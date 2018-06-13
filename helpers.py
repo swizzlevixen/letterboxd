@@ -1,16 +1,15 @@
-# Helper Methods
+"""
+Helper Methods for JSON responses
+TODO: See if this is really necessary if I'm using `requests`. I feel like a lot of this is already taken care of.
+"""
 
 import json
-import pprint
 
 def show_json(rest_response):
     if (rest_response.code != 200):
         print(rest_response.description)
     if (rest_response.code != 204):
-        data = json.decoder(rest_response)  # I feel like this isn't necessary if I'm using requests
-        pretty_printer = pprint.PrettyPrinter(indent = 4)
-        assert isinstance(data, object)
-        pretty_printer.pprint(data)
+        print json.dumps(rest_response, indent = 4, sort_keys = True)
 
 # FIXME: This is the Ruby implementation
 
