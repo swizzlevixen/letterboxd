@@ -23,11 +23,12 @@ def film_keys():
 #     assert response['id'] == "raiders-of-the-lost-ark", "The ID should be in the response"
 #     assert set(film_keys).issubset(response.keys()), "All keys should be in the response"
 
-@vcr.use_cassette('tests/vcr_cassettes/movie-info.yml', filter_query_parameters=['api_key'])
+@vcr.use_cassette('tests/vcr_cassettes/movie-info.yml', filter_query_parameters=['api_key', 'api_secret'])
 def test_film_info():
     """Tests API call to get a film's info"""
 
-    lbxd = Letterboxd(API_BASE, API_KEY, API_SECRET)
+    # Assume use of environment variables
+    lbxd = Letterboxd()
 
     film_instance = Film("raiders-of-the-lost-ark")
     response = film_instance.info()
