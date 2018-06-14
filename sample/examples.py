@@ -1,6 +1,4 @@
-import json
-from .letterboxd.letterboxd import Letterboxd
-import helpers
+from letterboxd.letterboxd import Letterboxd
 
 # Assuming use of environment variables:
 lbxd = Letterboxd()
