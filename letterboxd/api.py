@@ -5,7 +5,7 @@ class API ():
     Letterboxd API helpers
     """
 
-    def api(self, path, params = {}, form = nil, headers = {}, method = "get"):
+    def api(self, path, params = {}, form = None, headers = {}, method = "get"):
         """
         :param path: The endpoint for the service
         :param params:
@@ -16,6 +16,7 @@ class API ():
         """
 
         if (form):
+            pass
 
 
 
