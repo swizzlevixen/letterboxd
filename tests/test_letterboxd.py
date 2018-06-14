@@ -1,5 +1,6 @@
 from pytest import fixture
 from letterboxd.letterboxd import Letterboxd
+from letterboxd.services.film import Film
 import vcr
 
 @fixture
