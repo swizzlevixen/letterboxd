@@ -29,7 +29,7 @@ class Letterboxd(object):
         if (self.api_key == ""):
             # If the variable wasn't passed in,
             # try to get the environment variable instead
-            API_KEY = os.environ.get('LBX_API_KEY', None)
+            API_KEY = os.environ.get('LBXD_API_KEY', None)
 
             class APIKeyMissingError(Exception):
                 pass
@@ -44,7 +44,7 @@ class Letterboxd(object):
         if (self.api_secret == ""):
             # If the variable wasn't passed in,
             # try to get the environment variable instead
-            API_SECRET = os.environ.get('LBX_API_SECRET', None)
+            API_SECRET = os.environ.get('LBXD_API_SECRET', None)
 
             class APISecretMissingError(Exception):
                 pass
