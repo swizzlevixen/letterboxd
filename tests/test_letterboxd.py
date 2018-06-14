@@ -1,6 +1,5 @@
 from pytest import fixture
 from letterboxd.letterboxd import Letterboxd
-from letterboxd.services.film import Film
 import vcr
 
 @fixture
@@ -31,7 +30,7 @@ def test_film_info():
     # Assume use of environment variables
     lbxd = Letterboxd()
 
-    film_instance = Film("raiders-of-the-lost-ark")
+    film_instance = lbxd.film("raiders-of-the-lost-ark")
     response = film_instance.info()
 
     assert isinstance(response, dict)

@@ -1,10 +1,11 @@
+import json
 import requests
 import time
 import uuid
 
 CHARLES_PROXY = "http://localhost:8888/"
 
-class API ():
+class API():
     """
     Letterboxd API helpers
     """
@@ -14,17 +15,28 @@ class API ():
         :param path: The endpoint for the service
         :param params: dictionary of parameters
         :param form: ???
-        :param headers: dictionary, JSON object
-        :param method: HTML methods get, post, put, patch
+        :param headers: dictionary - JSON object
+        :param method: string - HTML methods get, post, put, patch
         :return: 
         """
 
-        if (self.token):
+        if self.token:
             headers["Authorization"] = 'Bearer {}'.format(self.token)
 
-        if (form):
+        url = self.add_metadata("{}/{}".format(self.api_base, self.path))
+
+        if form:
             pass
-        elif
+        elif method.lower() in ['post', 'put', 'patch']:
+            params = self.remove_nil_params(params)
+            body = json_data = json.dumps(params)
+            signature = self.sign(method.upper(), url, body)
+            url = self.add_params(url, signature)
+        else:
+            body = ""
+            url = self.add_params(url, params)
+            signature = self.sign(method.upper(), url)
+            url = self.add_params(url, signature)
 
     # Remove nil params, and replace :null with nil
     def remove_nil_params(self, params):
@@ -41,7 +53,7 @@ class API ():
         nonce = uuid.uuid4()
         # timestamp: number of seconds since epoch, Jan 1, 1970 (UTC)
         timestamp = int(time.time())
-        self.add_params(url, {'apikey': self.api_key, 'nonce': nonce, 'timestamp': timestamp)
+        self.add_params(url, {'apikey': self.api_key, 'nonce': nonce, 'timestamp': timestamp})
 
     def sign(self, method, url, body=""):
             pass

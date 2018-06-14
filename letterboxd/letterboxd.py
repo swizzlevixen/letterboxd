@@ -60,3 +60,6 @@ class Letterboxd(object):
         self.session = requests.Session()
         self.session.params = {}
         self.session.params['api_key'] = API_KEY
+
+    def film(self, object):
+        return Film(object)

@@ -1,3 +1,7 @@
+"""
+/file endpoints
+"""
+
 from letterboxd.api import API
 
 class Film(object):
