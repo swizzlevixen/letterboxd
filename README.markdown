@@ -8,11 +8,11 @@ A ***WORK-IN-PROGRESS,*** focusing first on retrieving watchlists and other list
 
 ## Usage
 
-Instantiate the `Letterboxd` class, and provide it with the `api_base` URL for the API, your `api_key`, and your `api_secret`. You can pass it in to the class’ init, or add it to your environment variables as:
+Instantiate the `Letterboxd` class, and provide it with the `api_base` URL for the API, your `api_key`, and your `api_secret`. You can pass it as a variable to the class init, or add it to your environment variables as:
 
 ```
-export LBX_API_KEY="YOUR_KEY_HERE"
-export LBX_API_SECRET="YOUR_SECRET_HERE"
+export LBXD_API_KEY="YOUR_KEY_HERE"
+export LBXD_API_SECRET="YOUR_SECRET_HERE"
 ```
 
 If you do not provide an `api_base`, it currently defaults to `https://api.letterboxd.com/api/v0`.
