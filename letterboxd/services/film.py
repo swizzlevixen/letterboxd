@@ -6,4 +6,4 @@ class Film(object):
 
     # /film/{id}
     def info(self):
-        API.api('film/{}'.format(self.id))
+        API.api(self, path='film/{}'.format(self.id))
