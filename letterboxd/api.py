@@ -17,6 +17,26 @@ import uuid
 
 CHARLES_PROXY = "http://localhost:8888/"
 
+# I need to create a Prepared Request, so I can sign it.
+# http://docs.python-requests.org/en/master/user/advanced/#prepared-requests
+# Based on the answer on StackOverflow:
+# https://stackoverflow.com/questions/42100488/how-do-i-sign-a-post-request-using-hmac-sha512-and-the-python-requests-library
+#
+# import requests
+# import hmac
+# import hashlib
+#
+#
+# request = requests.Request(
+#     'POST', 'https://poloniex.com/tradingApi',
+#     data=payload, headers=headers)
+# prepped = request.prepare()
+# signature = hmac.new(secret, prepped.body, digestmod=hashlib.sha512)
+# prepped.headers['Sign'] = signature.hexdigest()
+#
+# with requests.Session() as session:
+#     response = session.send(prepped)
+
 class API():
     """
     Letterboxd API helpers
