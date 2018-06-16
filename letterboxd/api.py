@@ -2,6 +2,18 @@ import json
 import requests
 import time
 import uuid
+from letterboxd.letterboxd import Letterboxd
+##### Ruby implementation
+#
+# require 'net/http'
+# require 'rubygems'
+# require 'rest-client'
+# require 'date'
+# require 'uri'
+# require 'securerandom'
+# require 'openssl'
+# require 'base64'
+
 
 CHARLES_PROXY = "http://localhost:8888/"
 
@@ -58,66 +70,21 @@ class API():
     def sign(self, method, url, body=""):
             pass
 
-##### Ruby implementation
-#
-# require 'net/http'
-# require 'rubygems'
-# require 'rest-client'
-# require 'date'
-# require 'uri'
-# require 'securerandom'
-# require 'openssl'
-# require 'base64'
-#
-# module API
-#
-#   CHARLES_PROXY = "http://localhost:8888/"
-#
-#   def api(path, params: {}, form: nil, headers: {:accept => "application/json", "Content-Type" => "application/json" }, method: "get")
-#     headers["Authorization"] = "Bearer #{@token}" unless @token.nil?
-#     url = add_metadata "#{@api_base}/#{path}"
-#     if form
-#       body = URI.encode_www_form form
-#       headers["Content-Type"] = "application/x-www-form-urlencoded"
-#       signature = sign method.upcase, url, body
-#       headers["Authorization"] = "Signature #{signature}"
-#     elsif method.downcase =~ /(post|put|patch)/
-#       body = JSON.generate remove_nil_params(params)
-#       signature = sign method.upcase, url, body
-#       url = add_params(url, {:signature => signature})
-#     else
-#       body = ""
-#       url = add_params(url, params)
-#       signature = sign method.upcase, url
-#       url = add_params(url, {:signature => signature})
-#     end
-#     begin
-#       RestClient.proxy = CHARLES_PROXY
-#       rest_call method, url, body, headers
-#     rescue Errno::ECONNREFUSED
-#       RestClient.proxy = nil
-#       rest_call method, url, body, headers
-#     end
-#   end
+
+# Ruby implementation
 #
 #   private
-#
-#   # Remove nil params, and replace :null with nil
-#   def remove_nil_params params
-#     result = {}
-#     params.select {|k,v| !v.nil? }.map {|k,v|
-#       if v === :null
-#         result[k] = nil
-#       elsif v.is_a?(Hash)
-#         result[k] = remove_nil_params v
-#       elsif v.is_a?(Array)
-#         result[k] = v.map {|x| (x.is_a?(Hash) || x.is_a?(Array) ? remove_nil_params(x) : x) }
-#       else
-#         result[k] = v
-#       end
-#     }
-#     result
-#   end
+
+    def __remove_nil_params(self, params):
+        result = {k: v for k, v in params.items() if v is not None}
+        return result
+
+
+    def __rest_call(self, method, url, body, headers):
+        if method.lower() in ['post', 'put', 'patch']:
+
+
+
 #
 #   def rest_call method, url, body, headers
 #     begin
