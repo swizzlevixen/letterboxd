@@ -1,6 +1,10 @@
 from pytest import fixture
 from letterboxd.letterboxd import Letterboxd
+import logging
 import vcr
+
+logging.getLogger(__name__)
+logging.basicConfig(level=logging.DEBUG)
 
 @fixture
 def film_keys():
@@ -30,8 +34,9 @@ def test_film_info():
     # Assume use of environment variables
     lbxd = Letterboxd()
 
-    film_instance = lbxd.film("raiders-of-the-lost-ark")
+    film_instance = lbxd.film(film_id = "raiders-of-the-lost-ark")
     response = film_instance.info()
+    logging.debug("response: {}".format(response))
 
     assert isinstance(response, dict)
     assert response['id'] == "raiders-of-the-lost-ark", "The ID should be in the response"

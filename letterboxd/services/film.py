@@ -1,13 +1,13 @@
 """
 /file endpoints
 """
-
-from letterboxd.api import API
+import logging
 
 class Film(object):
-    def __init__(self, id):
-        self.id = id
+    def __init__(self, film_id, api):
+        self.__api = api
+        self.__film_id = film_id
 
     # /film/{id}
     def info(self):
-        API.api(self, path='film/{}'.format(self.id))
+        return self.__api.api_call(path = 'film/{}'.format(self.__film_id))

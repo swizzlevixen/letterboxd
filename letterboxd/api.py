@@ -1,8 +1,9 @@
 import json
+import logging
 import requests
 import time
+import urllib
 import uuid
-from letterboxd.letterboxd import Letterboxd
 ##### Ruby implementation
 #
 # require 'net/http'
@@ -14,90 +15,83 @@ from letterboxd.letterboxd import Letterboxd
 # require 'openssl'
 # require 'base64'
 
-
 CHARLES_PROXY = "http://localhost:8888/"
 
 class API():
     """
     Letterboxd API helpers
     """
+    def __init__(self, api_base, api_key, api_secret):
+        self.api_base = api_base
+        self.api_key = api_key
+        self.api_secret = api_secret
 
-    def api(self, path, params = {}, form = None, headers = {}, method = "get"):
+        # Start the shared requests session
+        self.session = requests.Session()
+        self.session.params = {}
+        self.session.params['api_key'] = self.api_key
+
+        # TODO: Put the auth.py call here, if we have a user/pass
+        self.token = ''
+
+    def api_call(self, path, params = {}, form = None, headers = {}, method = "get"):
         """
-        :param path: The endpoint for the service
-        :param params: dictionary of parameters
-        :param form: ???
+        :param path: string - The endpoint for the service
+        :param params: dictionary - of parameters
+        :param form: string - the form information from the auth.py call
         :param headers: dictionary - JSON object
         :param method: string - HTML methods get, post, put, patch
         :return: 
         """
 
+        # If we have an oAuth token
         if self.token:
             headers["Authorization"] = 'Bearer {}'.format(self.token)
 
-        url = self.add_metadata("{}/{}".format(self.api_base, self.path))
+        url = self.__add_metadata("{}/{}".format(self.api_base, path))
+        logging.debug('url: {}'.format(url))
 
         if form:
-            pass
+            params['form'] = form
+            headers["Content-Type"] = "application/x-www-form-urlencoded"
+            signature = self.__sign(method.upper(), url, body)
+            headers["Authorization"] = "Signature {}".format(signature)
         elif method.lower() in ['post', 'put', 'patch']:
-            params = self.remove_nil_params(params)
+            params = self.__remove_nil_params(params)
             body = json_data = json.dumps(params)
-            signature = self.sign(method.upper(), url, body)
-            url = self.add_params(url, signature)
+            signature = self.__sign(method.upper(), url, body)
+            url = self.__add_params(url, signature)
         else:
             body = ""
-            url = self.add_params(url, params)
-            signature = self.sign(method.upper(), url)
-            url = self.add_params(url, signature)
+            url = self.__add_params(url, params)
+            signature = self.__sign(method.upper(), url)
+            url = self.__add_params(url, signature)
 
-    # Remove nil params, and replace :null with nil
-    def remove_nil_params(self, params):
-        pass
+    # Methods after this should be private
 
-    def rest_call (self, method, url, body, headers):
-        pass
-
-    def add_params(self, url, params):
-        pass
-
-    def add_metadata(self, url):
-        # nonce: UUID string, must be unique for each API request
-        nonce = uuid.uuid4()
-        # timestamp: number of seconds since epoch, Jan 1, 1970 (UTC)
-        timestamp = int(time.time())
-        self.add_params(url, {'apikey': self.api_key, 'nonce': nonce, 'timestamp': timestamp})
-
-    def sign(self, method, url, body=""):
-            pass
-
-
-# Ruby implementation
-#
-#   private
-
+    # Remove empty params
     def __remove_nil_params(self, params):
         result = {k: v for k, v in params.items() if v is not None}
         return result
 
-
+    # Do the rest call
     def __rest_call(self, method, url, body, headers):
-        if method.lower() in ['post', 'put', 'patch']:
+        try:
+            if method.lower() == 'post':
+                self.session.post(url, json=body, headers=headers)
+            elif method.lower() == 'put':
+                self.session.put(url, json = body, headers = headers)
+            elif method.lower() == 'patch':
+                self.session.patch(url, json = body, headers = headers)
+            else:
+                self.session.get(url, headers = headers)
+        except Exception as e:
+            logging.error("__rest_call: {}".format(e))
 
 
+    def __add_params(self, url, params):
+        pass
 
-#
-#   def rest_call method, url, body, headers
-#     begin
-#       if method.downcase =~ /(post|put|patch)/
-#         RestClient.send method.downcase, url, body, headers
-#       else
-#         RestClient.send method.downcase, url, headers
-#       end
-#     rescue RestClient::ExceptionWithResponse => e
-#       e.response
-#     end
-#   end
-#
 #   def add_params(url, params)
 #     uri = URI(url)
 #     query = URI.decode_www_form(uri.query || "")
@@ -105,14 +99,22 @@ class API():
 #     uri.query = URI.encode_www_form(query)
 #     uri.to_s
 #   end
-#
+
+    def __add_metadata(self, url):
+        # nonce: UUID string, must be unique for each API request
+        nonce = uuid.uuid4()
+        # timestamp: number of seconds since epoch, Jan 1, 1970 (UTC)
+        timestamp = int(time.time())
+        self.__add_params(url, {'apikey': self.api_key, 'nonce': nonce, 'timestamp': timestamp})
+
 #   def add_metadata url
 #     add_params url, {:apikey => @api_key, :nonce => SecureRandom.uuid, :timestamp => Time.now.to_i}
 #   end
-#
+
+    def __sign(self, method, url, body=""):
+            pass
+
 #   def sign method, url, body = ""
 #     str = "#{method}\u0000#{url}\u0000#{body}"
 #     signature = OpenSSL::HMAC.digest("sha256", @api_secret, str).unpack("H*")[0].downcase
 #   end
-#
-# end

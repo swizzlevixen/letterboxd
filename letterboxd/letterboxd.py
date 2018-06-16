@@ -3,9 +3,10 @@ Python 3 wrapper for
 Version 0 of the Letterboxd API
 """
 
+import logging
 import os
 import requests
-# import api
+from letterboxd.api import API
 # import service/auth
 # import service/comments
 # import service/contributors
@@ -56,10 +57,8 @@ class Letterboxd(object):
                         "for more information"
                 )
 
-        # Start the shared requests session
-        self.session = requests.Session()
-        self.session.params = {}
-        self.session.params['api_key'] = API_KEY
+        self.api = API(api_base, api_key, api_secret)
 
-    def film(self, object):
-        return Film(object)
+
+    def film(self, film_id):
+        return Film(film_id = film_id, api = self.api)
