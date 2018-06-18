@@ -2,6 +2,9 @@
 Authentication services for the Letterboxd API
 """
 
+import requests
+from requests_oauthlib import oauth2_auth
+
 def token(username, password):
 
 
