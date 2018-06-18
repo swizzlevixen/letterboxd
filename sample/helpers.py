@@ -4,12 +4,14 @@ TODO: See if this is really necessary if I'm using `requests`. I feel like a lot
 """
 
 import json
+import logging
+logging.getLogger(__name__).addHandler(logging.NullHandler())
 
 def show_json(rest_response):
     if (rest_response.code != 200):
         print(rest_response.description)
     if (rest_response.code != 204):
-        print json.dumps(rest_response, indent = 4, sort_keys = True)
+        print(json.dumps(rest_response, indent = 4, sort_keys = True))
 
 # FIXME: This is the Ruby implementation
 
