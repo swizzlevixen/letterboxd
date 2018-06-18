@@ -4,7 +4,8 @@ import logging
 import vcr
 
 logging.getLogger(__name__)
-logging.basicConfig(level=logging.DEBUG)
+FORMAT = "[%(filename)s:%(lineno)s - %(funcName)20s() ] %(message)s"
+logging.basicConfig(format=FORMAT, level = logging.DEBUG)
 
 @fixture
 def film_keys():
