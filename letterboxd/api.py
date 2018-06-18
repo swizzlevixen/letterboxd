@@ -1,41 +1,13 @@
-import json
+import hashlib
+import hmac
 import logging
 import requests
 import time
-import urllib
 import uuid
-##### Ruby implementation
-#
-# require 'net/http'
-# require 'rubygems'
-# require 'rest-client'
-# require 'date'
-# require 'uri'
-# require 'securerandom'
-# require 'openssl'
-# require 'base64'
+
+logging.getLogger(__name__)
 
 CHARLES_PROXY = "http://localhost:8888/"
-
-# I need to create a Prepared Request, so I can sign it.
-# http://docs.python-requests.org/en/master/user/advanced/#prepared-requests
-# Based on the answer on StackOverflow:
-# https://stackoverflow.com/questions/42100488/how-do-i-sign-a-post-request-using-hmac-sha512-and-the-python-requests-library
-#
-# import requests
-# import hmac
-# import hashlib
-#
-#
-# request = requests.Request(
-#     'POST', 'https://poloniex.com/tradingApi',
-#     data=payload, headers=headers)
-# prepped = request.prepare()
-# signature = hmac.new(secret, prepped.body, digestmod=hashlib.sha512)
-# prepped.headers['Sign'] = signature.hexdigest()
-#
-# with requests.Session() as session:
-#     response = session.send(prepped)
 
 class API():
     """
@@ -43,59 +15,152 @@ class API():
     """
     def __init__(self, api_base, api_key, api_secret):
         self.api_base = api_base
+        logging.debug("api_base: {}".format(self.api_base))
         self.api_key = api_key
         self.api_secret = api_secret
 
         # Start the shared requests session
         self.session = requests.Session()
         self.session.params = {}
-        self.session.params['api_key'] = self.api_key
 
         # TODO: Put the auth.py call here, if we have a user/pass
         self.token = ''
+
 
     def api_call(self, path, params = {}, form = None, headers = {}, method = "get"):
         """
         :param path: string - The endpoint for the service
         :param params: dictionary - of parameters
         :param form: string - the form information from the auth.py call
-        :param headers: dictionary - JSON object
+        :param headers: dictionary - dictionary of parameters
         :param method: string - HTML methods get, post, put, patch
-        :return: 
+        :return: ??? response
         """
 
         # If we have an oAuth token
         if self.token:
             headers["Authorization"] = 'Bearer {}'.format(self.token)
 
-        url = self.__add_metadata("{}/{}".format(self.api_base, path))
+        url = "{}/{}".format(self.api_base, path)
         logging.debug('url: {}'.format(url))
 
-        if form:
-            params['form'] = form
-            headers["Content-Type"] = "application/x-www-form-urlencoded"
-            signature = self.__sign(method.upper(), url, body)
-            headers["Authorization"] = "Signature {}".format(signature)
-        elif method.lower() in ['post', 'put', 'patch']:
-            params = self.__remove_nil_params(params)
-            body = json_data = json.dumps(params)
-            signature = self.__sign(method.upper(), url, body)
-            url = self.__add_params(url, signature)
-        else:
-            body = ""
-            url = self.__add_params(url, params)
-            signature = self.__sign(method.upper(), url)
-            url = self.__add_params(url, signature)
+        # TODO: Ruby representation that needs re-writing
+        # if form:
+        #     params['form'] = form
+        #     headers["Content-Type"] = "application/x-www-form-urlencoded"
+        #     signature = self.__sign(method.upper(), url, body)
+        #     headers["Authorization"] = "Signature {}".format(signature)
+        # elif method.lower() in ['post', 'put', 'patch']:
+        #     params = self.__remove_empty_from_dict(params)
+        #     body = json_data = json.dumps(params)
+        #     signature = self.__sign(method.upper(), url, body)
+        #     url = self.__add_params(url, signature)
+        # else:
+        #     body = ""
+        #     url = self.__add_params(url, params)
+        #     signature = self.__sign(method.upper(), url)
+        #     url = self.__add_params(url, signature)
 
-    # Methods after this should be private
+        logging.debug("\nurl: {}\nparams: {}\nheaders: {}\nmethod: {}\n-------------------------".format(url, params, headers, method))
+        prepared_request = self.__prepare_request(url, params = params, headers = headers, method = method)
+        logging.debug(prepared_request.url)
+        response = self.session.send(prepared_request)
+        logging.debug(response.status_code)
+        logging.debug(type(response))
+        # TODO: if status code 200 or 204(?), return the response JSON deocded, else handle the error
+        return response
 
-    # Remove empty params
-    def __remove_nil_params(self, params):
-        result = {k: v for k, v in params.items() if v is not None}
-        return result
 
-    # Do the rest call
+    # -------------------------
+    # Private methods
+
+
+    def __prepare_request(self, url, params = {}, data = [], headers = {}, method = "get", form = False):
+        """
+        Prepare the request and sign it
+        :param url: string
+        :param params: dict
+        :param form: bool
+        :param headers: dict
+        :param method: string - get, post, put, patch
+        :return: ??? prepared_request
+        """
+        # TODO: Probably need to do an if: for Form == True differences
+        # Add the request metadata required for uniquely identifying the request
+        params = self.__add_metadata(params)
+
+        # Prepare the request and add it to the current requests session
+        request = requests.Request(method.upper(), url, params = params, data = data, headers = headers)
+        prepared_request = self.session.prepare_request(request)
+
+        logging.debug("prepared url: {}".format(prepared_request.url))
+        # Sign the request
+        signature = self.__sign(method = method.upper(), url = prepared_request.url)
+        # Add the signature to the end of the params in the url
+        prepared_request.prepare_url(prepared_request.url, {'signature': signature})
+        logging.debug(type(prepared_request))
+        return prepared_request
+
+
+    def __remove_empty_from_dict(self, dirty_dict):
+        """
+        Takes a dictionary recursively removes all None and "" values
+        :param dirty_dict: dict
+        :return: dict
+        """
+        logging.debug("params: {}".format(dirty_dict))
+        cleaned_dict = {}
+        for key, value in dirty_dict.items():
+            logging.debug("key: {}, value: {}".format(key, value))
+
+            if (value is None) or (value is ""):
+                logging.debug("Toss the value!")
+            elif isinstance(value,dict):
+                this_dict = self.__remove_empty_from_dict(value)
+                cleaned_dict[key] = this_dict
+            elif isinstance(value,tuple) or isinstance(value, list):
+                cleaned_dict[key] = self.__remove_empty_from_list(value)
+            else:
+                cleaned_dict[key] = value
+            logging.debug("-------------------------")
+        logging.debug("result: {}".format(cleaned_dict))
+        return cleaned_dict
+
+
+    def __remove_empty_from_list(self, dirty_list):
+        """
+        Takes a tuple or list and recursively removes all None and "" values
+        :param dirty_list: tuple or list
+        :return: list
+        """
+        cleaned_list = []
+        for __item in dirty_list:
+            logging.debug(__item)
+            if __item is "" or __item is None:
+                logging.debug("item {} is {}".format(__item, "None"))
+                pass
+            elif isinstance(__item, dict):
+                logging.debug("item {} is {}".format(__item, "dict"))
+                cleaned_list.append(self.__remove_empty_from_dict(__item))
+            elif isinstance(__item,tuple) or isinstance(__item, list):
+                logging.debug("item {} is {}".format(__item, "tuple or list"))
+                cleaned_list.append(self.__remove_empty_from_list(__item))
+            else:
+                logging.debug("item {} is {}".format(__item, "else"))
+                cleaned_list.append(__item)
+        return cleaned_list
+
+
     def __rest_call(self, method, url, body, headers):
+        """
+        Do the rest call
+        :param method: str - get, post, put, patch
+        :param url: str
+        :param body: str - JSON encoded
+        :param headers: dict
+        :return: ???
+        """
+        # TODO: This isn't actually hooked up to anything yet.
         try:
             if method.lower() == 'post':
                 self.session.post(url, json=body, headers=headers)
@@ -109,32 +174,47 @@ class API():
             logging.error("__rest_call: {}".format(e))
 
 
-    def __add_params(self, url, params):
-        pass
-
-#   def add_params(url, params)
-#     uri = URI(url)
-#     query = URI.decode_www_form(uri.query || "")
-#     params.each { |k,v| query << [k,v == :null ? nil : v] unless v.nil? || ( v.is_a?(Array) && v.empty? ) }
-#     uri.query = URI.encode_www_form(query)
-#     uri.to_s
-#   end
-
-    def __add_metadata(self, url):
+    def __add_metadata(self, params):
+        """
+        Adds the metadata params required for signing the request
+        :param params: dict
+        :return: dict
+        """
+        params['apikey'] = self.api_key
         # nonce: UUID string, must be unique for each API request
-        nonce = uuid.uuid4()
+        params['nonce'] = uuid.uuid4()
         # timestamp: number of seconds since epoch, Jan 1, 1970 (UTC)
-        timestamp = int(time.time())
-        self.__add_params(url, {'apikey': self.api_key, 'nonce': nonce, 'timestamp': timestamp})
+        params['timestamp'] = int(time.time())
+        return params
 
-#   def add_metadata url
-#     add_params url, {:apikey => @api_key, :nonce => SecureRandom.uuid, :timestamp => Time.now.to_i}
-#   end
 
     def __sign(self, method, url, body=""):
-            pass
+        """
+        Create a salted string as bytes, of the form [METHOD]\x00[URL]\x00[BODY],
+        where [METHOD] is GET, POST, etc., [URL] is the fully-qualified request
+        URL including the apikey, nonce, timestamp and any other method parameters,
+        and [BODY] is a JSON-encoded string (for POST, PATCH and DELETE requests)
+        or empty (for GET requests). Next, create a [SIGNATURE] from the salted
+        string by applying a lower-case HMAC/SHA-256 transformation, using your
+        API Secret, and append it to your API request URL as the final query
+        parameter: …&signature=[SIGNATURE]
 
-#   def sign method, url, body = ""
-#     str = "#{method}\u0000#{url}\u0000#{body}"
-#     signature = OpenSSL::HMAC.digest("sha256", @api_secret, str).unpack("H*")[0].downcase
-#   end
+        Notes: you must specify a Content-Type: application/json request header
+        if [BODY] is JSON-encoded. The apikey parameter is your supplied API Key.
+        The nonce parameter should be a UUID string and must be unique for each
+        API request. The timestamp parameter is the number of seconds since
+        Jan 1, 1970 (UTC), also know as "UNIX Epoch time."
+
+        :param method: str - get, post, put, patch
+        :param url: str
+        :param body: str - JSON-encoded
+        :return: str
+        """
+        # Create the salted bytestring
+        signing_bytestring = b"\x00".join([str.encode(method), str.encode(url), str.encode(body)])
+        logging.debug('signing_bytestring: type: {}, value: {}'.format(type(signing_bytestring), signing_bytestring))
+        # applying an HMAC/SHA-256 transformation, using our API Secret
+        signature = hmac.new(str.encode(self.api_secret), signing_bytestring, digestmod=hashlib.sha256)
+        # get the string representation of the hash
+        signature_string = signature.hexdigest()
+        return signature_string
