@@ -22,7 +22,7 @@ class API():
         logging.debug("api_secret: {}".format(self.api_secret))
 
         if (self.api_key == ""):
-            # If the variable wasn't passed in,
+            # If the API key wasn't passed in
             class APIKeyMissingError(Exception):
                 pass
 
@@ -33,7 +33,7 @@ class API():
             )
 
         if (self.api_secret == ""):
-            # If the variable wasn't passed in,
+            # If the API shared secret wasn't passed in
             class APISecretMissingError(Exception):
                 pass
 
