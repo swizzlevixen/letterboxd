@@ -17,7 +17,31 @@ class API():
         self.api_base = api_base
         logging.debug("api_base: {}".format(self.api_base))
         self.api_key = api_key
+        logging.debug("api_key: {}".format(self.api_key))
         self.api_secret = api_secret
+        logging.debug("api_secret: {}".format(self.api_secret))
+
+        if (self.api_key == ""):
+            # If the variable wasn't passed in,
+            class APIKeyMissingError(Exception):
+                pass
+
+            raise APIKeyMissingError(
+                    "All methods require an API key. See "
+                    "https://letterboxd.com/api-coming-soon/ "
+                    "for more information"
+            )
+
+        if (self.api_secret == ""):
+            # If the variable wasn't passed in,
+            class APISecretMissingError(Exception):
+                pass
+
+            raise APISecretMissingError(
+                    "All methods require an API secret. See "
+                    "https://letterboxd.com/api-coming-soon/ "
+                    "for more information"
+            )
 
         # Start the shared requests session
         self.session = requests.Session()

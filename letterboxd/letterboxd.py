@@ -31,6 +31,7 @@ class Letterboxd(object):
             # If the variable wasn't passed in,
             # try to get the environment variable instead
             API_KEY = os.environ.get('LBXD_API_KEY', None)
+            logging.debug(API_KEY)
 
             class APIKeyMissingError(Exception):
                 pass

@@ -35,10 +35,10 @@ def test_film_info():
     # Assume use of environment variables
     lbxd = Letterboxd()
 
-    film_instance = lbxd.film(film_id = "raiders-of-the-lost-ark")
+    film_instance = lbxd.film(film_id = "2bbs")  # Raiders of the Lost Ark
     response = film_instance.info()
     logging.debug("response: {}".format(response))
 
     assert isinstance(response, dict)
-    assert response['id'] == "raiders-of-the-lost-ark", "The ID should be in the response"
+    assert response['id'] == "2bbs", "The ID should be in the response"
     assert set(film_keys).issubset(response.keys()), "All keys should be in the response"
