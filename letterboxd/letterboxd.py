@@ -30,35 +30,39 @@ class Letterboxd(object):
         if (self.api_key == ""):
             # If the variable wasn't passed in,
             # try to get the environment variable instead
-            API_KEY = os.environ.get('LBXD_API_KEY', None)
-            logging.debug(API_KEY)
+            LBXD_API_KEY = os.environ.get('LBXD_API_KEY', None)
 
             class APIKeyMissingError(Exception):
                 pass
 
-            if API_KEY is None:
+            if LBXD_API_KEY is None:
                 raise APIKeyMissingError(
                         "All methods require an API key. See "
                         "https://letterboxd.com/api-coming-soon/ "
                         "for more information"
                 )
+            else:
+                self.api_key = LBXD_API_KEY
+
 
         if (self.api_secret == ""):
             # If the variable wasn't passed in,
             # try to get the environment variable instead
-            API_SECRET = os.environ.get('LBXD_API_SECRET', None)
+            LBXD_API_SECRET = os.environ.get('LBXD_API_SECRET', None)
 
             class APISecretMissingError(Exception):
                 pass
 
-            if API_SECRET is None:
+            if LBXD_API_SECRET is None:
                 raise APISecretMissingError(
                         "All methods require an API secret. See "
                         "https://letterboxd.com/api-coming-soon/ "
                         "for more information"
                 )
+            else:
+                self.api_secret = LBXD_API_SECRET
 
-        self.api = API(api_base, api_key, api_secret)
+        self.api = API(self.api_base, self.api_key, self.api_secret)
 
 
     def film(self, film_id):
