@@ -2,7 +2,6 @@ from pytest import fixture
 from letterboxd.letterboxd import Letterboxd
 import logging
 import requests
-import vcr
 
 logging.getLogger(__name__)
 # FORMAT = "[%(filename)s:%(lineno)s - %(funcName)20s() ] %(message)s"
@@ -18,7 +17,7 @@ def film_keys():
             'poster', 'backdrop', 'backdropFocalPoint', 'trailer',
             'genres', 'contributions', 'filmCollectionId', 'links']
 
-#@vcr.use_cassette('tests/vcr_cassettes/movie-info.yml', filter_query_parameters=['api_key', 'api_secret'])
+
 def test_film_info():
     """Tests API call to get a film's info"""
 
