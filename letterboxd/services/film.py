@@ -1,5 +1,11 @@
 """
-/file endpoints
+Film(s) services for the Letterboxd API
+
+/films endpoints documentation
+http://api-docs.letterboxd.com/#path--films
+
+/film endpoints documentation
+http://api-docs.letterboxd.com/#path--film--id-
 """
 import logging
 
