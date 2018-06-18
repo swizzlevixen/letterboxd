@@ -1,5 +1,8 @@
 """
 Authentication services for the Letterboxd API
+
+Authentication API Documentation:
+http://api-docs.letterboxd.com/#auth
 """
 
 import requests
