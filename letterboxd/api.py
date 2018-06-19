@@ -1,3 +1,9 @@
+"""
+Communication methods for the Letterboxd API
+
+API Documentation:
+http://api-docs.letterboxd.com/
+"""
 import hashlib
 import hmac
 import logging
@@ -15,11 +21,8 @@ class API():
     """
     def __init__(self, api_base, api_key, api_secret):
         self.api_base = api_base
-        logging.debug("api_base: {}".format(self.api_base))
         self.api_key = api_key
-        logging.debug("api_key: {}".format(self.api_key))
         self.api_secret = api_secret
-        logging.debug("api_secret: {}".format(self.api_secret))
 
         if (self.api_key == ""):
             # If the API key wasn't passed in
