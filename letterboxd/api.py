@@ -127,7 +127,7 @@ class API():
 
         logging.debug("prepared url: {}".format(prepared_request.url))
         # Sign the request
-        signature = self.__sign(method = method.upper(), url = prepared_request.url)
+        signature = self.__sign(method = prepared_request.method, url = prepared_request.url)
         # Add the signature to the end of the params in the url
         # FIXME: this needs to be different for `form` requests
         prepared_request.prepare_url(prepared_request.url, {'signature': signature})
