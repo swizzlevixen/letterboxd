@@ -82,6 +82,7 @@ class API():
             headers["Content-Type"] = "application/x-www-form-urlencoded"
 
 
+
         # TODO: Ruby representation that needs re-writing
 
         # if form:
@@ -105,7 +106,7 @@ class API():
         response = self.session.send(prepared_request)
         logging.debug(response.status_code)
         logging.debug(type(response))
-        # TODO: if status code 200 or 204(?), return the response JSON deocded, else handle the error
+        # TODO: if status code 200 or 204(?), return the response JSON decoded, else handle the error
         return response
 
 
