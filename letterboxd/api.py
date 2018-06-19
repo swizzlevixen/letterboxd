@@ -74,17 +74,9 @@ class API():
             "\nurl: {}\nparams: {}\nform: {}\nheaders: {}\nmethod: {}\n-------------------------".format(url, params,
                                                                                                          form, headers,
                                                                                                          method))
-
+        # TODO: Needs re-writing to use requests params, etc.
         # Is there any other need to use `form` than for an oAuth call?
         # should some of this code be in there instead?
-        if form:
-            params['form'] = form
-            headers["Content-Type"] = "application/x-www-form-urlencoded"
-
-
-
-        # TODO: Ruby representation that needs re-writing
-
         # if form:
         #     params['form'] = form
         #     headers["Content-Type"] = "application/x-www-form-urlencoded"
@@ -101,6 +93,7 @@ class API():
         #     signature = self.__sign(method.upper(), url)
         #     url = self.__add_params(url, signature)
 
+        # Prepare the request
         prepared_request = self.__prepare_request(url, params = params, headers = headers, method = method)
         logging.debug(prepared_request.url)
         response = self.session.send(prepared_request)
@@ -136,6 +129,7 @@ class API():
         # Sign the request
         signature = self.__sign(method = method.upper(), url = prepared_request.url)
         # Add the signature to the end of the params in the url
+        # FIXME: this needs to be different for `form` requests
         prepared_request.prepare_url(prepared_request.url, {'signature': signature})
         logging.debug(type(prepared_request))
         return prepared_request
