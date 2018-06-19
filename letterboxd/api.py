@@ -69,9 +69,21 @@ class API():
             headers["Authorization"] = 'Bearer {}'.format(self.token)
 
         url = "{}/{}".format(self.api_base, path)
-        logging.debug('url: {}'.format(url))
+
+        logging.debug(
+            "\nurl: {}\nparams: {}\nform: {}\nheaders: {}\nmethod: {}\n-------------------------".format(url, params,
+                                                                                                         form, headers,
+                                                                                                         method))
+
+        # Is there any other need to use `form` than for an oAuth call?
+        # should some of this code be in there instead?
+        if form:
+            params['form'] = form
+            headers["Content-Type"] = "application/x-www-form-urlencoded"
+
 
         # TODO: Ruby representation that needs re-writing
+
         # if form:
         #     params['form'] = form
         #     headers["Content-Type"] = "application/x-www-form-urlencoded"
@@ -88,7 +100,6 @@ class API():
         #     signature = self.__sign(method.upper(), url)
         #     url = self.__add_params(url, signature)
 
-        logging.debug("\nurl: {}\nparams: {}\nheaders: {}\nmethod: {}\n-------------------------".format(url, params, headers, method))
         prepared_request = self.__prepare_request(url, params = params, headers = headers, method = method)
         logging.debug(prepared_request.url)
         response = self.session.send(prepared_request)
