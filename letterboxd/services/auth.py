@@ -9,7 +9,8 @@ import logging
 import requests
 from requests_oauthlib import oauth2_auth
 
-class Authentication():
+
+class Authentication:
     """
     User authentication services for Letterbotokend
     """
