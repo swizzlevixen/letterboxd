@@ -6,6 +6,7 @@ http://api-docs.letterboxd.com/
 """
 import hashlib
 import hmac
+import json
 import logging
 import requests
 import time
