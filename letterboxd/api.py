@@ -9,6 +9,7 @@ import hmac
 import logging
 import requests
 import time
+import urllib.parse
 import uuid
 
 logging.getLogger(__name__)
@@ -75,36 +76,40 @@ class API():
                                                                                                          form, headers,
                                                                                                          method))
         # TODO: Needs re-writing to use requests params, etc.
-        # Is there any other need to use `form` than for an oAuth call?
-        # should some of this code be in there instead?
-        # if form:
-        #     params['form'] = form
-        #     headers["Content-Type"] = "application/x-www-form-urlencoded"
-        #     signature = self.__sign(method.upper(), url, body)
-        #     headers["Authorization"] = "Signature {}".format(signature)
-        # elif method.lower() in ['post', 'put', 'patch']:
-        #     params = self.__remove_empty_from_dict(params)
+        if form:
+            # Is there any other need to use `form` than for an oAuth call?
+            # should some of this code be in there instead?
+            # Escape the form string
+            data = urllib.parse.quote_plus(form)
+            headers["Content-Type"] = "application/x-www-form-urlencoded"
+            # Prepare the request
+            prepared_dict = self.__prepare_request(url, data = data, headers = headers, method = method)
+            prepared_request = prepared_dict['prepared_request']
+            signature = prepared_dict['signature']
+            # Add the signature to the headers
+            prepared_request.headers['Authorization'] = "Signature {}".format(signature)
+        elif method.lower() in ['post', 'put', 'patch']:
+            params = self.__remove_empty_from_dict(params)
+            data = json.dumps(params)  # not sure if this is correct
         #     body = json_data = json.dumps(params)
         #     signature = self.__sign(method.upper(), url, body)
         #     url = self.__add_params(url, signature)
-        # else:
-        #     body = ""
-        #     url = self.__add_params(url, params)
-        #     signature = self.__sign(method.upper(), url)
-        #     url = self.__add_params(url, signature)
+        else:
+            # It's a GET
+            # Prepare the request
+            prepared_dict = self.__prepare_request(url, params = params, headers = headers, method = method)
+            prepared_request = prepared_dict['prepared_request']
+            signature = prepared_dict['signature']
+            logging.debug(prepared_request.url)
+            # Add the signature to the end of the params in the url
+            prepared_request.prepare_url(prepared_request.url, {'signature': signature})
+            logging.debug(type(prepared_request))
 
-        # Prepare the request
-        prepared_dict = self.__prepare_request(url, params = params, headers = headers, method = method)
-        prepared_request = prepared_dict['prepared_request']
-        signature = prepared_dict['signature']
-        logging.debug(prepared_request.url)
-        # Add the signature to the end of the params in the url
-        prepared_request.prepare_url(prepared_request.url, {'signature': signature})
-        logging.debug(type(prepared_request))
         # send the request
         response = self.session.send(prepared_request)
         logging.debug(response.status_code)
         logging.debug(type(response))
+
         # TODO: if status code 200 or 204(?), return the response JSON decoded?, else handle the error
         return response
 
