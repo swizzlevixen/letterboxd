@@ -131,9 +131,8 @@ class API():
         :param form: bool
         :param headers: dict
         :param method: string - get, post, put, patch
-        :return: dict - {prepared_request, signature}
+        :return: dict - {'prepared_request', 'signature'}
         """
-        # TODO: Probably need to do an if: for Form == True differences
         # Add the request metadata required for uniquely identifying the request
         params = self.__add_metadata(params)
 
