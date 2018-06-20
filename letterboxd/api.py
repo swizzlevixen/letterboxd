@@ -244,11 +244,7 @@ class API:
         signing_bytestring = b"\x00".join(
             [str.encode(method), str.encode(url), str.encode(body)]
         )
-        logging.debug(
-            "signing_bytestring: type: {}, value: {}".format(
-                type(signing_bytestring), signing_bytestring
-            )
-        )
+        logging.debug("signing_bytestring: {}".format(signing_bytestring))
         # applying an HMAC/SHA-256 transformation, using our API Secret
         signature = hmac.new(
             str.encode(self.api_secret), signing_bytestring, digestmod=hashlib.sha256
