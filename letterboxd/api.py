@@ -75,7 +75,7 @@ class API():
             "\nurl: {}\nparams: {}\nform: {}\nheaders: {}\nmethod: {}\n-------------------------".format(url, params,
                                                                                                          form, headers,
                                                                                                          method))
-        # TODO: Needs re-writing to use requests params, etc.
+
         if form:
             # Is there any other need to use `form` than for an oAuth call?
             # should some of this code be in there instead?
