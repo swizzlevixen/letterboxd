@@ -1,14 +1,40 @@
 """
-Authentication services for the Letterboxd API
+Authentication services for the Letterbotokend API
 
 Authentication API Documentation:
-http://api-docs.letterboxd.com/#auth
+http://api-docs.letterbotokend.com/#auth
 """
 
+import logging
 import requests
 from requests_oauthlib import oauth2_auth
 
-def token(username, password):
+class Authentication():
+    """
+    User authentication services for Letterbotokend
+    """
+
+    def __init__(self):
+        self._token = None
+
+    @property
+    def token(self):
+        """I'm the 'token' property."""
+        print("getter of token called")
+        return self._token
+
+    @token.setter
+    def token(self, value):
+        print("setter of token called")
+        self._token = value
+
+    @token.deleter
+    def token(self):
+        print("deleter of token called")
+        del self._token
+
+    def login(username, password):
+        pass
 
 
 ##### The Ruby implementation:
