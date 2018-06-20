@@ -9,6 +9,7 @@ http://api-docs.letterboxd.com/#path--film--id-
 """
 import logging
 
+
 class Film(object):
     def __init__(self, film_id, api):
         self.__api = api
@@ -16,4 +17,4 @@ class Film(object):
 
     # /film/{id}
     def info(self):
-        return self.__api.api_call(path = 'film/{}'.format(self.__film_id))
+        return self.__api.api_call(path="film/{}".format(self.__film_id))
