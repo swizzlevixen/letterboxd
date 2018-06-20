@@ -132,7 +132,7 @@ class API():
         prepared_request = self.session.prepare_request(request)
 
         logging.debug("prepared url: {}".format(prepared_request.url))
-        # Sign the request
+        # Hash the request signature
         signature = self.__sign(method = prepared_request.method, url = prepared_request.url)
         return {'prepared_request': prepared_request, 'signature': signature}
 
