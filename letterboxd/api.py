@@ -134,8 +134,8 @@ class API():
         :param method: string - get, post, put, patch
         :return: dict - {'prepared_request', 'signature'}
         """
-        # Add the request metadata required for uniquely identifying the request
-        params = self.__add_metadata(params)
+        # Add the request params required for uniquely identifying the request
+        params = self.__add_unique_params(params)
 
         # Prepare the request and add it to the current requests session
         request = requests.Request(method.upper(), url, params = params, data = data, headers = headers)
@@ -196,7 +196,7 @@ class API():
         return cleaned_list
 
 
-    def __add_metadata(self, params):
+    def __add_unique_params(self, params):
         """
         Adds the metadata params required for signing the request
         :param params: dict
