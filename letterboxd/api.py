@@ -112,6 +112,7 @@ class API():
 
         # send the request
         response = self.session.send(prepared_request)
+        # TODO: catch any errors here
         logging.debug(response.status_code)
         logging.debug(type(response))
 
@@ -193,29 +194,6 @@ class API():
                 logging.debug("item {} is {}".format(__item, "else"))
                 cleaned_list.append(__item)
         return cleaned_list
-
-
-    def __rest_call(self, method, url, body, headers):
-        """
-        Do the rest call
-        :param method: str - get, post, put, patch
-        :param url: str
-        :param body: str - JSON encoded
-        :param headers: dict
-        :return: ???
-        """
-        # TODO: This isn't actually hooked up to anything yet.
-        try:
-            if method.lower() == 'post':
-                self.session.post(url, json=body, headers=headers)
-            elif method.lower() == 'put':
-                self.session.put(url, json = body, headers = headers)
-            elif method.lower() == 'patch':
-                self.session.patch(url, json = body, headers = headers)
-            else:
-                self.session.get(url, headers = headers)
-        except Exception as e:
-            logging.error("__rest_call: {}".format(e))
 
 
     def __add_metadata(self, params):
