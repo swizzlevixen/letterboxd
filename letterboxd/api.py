@@ -94,12 +94,18 @@ class API():
         #     url = self.__add_params(url, signature)
 
         # Prepare the request
-        prepared_request = self.__prepare_request(url, params = params, headers = headers, method = method)
+        prepared_dict = self.__prepare_request(url, params = params, headers = headers, method = method)
+        prepared_request = prepared_dict['prepared_request']
+        signature = prepared_dict['signature']
         logging.debug(prepared_request.url)
+        # Add the signature to the end of the params in the url
+        prepared_request.prepare_url(prepared_request.url, {'signature': signature})
+        logging.debug(type(prepared_request))
+        # send the request
         response = self.session.send(prepared_request)
         logging.debug(response.status_code)
         logging.debug(type(response))
-        # TODO: if status code 200 or 204(?), return the response JSON decoded, else handle the error
+        # TODO: if status code 200 or 204(?), return the response JSON decoded?, else handle the error
         return response
 
 
@@ -115,7 +121,7 @@ class API():
         :param form: bool
         :param headers: dict
         :param method: string - get, post, put, patch
-        :return: ??? prepared_request
+        :return: dict - {prepared_request, signature}
         """
         # TODO: Probably need to do an if: for Form == True differences
         # Add the request metadata required for uniquely identifying the request
@@ -128,11 +134,7 @@ class API():
         logging.debug("prepared url: {}".format(prepared_request.url))
         # Sign the request
         signature = self.__sign(method = prepared_request.method, url = prepared_request.url)
-        # Add the signature to the end of the params in the url
-        # FIXME: this needs to be different for `form` requests
-        prepared_request.prepare_url(prepared_request.url, {'signature': signature})
-        logging.debug(type(prepared_request))
-        return prepared_request
+        return {'prepared_request': prepared_request, 'signature': signature}
 
 
     def __remove_empty_from_dict(self, dirty_dict):
