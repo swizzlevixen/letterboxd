@@ -16,35 +16,37 @@ logging.getLogger(__name__)
 
 CHARLES_PROXY = "http://localhost:8888/"
 
-class API():
+
+class API:
     """
     Letterboxd API helpers
     """
+
     def __init__(self, api_base, api_key, api_secret):
         self.api_base = api_base
         self.api_key = api_key
         self.api_secret = api_secret
 
-        if (self.api_key == ""):
+        if self.api_key == "":
             # If the API key wasn't passed in
             class APIKeyMissingError(Exception):
                 pass
 
             raise APIKeyMissingError(
-                    "All methods require an API key. See "
-                    "https://letterboxd.com/api-coming-soon/ "
-                    "for more information"
+                "All methods require an API key. See "
+                "https://letterboxd.com/api-coming-soon/ "
+                "for more information"
             )
 
-        if (self.api_secret == ""):
+        if self.api_secret == "":
             # If the API shared secret wasn't passed in
             class APISecretMissingError(Exception):
                 pass
 
             raise APISecretMissingError(
-                    "All methods require an API secret. See "
-                    "https://letterboxd.com/api-coming-soon/ "
-                    "for more information"
+                "All methods require an API secret. See "
+                "https://letterboxd.com/api-coming-soon/ "
+                "for more information"
             )
 
         # Start the shared requests session
@@ -52,10 +54,9 @@ class API():
         self.session.params = {}
 
         # TODO: Put the auth.py call here, if we have a user/pass
-        self.token = ''
+        self.token = ""
 
-
-    def api_call(self, path, params = {}, form = None, headers = {}, method = "get"):
+    def api_call(self, path, params={}, form=None, headers={}, method="get"):
         """
         :param path: string - The endpoint for the service
         :param params: dictionary - of parameters
@@ -67,14 +68,15 @@ class API():
 
         # If we have an oAuth token
         if self.token:
-            headers["Authorization"] = 'Bearer {}'.format(self.token)
+            headers["Authorization"] = "Bearer {}".format(self.token)
 
         url = "{}/{}".format(self.api_base, path)
 
         logging.debug(
-            "\nurl: {}\nparams: {}\nform: {}\nheaders: {}\nmethod: {}\n-------------------------".format(url, params,
-                                                                                                         form, headers,
-                                                                                                         method))
+            "\nurl: {}\nparams: {}\nform: {}\nheaders: {}\nmethod: {}\n-------------------------".format(
+                url, params, form, headers, method
+            )
+        )
 
         if form:
             # Is there any other need to use `form` than for an oAuth call?
@@ -83,31 +85,37 @@ class API():
             data = urllib.parse.quote_plus(form)
             headers["Content-Type"] = "application/x-www-form-urlencoded"
             # Prepare the request
-            prepared_dict = self.__prepare_request(url, data = data, headers = headers, method = method)
-            prepared_request = prepared_dict['prepared_request']
-            signature = prepared_dict['signature']
+            prepared_dict = self.__prepare_request(
+                url, data=data, headers=headers, method=method
+            )
+            prepared_request = prepared_dict["prepared_request"]
+            signature = prepared_dict["signature"]
             # Add the signature to the headers
-            prepared_request.headers['Authorization'] = "Signature {}".format(signature)
-        elif method.lower() in ['post', 'put', 'patch']:
+            prepared_request.headers["Authorization"] = "Signature {}".format(signature)
+        elif method.lower() in ["post", "put", "patch"]:
             params = self.__remove_empty_from_dict(params)
             # JSON-encode the data
             data = json.dumps(params)
-            headers['Content-Type'] = "application/json"
+            headers["Content-Type"] = "application/json"
             # prepare the request
-            prepared_dict = self.__prepare_request(url, data = data, headers = headers, method = method)
-            prepared_request = prepared_dict['prepared_request']
-            signature = prepared_dict['signature']
+            prepared_dict = self.__prepare_request(
+                url, data=data, headers=headers, method=method
+            )
+            prepared_request = prepared_dict["prepared_request"]
+            signature = prepared_dict["signature"]
             # Attach the signature
-            prepared_request.prepare_url(prepared_request.url, {'signature': signature})
+            prepared_request.prepare_url(prepared_request.url, {"signature": signature})
         else:
             # It's a GET
             # Prepare the request
-            prepared_dict = self.__prepare_request(url, params = params, headers = headers, method = method)
-            prepared_request = prepared_dict['prepared_request']
-            signature = prepared_dict['signature']
+            prepared_dict = self.__prepare_request(
+                url, params=params, headers=headers, method=method
+            )
+            prepared_request = prepared_dict["prepared_request"]
+            signature = prepared_dict["signature"]
             logging.debug(prepared_request.url)
             # Add the signature to the end of the params in the url
-            prepared_request.prepare_url(prepared_request.url, {'signature': signature})
+            prepared_request.prepare_url(prepared_request.url, {"signature": signature})
             logging.debug(type(prepared_request))
 
         # send the request
@@ -119,12 +127,12 @@ class API():
         # TODO: if status code 200 or 204(?), return the response JSON decoded?, else handle the error
         return response
 
-
     # -------------------------
     # Private methods
 
-
-    def __prepare_request(self, url, params = {}, data = [], headers = {}, method = "get", form = False):
+    def __prepare_request(
+        self, url, params={}, data=[], headers={}, method="get", form=False
+    ):
         """
         Prepare the request and sign it
         :param url: string
@@ -138,14 +146,17 @@ class API():
         params = self.__add_unique_params(params)
 
         # Prepare the request and add it to the current requests session
-        request = requests.Request(method.upper(), url, params = params, data = data, headers = headers)
+        request = requests.Request(
+            method.upper(), url, params=params, data=data, headers=headers
+        )
         prepared_request = self.session.prepare_request(request)
 
         logging.debug("prepared url: {}".format(prepared_request.url))
         # Hash the request signature
-        signature = self.__sign(method = prepared_request.method, url = prepared_request.url)
-        return {'prepared_request': prepared_request, 'signature': signature}
-
+        signature = self.__sign(
+            method=prepared_request.method, url=prepared_request.url
+        )
+        return {"prepared_request": prepared_request, "signature": signature}
 
     def __remove_empty_from_dict(self, dirty_dict):
         """
@@ -160,17 +171,16 @@ class API():
 
             if (value is None) or (value is ""):
                 logging.debug("Toss the value!")
-            elif isinstance(value,dict):
+            elif isinstance(value, dict):
                 this_dict = self.__remove_empty_from_dict(value)
                 cleaned_dict[key] = this_dict
-            elif isinstance(value,tuple) or isinstance(value, list):
+            elif isinstance(value, tuple) or isinstance(value, list):
                 cleaned_dict[key] = self.__remove_empty_from_list(value)
             else:
                 cleaned_dict[key] = value
             logging.debug("-------------------------")
         logging.debug("result: {}".format(cleaned_dict))
         return cleaned_dict
-
 
     def __remove_empty_from_list(self, dirty_list):
         """
@@ -187,7 +197,7 @@ class API():
             elif isinstance(__item, dict):
                 logging.debug("item {} is {}".format(__item, "dict"))
                 cleaned_list.append(self.__remove_empty_from_dict(__item))
-            elif isinstance(__item,tuple) or isinstance(__item, list):
+            elif isinstance(__item, tuple) or isinstance(__item, list):
                 logging.debug("item {} is {}".format(__item, "tuple or list"))
                 cleaned_list.append(self.__remove_empty_from_list(__item))
             else:
@@ -195,20 +205,18 @@ class API():
                 cleaned_list.append(__item)
         return cleaned_list
 
-
     def __add_unique_params(self, params):
         """
         Adds the metadata params required for signing the request
         :param params: dict
         :return: dict
         """
-        params['apikey'] = self.api_key
+        params["apikey"] = self.api_key
         # nonce: UUID string, must be unique for each API request
-        params['nonce'] = uuid.uuid4()
+        params["nonce"] = uuid.uuid4()
         # timestamp: number of seconds since epoch, Jan 1, 1970 (UTC)
-        params['timestamp'] = int(time.time())
+        params["timestamp"] = int(time.time())
         return params
-
 
     def __sign(self, method, url, body=""):
         """
@@ -233,10 +241,18 @@ class API():
         :return: str
         """
         # Create the salted bytestring
-        signing_bytestring = b"\x00".join([str.encode(method), str.encode(url), str.encode(body)])
-        logging.debug('signing_bytestring: type: {}, value: {}'.format(type(signing_bytestring), signing_bytestring))
+        signing_bytestring = b"\x00".join(
+            [str.encode(method), str.encode(url), str.encode(body)]
+        )
+        logging.debug(
+            "signing_bytestring: type: {}, value: {}".format(
+                type(signing_bytestring), signing_bytestring
+            )
+        )
         # applying an HMAC/SHA-256 transformation, using our API Secret
-        signature = hmac.new(str.encode(self.api_secret), signing_bytestring, digestmod=hashlib.sha256)
+        signature = hmac.new(
+            str.encode(self.api_secret), signing_bytestring, digestmod=hashlib.sha256
+        )
         # get the string representation of the hash
         signature_string = signature.hexdigest()
         return signature_string
