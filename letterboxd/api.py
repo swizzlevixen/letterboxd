@@ -90,10 +90,15 @@ class API():
             prepared_request.headers['Authorization'] = "Signature {}".format(signature)
         elif method.lower() in ['post', 'put', 'patch']:
             params = self.__remove_empty_from_dict(params)
-            data = json.dumps(params)  # not sure if this is correct
-        #     body = json_data = json.dumps(params)
-        #     signature = self.__sign(method.upper(), url, body)
-        #     url = self.__add_params(url, signature)
+            # JSON-encode the data
+            data = json.dumps(params)
+            headers['Content-Type'] = "application/json"
+            # prepare the request
+            prepared_dict = self.__prepare_request(url, data = data, headers = headers, method = method)
+            prepared_request = prepared_dict['prepared_request']
+            signature = prepared_dict['signature']
+            # Attach the signature
+            prepared_request.prepare_url(prepared_request.url, {'signature': signature})
         else:
             # It's a GET
             # Prepare the request
