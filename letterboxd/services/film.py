@@ -9,6 +9,8 @@ http://api-docs.letterboxd.com/#path--film--id-
 """
 import logging
 
+logging.getLogger(__name__)
+
 
 class Film(object):
     def __init__(self, film_id, api):
