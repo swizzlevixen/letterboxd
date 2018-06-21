@@ -37,9 +37,10 @@ class Authentication:
         del self._token
 
     def login(self, username, password):
-        login_response = self._api.api_call(path = "auth/token", method = "post", form: {"grant_type": "password", "username": username, "password": password)
+        form = {"grant_type": "password", "username": username, "password": password}
+        login_response = self._api.api_call(path="auth/token", method="post", form=form)
         login_response_json = login_response.json()
-        self.token = login_response_json['access_token']
+        self.token = login_response_json["access_token"]
         if not token:
             # TODO: There's probably a JSON response error we can display instead
             raise ConnectionRefusedError("No token received")
