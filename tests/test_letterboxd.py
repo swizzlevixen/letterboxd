@@ -75,6 +75,6 @@ def test_user_auth():
     # make login
     user = lbxd.auth()
     assert isinstance != None
-    user.get_token(LBXD_USERNAME, LBXD_PASSWORD)
+    user.login(LBXD_USERNAME, LBXD_PASSWORD)
     logging.debug("user.token: {}".format(user.token))
     assert isinstance(user.token, str)
