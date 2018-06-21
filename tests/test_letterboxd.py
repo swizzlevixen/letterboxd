@@ -65,11 +65,11 @@ def test_user_auth():
     # try to get the user password from environment variable
     LBXD_PASSWORD = os.environ.get("LBXD_PASSWORD", None)
 
-    class APISecretMissingError(Exception):
+    class PasswordMissingError(Exception):
         pass
 
     if LBXD_PASSWORD is None:
-        raise APISecretMissingError("Auth methods require a Letterboxd password.")
+        raise PasswordMissingError("Auth methods require a Letterboxd password.")
 
     lbxd = Letterboxd()
     # make login
