@@ -8,11 +8,11 @@ import os
 import requests
 from letterboxd.api import API
 
-# import service/auth
-# import service/comments
-# import service/contributors
+from .services.auth import Authentication
 from .services.film import Film
 
+# import service/comments
+# import service/contributors
 # import service/lists
 # import service/log_entries
 # import service/me
@@ -64,6 +64,9 @@ class Letterboxd(object):
                 self.api_secret = LBXD_API_SECRET
 
         self.api = API(self.api_base, self.api_key, self.api_secret)
+
+    def auth(self):
+        return Authentication(api=self.api)
 
     def film(self, film_id):
         return Film(film_id=film_id, api=self.api)
