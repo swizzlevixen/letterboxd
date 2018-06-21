@@ -17,8 +17,9 @@ class Authentication:
     User authentication services for Letterboxd
     """
 
-    def __init__(self):
+    def __init__(self, api):
         self._token = None
+        self._api = api
 
     @property
     def token(self):
@@ -35,23 +36,11 @@ class Authentication:
         logging.debug("deleter of token called")
         del self._token
 
-    def login(username, password):
-        pass
-
-
-##### The Ruby implementation:
-#
-# module Auth
-#
-#   attr_reader :token
-#
-#   def login username, password
-#     login_response = api "auth/token", method: "post", form: [["grant_type", "password"], ["username", username], ["password", password]]
-#     # login_response = api "auth/token", method: "post", params: {grant_type: "password", username: username, password: password}
-#     json = JSON.parse(login_response.to_s)
-#     @token = json["access_token"]
-#     raise "Unable to log in" unless @token
-#     login_response
-#   end
-#
-# end
+    def login(self, username, password):
+        login_response = self._api.api_call(path = "auth/token", method = "post", form: {"grant_type": "password", "username": username, "password": password)
+        login_response_json = login_response.json()
+        self.token = login_response_json['access_token']
+        if not token:
+            # TODO: There's probably a JSON response error we can display instead
+            raise ConnectionRefusedError("No token received")
+        return login_response
