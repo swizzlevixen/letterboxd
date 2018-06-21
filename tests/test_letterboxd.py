@@ -4,8 +4,6 @@ import logging
 import requests
 
 logging.getLogger(__name__)
-# FORMAT = "[%(filename)s:%(lineno)s - %(funcName)20s() ] %(message)s"
-# logging.basicConfig(format=FORMAT, level = logging.DEBUG)
 logging.basicConfig(level=logging.DEBUG)
 
 
@@ -51,3 +49,31 @@ def test_film_info():
     assert set(film_keys()).issubset(
         response_json.keys()
     ), "All keys should be in the response"
+
+
+def test_user_auth():
+    # try to get the username from environment variable
+    LBXD_USERNAME = os.environ.get("LBXD_USERNAME", None)
+
+    class UsernameMissingError(Exception):
+        pass
+
+    if LBXD_USERNAME is None:
+        raise UsernameMissingError("Auth methods require a Letterboxd username.")
+
+    # try to get the user password from environment variable
+    LBXD_PASSWORD = os.environ.get("LBXD_PASSWORD", None)
+
+    class APISecretMissingError(Exception):
+        pass
+
+    if LBXD_PASSWORD is None:
+        raise APISecretMissingError("Auth methods require a Letterboxd password.")
+
+    lbxd = Letterboxd()
+    # make login
+    user = lbxd.auth()  # Raiders of the Lost Ark
+    assert isinstance != None
+    user.login(LBXD_USERNAME, LBXD_PASSWORD)
+    logging.debug("user.token: {}".format(user.token))
+    assert isinstance(user.token, str)
