@@ -73,7 +73,7 @@ def test_user_auth():
 
     lbxd = Letterboxd()
     # make login
-    user = lbxd.auth()  # Raiders of the Lost Ark
+    user = lbxd.auth()
     assert isinstance != None
     user.login(LBXD_USERNAME, LBXD_PASSWORD)
     logging.debug("user.token: {}".format(user.token))
