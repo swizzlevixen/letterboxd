@@ -40,21 +40,22 @@ class Authentication:
         logging.debug("deleter of token called")
         del self._token
 
-    # Goal: Removing this in favor of `get_token`
-    # def login(self, username, password):
-    #     form = [
-    #         ["grant_type", "password"],
-    #         ["username", username],
-    #         ["password", password],
-    #     ]
-    #     logging.debug("form: {}".format(form))
-    #     login_response = self._api.api_call(path="auth/token", method="post", form=form)
-    #     login_response_json = login_response.json()
-    #     self.token = login_response_json["access_token"]
-    #     if not token:
-    #         # TODO: There's probably a JSON response error we can display instead
-    #         raise ConnectionRefusedError("No token received")
-    #     return self.token
+    # TODO: Hopefully remove this in favor of `get_token`?
+    def login(self, username, password):
+        form = {"grant_type": "password", "username": username, "password": password}
+        form_str = "&grant_type={}&username={}&password={}".format(
+            form["grant_type"], form["username"], form["password"]
+        )
+        logging.debug("form: {}".format(form_str))
+        login_response = self._api.api_call(
+            path="auth/token", method="post", form=form_str
+        )
+        login_response_json = login_response.json()
+        self.token = login_response_json["access_token"]
+        if not token:
+            # TODO: There's probably a JSON response error we can display instead
+            raise ConnectionRefusedError("No token received")
+        return self.token
 
     def get_token(self, username, password):
         client = LegacyApplicationClient(client_id=self._api.api_key)
