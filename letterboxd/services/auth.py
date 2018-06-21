@@ -61,7 +61,7 @@ class Authentication:
         oauth = OAuth2Session(client=client)
         token_url = "{}/auth/token".format(self._api.api_base)
         # FIXME: I believe I need to sign this request and add it as a header, as:
-        # headers["Authorization"] = "Signature {}".format(signature)\
+        # headers["Authorization"] = "Signature {}".format(signature)
         # How can I get the prepared_request for this token request?
         token = oauth.fetch_token(
             token_url=token_url,
