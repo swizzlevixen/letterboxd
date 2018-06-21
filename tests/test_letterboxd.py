@@ -1,6 +1,7 @@
 from pytest import fixture
 from letterboxd.letterboxd import Letterboxd
 import logging
+import os
 import requests
 
 logging.getLogger(__name__)
