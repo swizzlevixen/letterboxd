@@ -87,11 +87,11 @@ class API:
             # Is there any other need to use `form` than for an oAuth call?
             # should some of this code be in there instead?
             # Escape the form string
-            data = urllib.parse.quote_plus(form)
+            body = urllib.parse.quote_plus(form)
             headers["Content-Type"] = "application/x-www-form-urlencoded"
             # Prepare the request
             prepared_dict = self.__prepare_request(
-                url, data=data, headers=headers, method=method
+                url, body=body, headers=headers, method=method
             )
             prepared_request = prepared_dict["prepared_request"]
             signature = prepared_dict["signature"]
@@ -102,12 +102,12 @@ class API:
                 'API.api_call() elif method.lower() in ["post", "put", "patch"]:'
             )
             params = self.__remove_empty_from_dict(params)
-            # JSON-encode the data
-            data = json.dumps(params)
+            # JSON-encode the body
+            body = json.dumps(params)
             headers["Content-Type"] = "application/json"
             # prepare the request
             prepared_dict = self.__prepare_request(
-                url, data=data, headers=headers, method=method
+                url, body=body, headers=headers, method=method
             )
             prepared_request = prepared_dict["prepared_request"]
             signature = prepared_dict["signature"]
@@ -154,7 +154,7 @@ class API:
     # Private methods
 
     def __prepare_request(
-        self, url, params={}, data=[], headers={}, method="get", form=False
+        self, url, params={}, body=[], headers={}, method="get", form=False
     ):
         """
         Prepare the request and sign it
@@ -170,14 +170,16 @@ class API:
 
         # Prepare the request and add it to the current requests session
         request = requests.Request(
-            method.upper(), url, params=params, data=data, headers=headers
+            method.upper(), url, params=params, data=body, headers=headers
         )
         prepared_request = self.session.prepare_request(request)
 
         logging.debug("prepared url: {}".format(prepared_request.url))
         # Hash the request signature
         signature = self.__sign(
-            method=prepared_request.method, url=prepared_request.url
+            method=prepared_request.method,
+            url=prepared_request.url,
+            body=prepared_request.body,
         )
         return {"prepared_request": prepared_request, "signature": signature}
 
@@ -230,7 +232,7 @@ class API:
 
     def __add_unique_params(self, params):
         """
-        Adds the metadata params required for signing the request
+        Adds the metabody params required for signing the request
         :param params: dict
         :return: dict
         """
@@ -264,6 +266,8 @@ class API:
         :return: str
         """
         # Create the salted bytestring
+        if body == None:
+            body = ""
         signing_bytestring = b"\x00".join(
             [str.encode(method), str.encode(url), str.encode(body)]
         )
