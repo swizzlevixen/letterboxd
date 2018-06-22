@@ -16,6 +16,7 @@ class User(object):
         :param username: str
         :param password: str
         """
+        self._api = api
         self._auth = Authentication(api=api, username=username, password=password)
 
     def token(self):
@@ -24,3 +25,18 @@ class User(object):
         :return: str
         """
         return self._auth.token
+
+    def me(self):
+        """
+        /me
+        Get details about the authenticated member.
+        http://api-docs.letterboxd.com/#path--me
+        :return: dict - JSON response
+        """
+        return self._api.api_call(path="me", headers=self.__token_header())
+
+    # -------------------------
+    # Private methods
+
+    def __token_header(self):
+        return {"Authorization": "Bearer {}".format(self.token())}
