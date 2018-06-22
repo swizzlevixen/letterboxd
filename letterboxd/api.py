@@ -8,6 +8,7 @@ import hashlib
 import hmac
 import json
 import logging
+import os
 import requests
 import sys
 import time
@@ -17,6 +18,7 @@ import uuid
 logging.getLogger(__name__)
 
 CHARLES_PROXY = "http://localhost:8888/"
+CHARLES_CERTIFICATE = os.environ.get("CHARLES_CERTIFICATE", None)
 
 
 class API:
@@ -133,14 +135,14 @@ class API:
             )
         )
 
-        # Set up Charles proxy if we're in debug
+        # If we're in debug, set up Charles proxy
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Enabling debug Charles proxy")
             proxies = {"http": CHARLES_PROXY, "https": CHARLES_PROXY}
+            self.session.verify = CHARLES_CERTIFICATE
         else:
             proxies = None
         # send the request
-        # response = self.session.send(prepared_request, proxies=proxies)
+        response = self.session.send(prepared_request, proxies=proxies)
 
         # TODO: catch any errors here
         logging.debug(response.status_code)
