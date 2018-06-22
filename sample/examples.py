@@ -38,9 +38,4 @@ lbxd = Letterboxd()
 # make login
 test_user = lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
 test_token = test_user.token()
-test_user.get_me
-
-
-# FIXME: ruby implementation
-# lbxd.login 'YOUR_USERNAME_HERE', 'YOUR_PASSWORD_HERE'
-# helpers.show_json(lbxd.get_me)
+# test_user.get_me
