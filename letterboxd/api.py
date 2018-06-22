@@ -19,6 +19,7 @@ logging.getLogger(__name__)
 
 CHARLES_PROXY = "http://localhost:8888/"
 CHARLES_CERTIFICATE = os.environ.get("CHARLES_CERTIFICATE", None)
+CHARLES = os.environ.get("CHARLES", None)
 
 
 class API:
@@ -133,19 +134,29 @@ class API:
             )
         )
 
-        # If we're in debug, set up Charles proxy
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            proxies = {"http": CHARLES_PROXY, "https": CHARLES_PROXY}
-            self.session.verify = CHARLES_CERTIFICATE
-        else:
-            proxies = None
-        # send the request
-        response = self.session.send(prepared_request, proxies=proxies)
-
-        # TODO: catch any errors here
-        logging.debug(response.status_code)
+        try:
+            # If we've set the environment variable, run with Charles proxy
+            if CHARLES == "True":
+                # First, make sure we have the correct settings
+                if (
+                    logging.getLogger().isEnabledFor(logging.DEBUG)
+                    and CHARLES_CERTIFICATE
+                ):
+                    logging.debug("Send prepared_request through Charles")
+                    proxies = {"http": CHARLES_PROXY, "https": CHARLES_PROXY}
+                    self.session.verify = CHARLES_CERTIFICATE
+                    # send the request through the proxy
+                    response = self.session.send(prepared_request, proxies=proxies)
+            else:
+                # send the request normally
+                logging.debug("Send prepared_request")
+                response = self.session.send(prepared_request)
+        except ConnectionError as error:
+            logger.error(error)
+            raise
 
         # TODO: if status code 200 or 204(?), return the response JSON decoded?, else handle the error
+        logging.debug(response.status_code)
         return response
 
     # -------------------------
