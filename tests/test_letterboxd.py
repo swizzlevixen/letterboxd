@@ -87,9 +87,10 @@ def test_user_auth():
     assert isinstance(test_token, str)
 
 
-def test_user_get_me():
+def test_user_me():
     LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
     lbxd = Letterboxd()
     # make login
     test_user = lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
-    test_user.get_me()
+    me_dict = test_user.me()
+    assert isinstance(me_dict, dict)
