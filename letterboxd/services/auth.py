@@ -5,42 +5,76 @@ Authentication API Documentation:
 http://api-docs.letterbotokend.com/#auth
 """
 
-import json
 import logging
-import requests
-from oauthlib.oauth2 import LegacyApplicationClient
-from requests_oauthlib import OAuth2Session
+import datetime
 
 logging.getLogger(__name__)
 
-# TODO: This token business should just take care of itself. Instantiate with user & pass, call token, and if there isn't a token already. If it's about to expire, renew it; if it's expierd, get a new token. The other code should just ask for the token, and this auth takes care of the rest.
+# TODO:
 
 
 class Authentication:
     """
     User authentication services for Letterboxd
+
+    This token business mostly takes care of itself. Instantiate authentication
+    with username and password, then call token(), and if there isn't a token
+    already, or if it's expired, it will go and get one.
     """
 
-    def __init__(self, api):
-        self._token = None
+    def __init__(self, api, username, password):
+        """
+        Initializer
+        :param api: Letterboxd.API class instance
+        :param username: str - user name
+        :param password: str - user password
+        """
+        self._token_dict = None
         self._api = api
+        self._username = username
+        self._password = password
+        self._token_expiration = datetime.datetime.now()
 
     @property
     def token(self):
         logging.debug("getter of token called")
-        return self._token
+        if self._token_dict == None:
+            # We don't have a token yet
+            self._token_dict = self.login(self._username, self._password)
+        elif self._token_expiration < datetime.datetime.now():
+            # Our current token has expired, get a new one
+            self._token_dict = self.login(self._username, self._password)
+        # return just the access token string
+        return self._token_dict["access_token"]
 
     @token.setter
     def token(self, value):
         logging.debug("setter of token called")
-        self._token = value
+        # set with the whole token dictionary, e.g.:
+        # {'access_token' : 'c918e712c06xyz5212fafe18ca982c',
+        # 'token_type': 'Bearer',
+        # 'expires_in': 3600,
+        # 'refresh_token': 'fdfdfbba270nnn03bca545b156982'}
+        self._token_dict = value
+        # Calculate the expiration datetime
+        self._token_expiration = datetime.datetime.now() + datetime.timedelta(
+            seconds=self._token_dict["expires_in"]
+        )
 
     @token.deleter
     def token(self):
         logging.debug("deleter of token called")
-        del self._token
+        del self._token_dict
+        # Reset the expiration to now (i.e., 'expired')
+        self._token_expiration = datetime.datetime.now()
 
     def login(self, username, password):
+        """
+        User access to the Letterboxd API. Grabs a token for the user
+        :param username: str
+        :param password: str
+        :return: dict - either token dict or API error
+        """
         form = {"grant_type": "password", "username": username, "password": password}
         form_str = "grant_type={}&username={}&password={}".format(
             form["grant_type"], form["username"], form["password"]
@@ -57,8 +91,10 @@ class Authentication:
                 "Error {}: {} \n{}".format(status_code, error_type, error_message)
             )
         else:
-            self.token = response_data["access_token"]
-        if not self.token:
+            access_token = response_data["access_token"]
+        if not access_token:
             # TODO: There's probably a better error we can throw instead
             raise ConnectionRefusedError("No token received")
-        return self.token
+        else:
+            self.token = response_data
+        return response_data
