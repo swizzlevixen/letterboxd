@@ -4,8 +4,10 @@ Convenience module for user-based features of the Letterboxd API
 API Documentation:
 http://api-docs.letterboxd.com/
 """
-
+import logging
 from letterboxd.services.auth import Authentication
+
+logging.getLogger(__name__)
 
 
 class User(object):
@@ -33,10 +35,15 @@ class User(object):
         http://api-docs.letterboxd.com/#path--me
         :return: dict - JSON response
         """
-        return self._api.api_call(path="me", headers=self.__token_header())
+        auth_token_header = self.__token_header()
+        response = self._api.api_call(path="me", headers=auth_token_header)
+        # TODO: Handle errors
+        return response.json()
 
     # -------------------------
     # Private methods
 
     def __token_header(self):
-        return {"Authorization": "Bearer {}".format(self.token())}
+        auth_token_header = {"Authorization": "Bearer {}".format(self.token())}
+        logging.debug("auth_token_header: {}".format(auth_token_header))
+        return auth_token_header
