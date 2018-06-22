@@ -8,7 +8,7 @@ Currently a ***WORK-IN-PROGRESS,*** focusing first on retrieving watchlists and 
 
 ## Usage
 
-Instantiate the `Letterboxd` class, and provide it with the `api_base` URL for the API, your `api_key`, and your `api_secret`. You can pass it as a variable to the class init, or add it to your environment variables as:
+Instantiate the `Letterboxd` class, and provide it with the `api_base` URL for the API, your `api_key`, and your `api_secret`. You can pass it as a variable to the class initializer, or add it to your environment variables as:
 
 ```
 export LBXD_API_KEY="YOUR_KEY_HERE"
