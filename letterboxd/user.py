@@ -20,7 +20,7 @@ class User(object):
 
     def token(self):
         """
-        Make _Auth get a token, and return the token string
+        Make _auth get a token, and return the token string
         :return: str
         """
         return self._auth.token
