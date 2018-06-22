@@ -24,3 +24,9 @@ export LBXD_USERNAME="YOUR_USERNAME"
 export LBXD_PASSWORD="YOUR_PASSWORD"
 export CHARLES_CERTIFICATE="/path/to/charles-ssl-proxying-certificate.pem"
 ```
+
+Set the `CHARLES` environment variable to `True` to turn the proxy settings on. For example, if you want to use it on a case-by-case basis for testing, run the tests like this:
+
+```
+$ CHARLES="True" py.test
+```
