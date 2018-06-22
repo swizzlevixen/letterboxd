@@ -91,7 +91,7 @@ class API:
             headers["Content-Type"] = "application/x-www-form-urlencoded"
             # Prepare the request
             prepared_dict = self.__prepare_request(
-                url, body=body, headers=headers, method=method
+                url, body=form, headers=headers, method=method
             )
             prepared_request = prepared_dict["prepared_request"]
             signature = prepared_dict["signature"]
