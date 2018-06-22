@@ -47,14 +47,20 @@ class Authentication:
             form["grant_type"], form["username"], form["password"]
         )
         logging.debug("form: {}".format(form_str))
-        login_response = self._api.api_call(
-            path="auth/token", method="post", form=form_str
-        )
-        login_response_data = login_response.json()
-        logging.debug(login_response_data)
-        self.token = login_response_data["access_token"]
+        response = self._api.api_call(path="auth/token", method="post", form=form_str)
+        response_data = response.json()
+        logging.debug(response_data)
+        if response.status_code != 200:
+            status_code = str(response.status_code)
+            error_type = response_data["type"]
+            error_message = response_data["message"]
+            raise ConnectionRefusedError(
+                "Error {}: {} \n{}".format(status_code, error_type, error_message)
+            )
+        else:
+            self.token = response_data["access_token"]
         if not token:
-            # TODO: There's probably a JSON response error we can display instead
+            # TODO: There's probably a better error we can throw instead
             raise ConnectionRefusedError("No token received")
         return self.token
 
