@@ -9,6 +9,7 @@ import hmac
 import json
 import logging
 import requests
+import sys
 import time
 import urllib.parse
 import uuid
@@ -80,6 +81,7 @@ class API:
         )
 
         if form:
+            logging.debug("API.api_call() if form")
             # Is there any other need to use `form` than for an oAuth call?
             # should some of this code be in there instead?
             # Escape the form string
@@ -94,6 +96,9 @@ class API:
             # Add the signature to the headers
             prepared_request.headers["Authorization"] = "Signature {}".format(signature)
         elif method.lower() in ["post", "put", "patch"]:
+            logging.debug(
+                'API.api_call() elif method.lower() in ["post", "put", "patch"]:'
+            )
             params = self.__remove_empty_from_dict(params)
             # JSON-encode the data
             data = json.dumps(params)
@@ -107,6 +112,7 @@ class API:
             # Attach the signature
             prepared_request.prepare_url(prepared_request.url, {"signature": signature})
         else:
+            logging.debug("API.api_call() else:")
             # It's a GET
             # Prepare the request
             prepared_dict = self.__prepare_request(
@@ -117,13 +123,27 @@ class API:
             logging.debug(prepared_request.url)
             # Add the signature to the end of the params in the url
             prepared_request.prepare_url(prepared_request.url, {"signature": signature})
-            logging.debug(type(prepared_request))
 
+        logging.debug(
+            "API.api_call() prepared_request\nmethod: {}\nurl: {}\nheaders: {}\nbody: {}".format(
+                prepared_request.method,
+                prepared_request.url,
+                prepared_request.headers,
+                prepared_request.body,
+            )
+        )
+
+        # Set up Charles proxy if we're in debug
+        if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug("Enabling debug Charles proxy")
+            proxies = {"http": CHARLES_PROXY, "https": CHARLES_PROXY}
+        else:
+            proxies = None
         # send the request
-        response = self.session.send(prepared_request)
+        # response = self.session.send(prepared_request, proxies=proxies)
+
         # TODO: catch any errors here
         logging.debug(response.status_code)
-        logging.debug(type(response))
 
         # TODO: if status code 200 or 204(?), return the response JSON decoded?, else handle the error
         return response
