@@ -40,7 +40,6 @@ class Authentication:
         logging.debug("deleter of token called")
         del self._token
 
-    # TODO: Hopefully remove this in favor of `get_token`?
     def login(self, username, password):
         form = {"grant_type": "password", "username": username, "password": password}
         form_str = "grant_type={}&username={}&password={}".format(
@@ -62,20 +61,4 @@ class Authentication:
         if not self.token:
             # TODO: There's probably a better error we can throw instead
             raise ConnectionRefusedError("No token received")
-        return self.token
-
-    def get_token(self, username, password):
-        client = LegacyApplicationClient(client_id=self._api.api_key)
-        oauth = OAuth2Session(client=client)
-        token_url = "{}/auth/token".format(self._api.api_base)
-        # FIXME: I believe I need to sign this request and add it as a header, as:
-        # headers["Authorization"] = "Signature {}".format(signature)
-        # How can I get the prepared_request for this token request?
-        self.token = oauth.fetch_token(
-            token_url=token_url,
-            username=username,
-            password=password,
-            client_id=self._api.api_key,
-            client_secret=self._api.api_secret,
-        )
         return self.token
