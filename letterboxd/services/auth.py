@@ -10,8 +10,6 @@ import datetime
 
 logging.getLogger(__name__)
 
-# TODO:
-
 
 class Authentication:
     """
@@ -67,6 +65,8 @@ class Authentication:
         del self._token_dict
         # Reset the expiration to now (i.e., 'expired')
         self._token_expiration = datetime.datetime.now()
+
+    # TODO: renew_token()
 
     def login(self, username, password):
         """
