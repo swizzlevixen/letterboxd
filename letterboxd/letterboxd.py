@@ -7,7 +7,7 @@ import logging
 import os
 import requests
 from letterboxd.api import API
-
+from letterboxd.user import User
 from .services.auth import Authentication
 from .services.film import Film
 
@@ -70,3 +70,6 @@ class Letterboxd(object):
 
     def film(self, film_id):
         return Film(film_id=film_id, api=self.api)
+
+    def user(self, api, username, password):
+        return User(api, username, password)
