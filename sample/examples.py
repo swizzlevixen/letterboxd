@@ -1,12 +1,12 @@
+import os
+import pprint
+import sys
+
+# Add the directory containing the letterboxd module to the Python path
+lbxd_path = "../"
+sys.path.append(os.path.abspath(lbxd_path))
+
 from letterboxd.letterboxd import Letterboxd
-
-# Assuming use of environment variables:
-lbxd = Letterboxd()
-
-# If not using environment variables, instead instantiate Letterboxd() with your secrets:
-# API_KEY = 'YOUR_KEY_HERE'
-# API_SECRET = 'YOUR_SECRET_HERE'
-# lbxd = Letterboxd(api_key=API_KEY, api_secret=API_SECRET)
 
 
 def load_user_pass():
@@ -33,9 +33,20 @@ def load_user_pass():
     return (LBXD_USERNAME, LBXD_PASSWORD)
 
 
-LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
-lbxd = Letterboxd()
-# make login
-test_user = lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
-test_token = test_user.token()
-# test_user.get_me
+if __name__ == "__main__":
+    # Assuming use of environment variables:
+    lbxd = Letterboxd()
+
+    # If not using environment variables, instead instantiate Letterboxd() with your secrets:
+    # API_KEY = 'YOUR_KEY_HERE'
+    # API_SECRET = 'YOUR_SECRET_HERE'
+    # lbxd = Letterboxd(api_key=API_KEY, api_secret=API_SECRET)
+
+    # make login
+    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
+    test_user = lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
+    # request from the API endpoint /me
+    me_dict = test_user.me()
+    # print it pretty
+    prettyprinter = pprint.PrettyPrinter(indent=4)
+    prettyprinter.pprint(me_dict)
