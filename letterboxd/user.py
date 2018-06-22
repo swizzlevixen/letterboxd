@@ -38,7 +38,8 @@ class User(object):
         auth_token_header = self.__token_header()
         response = self._api.api_call(path="me", headers=auth_token_header)
         # TODO: Handle errors
-        return response.json()
+        data = response.json()
+        return data
 
     # -------------------------
     # Private methods
