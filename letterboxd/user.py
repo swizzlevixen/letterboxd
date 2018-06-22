@@ -10,5 +10,17 @@ from letterboxd.services.auth import Authentication
 
 class User(object):
     def __init__(self, api, username, password):
-        self._auth = Authentication(api=api)
-        self._auth.login(username=username, password=password)
+        """
+        Set up authentication for this user.
+        :param api: Letterboxd.API - class instance
+        :param username: str
+        :param password: str
+        """
+        self._auth = Authentication(api=api, username=username, password=password)
+
+    def token(self):
+        """
+        Make _Auth get a token, and return the token string
+        :return: str
+        """
+        return self._auth.token
