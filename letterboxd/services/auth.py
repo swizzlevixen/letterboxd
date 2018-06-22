@@ -59,7 +59,7 @@ class Authentication:
             )
         else:
             self.token = response_data["access_token"]
-        if not token:
+        if not self.token:
             # TODO: There's probably a better error we can throw instead
             raise ConnectionRefusedError("No token received")
         return self.token
@@ -71,7 +71,7 @@ class Authentication:
         # FIXME: I believe I need to sign this request and add it as a header, as:
         # headers["Authorization"] = "Signature {}".format(signature)
         # How can I get the prepared_request for this token request?
-        token = oauth.fetch_token(
+        self.token = oauth.fetch_token(
             token_url=token_url,
             username=username,
             password=password,
