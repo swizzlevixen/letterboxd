@@ -85,3 +85,11 @@ def test_user_auth():
     test_token = test_user.token()
     logging.debug("user.token: {}".format(test_token))
     assert isinstance(test_token, str)
+
+
+def test_user_get_me():
+    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
+    lbxd = Letterboxd()
+    # make login
+    test_user = lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
+    test_user.get_me()
