@@ -70,10 +70,11 @@ class Authentication:
 
     def login(self, username, password):
         """
-        User access to the Letterboxd API. Grabs a token for the user
+        User access to the Letterboxd API. Grabs a token for the user.
+        http://api-docs.letterboxd.com/#path--auth-token
         :param username: str
         :param password: str
-        :return: dict - either token dict or API error
+        :return: dict - either an AccessToken or OAuthError
         """
         form = {"grant_type": "password", "username": username, "password": password}
         form_str = "grant_type={}&username={}&password={}".format(
