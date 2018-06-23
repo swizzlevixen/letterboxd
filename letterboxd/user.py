@@ -20,6 +20,7 @@ class User(object):
         """
         self._api = api
         self._auth = Authentication(api=api, username=username, password=password)
+        self._me = None
 
     def token(self):
         """
@@ -28,6 +29,7 @@ class User(object):
         """
         return self._auth.token
 
+    @property
     def me(self):
         """
         /me
@@ -37,9 +39,13 @@ class User(object):
         """
         auth_token_header = self.__token_header()
         response = self._api.api_call(path="me", headers=auth_token_header)
-        # TODO: Handle errors
         data = response.json()
-        return data
+        self.me = data
+        return self._me
+
+    @me.setter
+    def me(self, value):
+        self._me = value
 
     # -------------------------
     # Private methods

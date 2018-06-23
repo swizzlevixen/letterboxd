@@ -92,6 +92,6 @@ def test_user_me():
     lbxd = Letterboxd()
     # make login
     test_user = lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
-    me_dict = test_user.me()
+    me_dict = test_user.me
     logging.debug("me_dict: {}".format(me_dict))
     assert isinstance(me_dict, dict)
