@@ -22,6 +22,7 @@ class User(object):
         self._auth = Authentication(api=api, username=username, password=password)
         self._me = None
 
+    @property
     def token(self):
         """
         Make _auth get a token, and return the token string
@@ -51,6 +52,6 @@ class User(object):
     # Private methods
 
     def __token_header(self):
-        auth_token_header = {"Authorization": "Bearer {}".format(self.token())}
+        auth_token_header = {"Authorization": "Bearer {}".format(self.token)}
         logging.debug("auth_token_header: {}".format(auth_token_header))
         return auth_token_header
