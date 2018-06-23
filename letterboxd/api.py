@@ -155,9 +155,21 @@ class API:
             logger.error(error)
             raise
 
-        # TODO: if status code 200 or 204(?), return the response JSON decoded?, else handle the error
         logging.debug(response.status_code)
-        return response
+        if response.status_code != 200:
+            # There's an error
+            status_code = str(response.status_code)
+            error_type = response_data["type"]
+            error_message = response_data["message"]
+            # TODO: This should probably be a different error
+            # TODO: Should I check for both 204 and 400?
+            raise ConnectionRefusedError(
+                "Error {}: {} \n{}".format(status_code, error_type, error_message)
+            )
+        else:
+            # Return the response JSON decoded
+            response_data = response.json()
+            return response_data
 
     # -------------------------
     # Private methods
