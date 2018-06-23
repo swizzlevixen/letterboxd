@@ -157,7 +157,10 @@ class API:
 
         # TODO: if status code 200 or 204(?), return the response JSON decoded?, else handle the error
         logging.debug(response.status_code)
-        return response
+        if response.status_code == requests.codes.ok:
+            return response
+        else:
+            response.raise_for_status()
 
     # -------------------------
     # Private methods
