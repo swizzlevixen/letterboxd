@@ -155,8 +155,8 @@ class API:
             logger.error(error)
             raise
 
-        # TODO: if status code 200 or 204(?), return the response JSON decoded?, else handle the error
-        logging.debug(response.status_code)
+        # Return the response
+        logging.debug(f"api_call() response.status_code: {response.status_code}")
         if response.status_code == requests.codes.ok:
             return response
         else:
