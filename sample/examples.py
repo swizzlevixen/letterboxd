@@ -46,7 +46,7 @@ if __name__ == "__main__":
     LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
     test_user = lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
     # request from the API endpoint /me
-    me_dict = test_user.me()
+    me_dict = test_user.me
     # print it pretty
     prettyprinter = pprint.PrettyPrinter(indent=4)
     prettyprinter.pprint(me_dict)

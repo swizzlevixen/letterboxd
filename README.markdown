@@ -2,7 +2,7 @@
 
 `v0.1a` - **THE CODE IS CURRENTLY IN AN ALPHA STATE, AND MAY BE VERY BROKEN.**
 
-A Python 3 implementation of the [Letterboxd API v0](http://api-docs.letterboxd.com/).
+A Python 3 implementation of the [Letterboxd API v0](http://api-docs.letterboxd.com/). Python 3.6 is required, because this uses formatted strings.
  
 Currently a ***WORK-IN-PROGRESS,*** focusing first on retrieving watchlists and other lists.
 
