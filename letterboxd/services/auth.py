@@ -84,16 +84,7 @@ class Authentication:
         response = self._api.api_call(path="auth/token", method="post", form=form_str)
         response_data = response.json()
         logging.debug(response_data)
-        if response.status_code != 200:
-            status_code = str(response.status_code)
-            error_type = response_data["type"]
-            error_message = response_data["message"]
-            raise ConnectionRefusedError(
-                "Error {}: {} \n{}".format(status_code, error_type, error_message)
-            )
-        else:
-            access_token = response_data["access_token"]
-        if not access_token:
+        if not response_data["access_token"]:
             # TODO: There's probably a better error we can throw instead
             raise ConnectionRefusedError("No token received")
         else:
