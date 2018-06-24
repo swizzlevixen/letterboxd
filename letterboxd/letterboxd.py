@@ -10,13 +10,13 @@ from letterboxd.api import API
 from letterboxd.user import User
 from .services.auth import Authentication
 from .services.film import Film
+from .services.member import Member
 
 # import service/comments
 # import service/contributors
 # import service/lists
 # import service/log_entries
 # import service/me
-# import service/members
 # import service/search
 
 # default API URL for v0
