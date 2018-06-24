@@ -28,6 +28,8 @@ class Member(object):
         :param watchlist_request: dict - WatchlistRequest
         :return: dict - FilmsResponse
         """
+        if member_id is None:
+            member_id = self._member_id
         return self._api.api_call(
             path=f"member/{member_id}/watchlist", params=watchlist_request
         )
