@@ -20,7 +20,7 @@ class Member(object):
     def details(self, member_id=None):
         pass
 
-    def watchlist(self, member_id=None, watchlist_request=None):
+    def watchlist(self, member_id=None, watchlist_request={}):
         """
         /member/{id}/watchlist
         http://api-docs.letterboxd.com/#path--member--id--watchlist
