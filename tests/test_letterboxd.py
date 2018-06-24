@@ -69,6 +69,25 @@ def film_keys():
 
 
 @fixture
+def film_summary_keys():
+    # FilmSummary definition
+    # http://api-docs.letterboxd.com/#/definitions/FilmSummary
+    # Commented lines may not be returned by every film
+    return [
+        "id",
+        "name",
+        # "originalName",
+        # "alternativeNames",
+        "releaseYear",
+        "directors",
+        "poster",
+        # "filmCollectionId",
+        "links",
+        "relationships",
+    ]
+
+
+@fixture
 def films_response_keys():
     # FilmsResponse definition
     # http://api-docs.letterboxd.com/#/definitions/FilmsResponse

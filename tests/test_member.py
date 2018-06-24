@@ -3,7 +3,7 @@ import logging
 import requests
 from letterboxd.letterboxd import Letterboxd
 from letterboxd.services.member import Member
-from tests.test_letterboxd import load_user_pass, films_response_keys
+from tests.test_letterboxd import load_user_pass, films_response_keys, film_summary_keys
 
 
 def test_member_watchlist():
@@ -27,4 +27,8 @@ def test_member_watchlist():
     assert isinstance(watchlist, dict)
     assert set(films_response_keys()).issubset(
         watchlist.keys()
+    ), "All keys should be in the response"
+    # Test the first movie in the watchlist
+    assert set(film_summary_keys()).issubset(
+        watchlist["items"][0].keys()
     ), "All keys should be in the response"
