@@ -17,11 +17,12 @@ class Film(object):
         self._api = api
         self._film_id = film_id
 
-    def info(self):
+    def info(self, film_id=self._film_id):
         """
         /film/{id}
         Get details about a film by ID.
         http://api-docs.letterboxd.com/#path--film--id-
-        :return: dict - JSON data
+        :param film_id: str - LID of the film
+        :return: dict - Film
         """
-        return self._api.api_call(path="film/{}".format(self._film_id))
+        return self._api.api_call(path=f"film/{film_id}")
