@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 import logging
-
+import requests
 from letterboxd.letterboxd import Letterboxd
 from letterboxd.services.member import Member
 from tests.test_letterboxd import load_user_pass
