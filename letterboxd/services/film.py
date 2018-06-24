@@ -26,3 +26,13 @@ class Film(object):
         :return: dict - Film
         """
         return self._api.api_call(path=f"film/{film_id}")
+
+    def availability(self, film_id=self._film_id):
+        """
+        /film/{id}/availability
+        Get availability data about a film by ID.
+        :param film_id: str - LID of the film
+        :return: list - FilmAvailabilityResponse
+        """
+        response = self._api.api_call(path=f"film/{film_id}/availability")
+        return response["FilmAvailabilityResponse"]
