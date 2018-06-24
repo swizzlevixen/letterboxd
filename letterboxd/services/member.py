@@ -17,6 +17,9 @@ class Member(object):
         self._api = api
         self._member_id = member_id
 
+    def details(self, member_id=None):
+        pass
+
     def watchlist(self, member_id=None, watchlist_request=None):
         """
         /member/{id}/watchlist
