@@ -92,7 +92,6 @@ def test_film_me():
     lbxd = Letterboxd()
     # make login
     test_user = lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
-    test_token = test_user.token
     film_instance = lbxd.film(film_id="2bbs")  # Raiders of the Lost Ark
     response = film_instance.me()
     logging.debug(f"response: {response}")
