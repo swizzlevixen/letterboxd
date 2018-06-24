@@ -17,7 +17,7 @@ class Film(object):
         self._api = api
         self._film_id = film_id
 
-    def info(self, film_id=self._film_id):
+    def info(self, film_id=None):
         """
         /film/{id}
         Get details about a film by ID.
@@ -25,14 +25,18 @@ class Film(object):
         :param film_id: str - LID of the film
         :return: dict - Film
         """
+        if film_id is None:
+            film_id = self._film_id
         return self._api.api_call(path=f"film/{film_id}")
 
-    def availability(self, film_id=self._film_id):
+    def availability(self, film_id=None):
         """
         /film/{id}/availability
         Get availability data about a film by ID.
         :param film_id: str - LID of the film
         :return: list - FilmAvailabilityResponse
         """
+        if film_id is None:
+            film_id = self._film_id
         response = self._api.api_call(path=f"film/{film_id}/availability")
         return response["FilmAvailabilityResponse"]
