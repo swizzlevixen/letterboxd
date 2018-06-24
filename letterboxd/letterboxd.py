@@ -3,9 +3,7 @@ Python 3 wrapper for
 Version 0 of the Letterboxd API
 """
 
-import logging
 import os
-import requests
 from letterboxd.api import API
 from letterboxd.user import User
 from .services.auth import Authentication
