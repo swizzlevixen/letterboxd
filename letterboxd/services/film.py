@@ -39,4 +39,6 @@ class Film(object):
         if film_id is None:
             film_id = self._film_id
         response = self._api.api_call(path=f"film/{film_id}/availability")
-        return response["FilmAvailabilityResponse"]
+        response_json = response.json()
+        availability_list = response_json["FilmAvailabilityResponse"]
+        return availability_list
