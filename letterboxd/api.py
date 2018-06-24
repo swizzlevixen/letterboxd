@@ -31,8 +31,7 @@ class API:
         self.api_base = api_base
         self.api_key = api_key
         self.api_secret = api_secret
-        self.token = None
-        # TODO - How do I get user.auth.token in here in a sane way?
+        self.user = None
 
         if self.api_key == "":
             # If the API key wasn't passed in
@@ -71,8 +70,8 @@ class API:
         """
 
         # If we have an oAuth token
-        if self.token:
-            headers["Authorization"] = "Bearer {}".format(self.token)
+        if self.user.token:
+            headers["Authorization"] = "Bearer {}".format(self.user.token)
 
         url = "{}/{}".format(self.api_base, path)
 
