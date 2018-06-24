@@ -1,10 +1,40 @@
 # Letterboxd
 
-`v0.1a` - **THE CODE IS CURRENTLY IN AN ALPHA STATE, AND MAY BE VERY BROKEN.**
+`v0.1.0a`
 
-A Python 3 implementation of the [Letterboxd API v0](http://api-docs.letterboxd.com/). Python 3.6 is required, because this uses formatted strings.
+**THE CODE IS CURRENTLY IN AN ALPHA STATE, AND MAY BE VERY BROKEN, AND/OR WHAT IS WORKING NOW MAY BREAK IN THE FUTURE.**
+
+A Python 3 implementation of the [Letterboxd API v0](http://api-docs.letterboxd.com/). Python 3.6+ is required, because this uses formatted strings.
  
 Currently a ***WORK-IN-PROGRESS,*** focusing first on retrieving watchlists and other lists.
+
+Letterboxd has posted an [example ruby client](https://github.com/grantyb/letterboxd-api-example-ruby-client), but as they say in the readme there:
+
+> Although the Letterboxd API isn’t public yet (as at 2017-06-12), we have seeded some developers with API keys.
+
+If you need more information about API access, please see https://letterboxd.com/api-coming-soon/
+
+## API Coverage
+
+The library currently covers these Letterboxd API endpoints:
+
+#### Film
+
+- /film/{id}
+- /film/{id}/availability — this does not seem to return any data at this time
+- /film/{id}/me
+
+#### Me
+
+- /me
+
+#### Member
+
+- /member/{id}/watchlist
+
+## Contributions
+
+Code files should be passed through the [Black](https://github.com/ambv/black) Python code formatter before check-in.
 
 ## Usage
 
