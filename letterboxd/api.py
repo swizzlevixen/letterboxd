@@ -31,6 +31,7 @@ class API:
         self.api_base = api_base
         self.api_key = api_key
         self.api_secret = api_secret
+        self.token = None
 
         if self.api_key == "":
             # If the API key wasn't passed in
@@ -58,8 +59,18 @@ class API:
         self.session = requests.Session()
         self.session.params = {}
 
-        # TODO: Put the auth.py call here, if we have a user/pass
-        self.token = ""
+    @property
+    def token(self):
+        return
+        # TODO: write the the token property stuff.
+
+    @token.setter
+    def token(self, value):
+        pass
+
+    @token.deleter
+    def token(self):
+        pass
 
     def api_call(self, path, params={}, form=None, headers={}, method="get"):
         """

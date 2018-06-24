@@ -47,6 +47,7 @@ class User(object):
     @me.setter
     def me(self, value):
         self._me = value
+        # TODO: set this to API.token as well
 
     # -------------------------
     # Private methods
