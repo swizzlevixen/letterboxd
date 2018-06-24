@@ -53,7 +53,13 @@ if __name__ == "__main__":
     print("\n-------------------------\n/me\n-------------------------\n")
     prettyprinter.pprint(me_dict)
 
-    # request film/{id}/me endpoint,
+    # request /film/{id} endpoint
+    film = lbxd.film(film_id="2bbs")  # Raiders of the Lost Ark
+    response = film.info()
+    response_json = response.json()
+    print("\n-------------------------\nfilm/{id}\n-------------------------\n")
+    prettyprinter.pprint(response_json)
+
     # request /film/{id}/me endpoint,
     film_instance = lbxd.film(film_id="2bbs")  # Raiders of the Lost Ark
     response = film_instance.me()
