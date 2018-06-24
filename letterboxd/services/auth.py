@@ -49,10 +49,10 @@ class Authentication:
     def token(self, value):
         logging.debug("setter of token called")
         # set with the whole token dictionary, e.g.:
-        # {'access_token' : 'c918e712c06xyz5212fafe18ca982c',
-        # 'token_type': 'Bearer',
-        # 'expires_in': 3600,
-        # 'refresh_token': 'fdfdfbba270nnn03bca545b156982'}
+        # {'access_token' : str,
+        #  'token_type': 'Bearer',
+        #  'expires_in': int,
+        #  'refresh_token': str}
         self._token_dict = value
         # Calculate the expiration datetime
         self._token_expiration = datetime.datetime.now() + datetime.timedelta(
