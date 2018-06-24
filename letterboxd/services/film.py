@@ -13,7 +13,7 @@ logging.getLogger(__name__)
 
 
 class Film(object):
-    def __init__(self, film_id, api):
+    def __init__(self, api, film_id=None):
         self._api = api
         self._film_id = film_id
 
