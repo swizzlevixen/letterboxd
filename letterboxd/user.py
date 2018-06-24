@@ -39,8 +39,7 @@ class User(object):
         http://api-docs.letterboxd.com/#path--me
         :return: dict - JSON response
         """
-        auth_token_header = self.__token_header()
-        response = self._api.api_call(path="me", headers=auth_token_header)
+        response = self._api.api_call(path="me")
         data = response.json()
         self.me = data
         return self._me
@@ -48,11 +47,3 @@ class User(object):
     @me.setter
     def me(self, value):
         self._me = value
-
-    # -------------------------
-    # Private methods
-
-    def __token_header(self):
-        auth_token_header = {"Authorization": "Bearer {}".format(self.token)}
-        logging.debug("auth_token_header: {}".format(auth_token_header))
-        return auth_token_header
