@@ -44,11 +44,14 @@ def load_user_pass():
 
 @fixture
 def film_keys():
+    # Film definition
+    # http://api-docs.letterboxd.com/#/definitions/Film
     # Responsible only for returning the test data
     # A film could also include 'originalName', but does not apply here
     return [
         "id",
         "name",
+        # "originalName",  # if it was if it was first released with a non-English title; does not apply to our test case
         "alternativeNames",
         "releaseYear",
         "tagline",
