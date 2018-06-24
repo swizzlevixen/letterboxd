@@ -75,6 +75,18 @@ def test_film_info():
     ), "All keys should be in the response"
 
 
+def test_film_availability():
+    lbxd = Letterboxd()
+    film_instance = lbxd.film(film_id="2bbs")  # Raiders of the Lost Ark
+    response = film_instance.availability()
+    logging.debug(f"response: {response}")
+    assert isinstance(response, requests.Response)
+    assert response.status_code == 200
+    response_json = response.json()
+    logging.debug(f"response_json: {response_json}")
+    assert isinstance(response_json, dict)
+
+
 def test_user_auth():
     LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
     lbxd = Letterboxd()
