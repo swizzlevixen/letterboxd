@@ -32,6 +32,7 @@ class API:
         self.api_key = api_key
         self.api_secret = api_secret
         self.token = None
+        # TODO - How do I get user.auth.token in here in a sane way?
 
         if self.api_key == "":
             # If the API key wasn't passed in
@@ -58,19 +59,6 @@ class API:
         # Start the shared requests session
         self.session = requests.Session()
         self.session.params = {}
-
-    @property
-    def token(self):
-        return
-        # TODO: write the the token property stuff.
-
-    @token.setter
-    def token(self, value):
-        pass
-
-    @token.deleter
-    def token(self):
-        pass
 
     def api_call(self, path, params={}, form=None, headers={}, method="get"):
         """
