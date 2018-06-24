@@ -34,9 +34,10 @@ def load_user_pass():
 
 
 if __name__ == "__main__":
+    prettyprinter = pprint.PrettyPrinter(indent=4)
+
     # Assuming use of environment variables:
     lbxd = Letterboxd()
-
     # If not using environment variables, instead instantiate Letterboxd() with your secrets:
     # lbxd = Letterboxd(api_key='YOUR_KEY_HERE', api_secret='YOUR_SECRET_HERE')
 
@@ -49,11 +50,12 @@ if __name__ == "__main__":
     # request from the API endpoint /me
     me_dict = test_user.me
     # print it pretty
-    prettyprinter = pprint.PrettyPrinter(indent=4)
+    print("\n-------------------------\n/me\n-------------------------\n")
     prettyprinter.pprint(me_dict)
 
     # request film/{id}/me endpoint,
     film_instance = lbxd.film(film_id="2bbs")  # Raiders of the Lost Ark
     response = film_instance.me()
     response_json = response.json()
+    print("\n-------------------------\nfilm/{id}/me\n-------------------------\n")
     prettyprinter.pprint(response_json)
