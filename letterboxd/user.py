@@ -21,7 +21,7 @@ class User(object):
         self._api = api
         self._auth = Authentication(api=api, username=username, password=password)
         self._me = None
-        self.token()
+        self.token
 
     @property
     def token(self):
