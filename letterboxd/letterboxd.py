@@ -10,12 +10,11 @@ from .services.auth import Authentication
 from .services.film import Film
 from .services.member import Member
 
-# import service/comments
-# import service/contributors
-# import service/lists
-# import service/log_entries
-# import service/me
-# import service/search
+# TODO: Write these modules
+# from .services.comment import Comment
+# from .services.list import List
+# from .services.log_entry import LogEntry
+# from .services.search import Search
 
 # default API URL for v0
 API_BASE_URL = "https://api.letterboxd.com/api/v0"
