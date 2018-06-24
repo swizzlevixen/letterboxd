@@ -38,13 +38,13 @@ if __name__ == "__main__":
     lbxd = Letterboxd()
 
     # If not using environment variables, instead instantiate Letterboxd() with your secrets:
-    # API_KEY = 'YOUR_KEY_HERE'
-    # API_SECRET = 'YOUR_SECRET_HERE'
-    # lbxd = Letterboxd(api_key=API_KEY, api_secret=API_SECRET)
+    # lbxd = Letterboxd(api_key='YOUR_KEY_HERE', api_secret='YOUR_SECRET_HERE')
 
-    # make login
+    # Login user
     LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
     test_user = lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
+    # If not using environment variables, instead instantiate Letterboxd() with your credentials
+    # test_user = lbxd.user(YOUR_USERNAME_HERE, YOUR_PASSWORD_HERE)
 
     # request from the API endpoint /me
     me_dict = test_user.me
