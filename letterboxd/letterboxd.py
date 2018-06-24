@@ -21,6 +21,7 @@ API_BASE_URL = "https://api.letterboxd.com/api/v0"
 
 
 class Letterboxd(object):
+    # noinspection PyPep8Naming
     def __init__(self, api_base=API_BASE_URL, api_key="", api_secret=""):
         self.api_base = api_base
         self.api_key = api_key
@@ -63,6 +64,7 @@ class Letterboxd(object):
         self.api = API(self.api_base, self.api_key, self.api_secret)
 
     def auth(self):
+        # noinspection PyArgumentList
         return Authentication(api=self.api)
 
     def film(self, film_id):
