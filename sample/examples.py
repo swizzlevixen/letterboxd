@@ -45,8 +45,15 @@ if __name__ == "__main__":
     # make login
     LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
     test_user = lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
+
     # request from the API endpoint /me
     me_dict = test_user.me
     # print it pretty
     prettyprinter = pprint.PrettyPrinter(indent=4)
     prettyprinter.pprint(me_dict)
+
+    # request film/{id}/me endpoint,
+    film_instance = lbxd.film(film_id="2bbs")  # Raiders of the Lost Ark
+    response = film_instance.me()
+    response_json = response.json()
+    prettyprinter.pprint(response_json)
