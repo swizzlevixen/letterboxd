@@ -61,13 +61,11 @@ def test_film_info():
 
     # Assume use of environment variables for api key and secret
     lbxd = Letterboxd()
-
     film_instance = lbxd.film(film_id="2bbs")  # Raiders of the Lost Ark
     response = film_instance.info()
     logging.debug(f"response: {response}")
     assert isinstance(response, requests.Response)
     assert response.status_code == 200
-
     response_json = response.json()
     logging.debug(f"response_json: {response_json}")
     assert isinstance(response_json, dict)
