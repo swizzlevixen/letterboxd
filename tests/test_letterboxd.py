@@ -7,6 +7,16 @@ logging.getLogger(__name__)
 logging.basicConfig(level=logging.DEBUG)
 
 
+def test_letterboxd():
+    lbxd = Letterboxd()
+    assert isinstance(lbxd, Letterboxd)
+
+
+# -------------------------
+# Letterboxd API Definitions
+# -------------------------
+
+
 @fixture
 def load_user_pass():
     """
@@ -55,6 +65,9 @@ def film_keys():
     ]
 
 
-def test_letterboxd():
-    lbxd = Letterboxd()
-    assert isinstance(lbxd, Letterboxd)
+@fixture
+def films_response_keys():
+    # FilmsResponse definition
+    # http://api-docs.letterboxd.com/#/definitions/FilmsResponse
+    # Responsible only for returning the test data
+    return ["cursor", "items"]
