@@ -14,8 +14,8 @@ logging.getLogger(__name__)
 
 class Film(object):
     def __init__(self, film_id, api):
-        self.__api = api
-        self.__film_id = film_id
+        self._api = api
+        self._film_id = film_id
 
     def info(self):
         """
@@ -24,4 +24,4 @@ class Film(object):
         http://api-docs.letterboxd.com/#path--film--id-
         :return: dict - JSON data
         """
-        return self.__api.api_call(path="film/{}".format(self.__film_id))
+        return self._api.api_call(path="film/{}".format(self._film_id))
