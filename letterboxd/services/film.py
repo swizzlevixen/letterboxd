@@ -40,3 +40,14 @@ class Film(object):
             film_id = self._film_id
         return self._api.api_call(path=f"film/{film_id}/availability")
         # FIXME: This doesn't seem to return any JSON data
+
+    def me(self, film_id=None):
+        """
+        /film/{id}/me
+        Get details of the authenticated member’s relationship with a film by ID.
+        :param film_id: str - LID of the film
+        :return: dict - FilmRelationship
+        """
+        if film_id is None:
+            film_id = self._film_id
+        return self._api.api_call(path=f"film/{film_id}/me")
