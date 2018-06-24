@@ -70,4 +70,4 @@ def films_response_keys():
     # FilmsResponse definition
     # http://api-docs.letterboxd.com/#/definitions/FilmsResponse
     # Responsible only for returning the test data
-    return ["cursor", "items"]
+    return ["next", "items"]
