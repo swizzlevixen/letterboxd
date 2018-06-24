@@ -29,5 +29,5 @@ class Member(object):
         :return: dict - FilmsResponse
         """
         return self._api.api_call(
-            path=f"film/{member_id}/watchlist", params=watchlist_request
+            path=f"member/{member_id}/watchlist", params=watchlist_request
         )
