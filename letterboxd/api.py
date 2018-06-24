@@ -70,7 +70,7 @@ class API:
         """
 
         # If we have an oAuth token
-        if self.user.token:
+        if self.user:
             headers["Authorization"] = "Bearer {}".format(self.user.token)
 
         url = "{}/{}".format(self.api_base, path)
