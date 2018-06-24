@@ -3,7 +3,7 @@ import pprint
 import sys
 
 # Add the relative directory containing the letterboxd module to the Python path
-lbxd_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))\
+lbxd_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.append(lbxd_path)
 
 from letterboxd.letterboxd import Letterboxd
