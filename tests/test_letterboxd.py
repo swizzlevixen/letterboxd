@@ -110,6 +110,7 @@ def test_user_auth():
     test_token = test_user.token
     logging.debug("test_user.token: {}".format(test_token))
     assert isinstance(test_token, str)
+    assert lbxd.api.user.token is test_token
 
 
 def test_user_me():
