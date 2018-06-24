@@ -20,8 +20,8 @@ def test_member_watchlist():
     assert isinstance(member, Member)
     watchlist_response = member.watchlist()
     logging.debug(f"watchlist_response: {watchlist_response}")
-    assert isinstance(response, requests.Response)
-    assert response.status_code == 200
+    assert isinstance(watchlist_response, requests.Response)
+    assert watchlist_response.status_code == 200
     watchlist = watchlist_response.json
     logging.debug(f"watchlist: {watchlist}")
     assert isinstance(watchlist, dict)
