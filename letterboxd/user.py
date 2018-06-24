@@ -1,5 +1,5 @@
 """
-Convenience module for user-based features of the Letterboxd API
+User-based features of the Letterboxd API
 
 API Documentation:
 http://api-docs.letterboxd.com/
