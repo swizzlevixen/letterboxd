@@ -34,11 +34,9 @@ class Film(object):
         /film/{id}/availability
         Get availability data about a film by ID.
         :param film_id: str - LID of the film
-        :return: list - FilmAvailabilityResponse
+        :return: dict - FilmAvailabilityResponse
         """
         if film_id is None:
             film_id = self._film_id
-        response = self._api.api_call(path=f"film/{film_id}/availability")
-        response_json = response.json()
-        availability_list = response_json["FilmAvailabilityResponse"]
-        return availability_list
+        return self._api.api_call(path=f"film/{film_id}/availability")
+        # FIXME: This doesn't seem to return any JSON data
