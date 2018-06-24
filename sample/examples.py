@@ -55,7 +55,7 @@ if __name__ == "__main__":
 
     # request /film/{id} endpoint
     film = lbxd.film(film_id="2bbs")  # Raiders of the Lost Ark
-    response = film.info()
+    response = film.details()
     response_json = response.json()
     print("\n-------------------------\nfilm/{id}\n-------------------------\n")
     prettyprinter.pprint(response_json)

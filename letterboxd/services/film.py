@@ -17,7 +17,7 @@ class Film(object):
         self._api = api
         self._film_id = film_id
 
-    def info(self, film_id=None):
+    def details(self, film_id=None):
         """
         /film/{id}
         Get details about a film by ID.
