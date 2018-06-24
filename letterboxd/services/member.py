@@ -17,14 +17,14 @@ class Member(object):
         self._api = api
         self._member_id = member_id
 
-    def watchlist(self, member_id=None):
+    def watchlist(self, member_id=None, watchlist_request=None):
         """
-        /film/{id}
-        Get details about a film by ID.
-        http://api-docs.letterboxd.com/#path--film--id-
-        :param film_id: str - LID of the film
-        :return: dict - Film
+        /member/{id}/watchlist
+        http://api-docs.letterboxd.com/#path--member--id--watchlist
+        :param member_id: str - LID of member to compare to?
+        :param watchlist_request: dict - WatchlistRequest
+        :return: dict - FilmsResponse
         """
-        if member_id is None:
-            member_id = self._member_id
-        return self._api.api_call(path=f"film/{member_id}/watchlist")
+        return self._api.api_call(
+            path=f"film/{member_id}/watchlist", params=watchlist_request
+        )
