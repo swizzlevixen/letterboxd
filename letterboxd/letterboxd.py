@@ -75,3 +75,7 @@ class Letterboxd(object):
         user = User(api=self.api, username=username, password=password)
         self.api.user = user
         return user
+
+    def member(self, member_id):
+        member = Member(member_id=member_id)
+        return member
