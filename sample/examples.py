@@ -47,13 +47,14 @@ if __name__ == "__main__":
     # If not using environment variables, instead instantiate Letterboxd() with your credentials
     # test_user = lbxd.user(YOUR_USERNAME_HERE, YOUR_PASSWORD_HERE)
 
-    # request from the API endpoint /me
+    # request /me endpoint
     me_dict = test_user.me
     # print it pretty
     print("\n-------------------------\n/me\n-------------------------\n")
     prettyprinter.pprint(me_dict)
 
     # request film/{id}/me endpoint,
+    # request /film/{id}/me endpoint,
     film_instance = lbxd.film(film_id="2bbs")  # Raiders of the Lost Ark
     response = film_instance.me()
     response_json = response.json()
