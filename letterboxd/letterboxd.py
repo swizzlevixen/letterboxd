@@ -22,8 +22,22 @@ API_BASE_URL = "https://api.letterboxd.com/api/v0"
 
 
 class Letterboxd(object):
+    """
+    Loads the API base URL, API key, and API shared secret, and connects with
+    all of the other classes.
+
+    If the key and secret are not passed as arguments, it looks for them as
+    environment variables, as LBXD_API_KEY and LBXD_API_SECRET.
+    """
+
     # noinspection PyPep8Naming
     def __init__(self, api_base=API_BASE_URL, api_key="", api_secret=""):
+        """
+
+        :param api_base: str - the base URL of the API, including version number
+        :param api_key: str
+        :param api_secret: str
+        """
         self.api_base = api_base
         self.api_key = api_key
         self.api_secret = api_secret
@@ -65,17 +79,37 @@ class Letterboxd(object):
         self.api = API(self.api_base, self.api_key, self.api_secret)
 
     def auth(self):
+        """
+        :return: services.auth.Authentication object
+        """
         # noinspection PyArgumentList
         return Authentication(api=self.api)
 
     def film(self, film_id):
+        """
+
+        :param film_id: str - the LID of a film on Letterboxd
+        :return: services.film.Film object
+        """
         return Film(film_id=film_id, api=self.api)
 
     def user(self, username, password):
+        """
+        Signs in the user, and adds the oAuth token to future API calls
+
+        :param username: str
+        :param password: str
+        :return: user.User object
+        """
         user = User(api=self.api, username=username, password=password)
         self.api.user = user
         return user
 
     def member(self, member_id):
+        """
+
+        :param member_id: str - LID for Letterboxd member
+        :return: services.member.Member object
+        """
         member = Member(api=self.api, member_id=member_id)
         return member
