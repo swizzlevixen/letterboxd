@@ -13,7 +13,7 @@ def test_user_auth():
     test_user = lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
     assert isinstance(test_user, User)
     test_token = test_user.token
-    logging.debug("test_user.token: {}".format(test_token))
+    logging.debug(f"test_user.token: {test_token}")
     assert isinstance(test_token, str)
     assert lbxd.api.user.token is test_token
 
@@ -24,5 +24,5 @@ def test_user_me():
     # make login
     test_user = lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
     me_dict = test_user.me
-    logging.debug("me_dict: {}".format(me_dict))
+    logging.debug(f"me_dict: {me_dict}")
     assert isinstance(me_dict, dict)
