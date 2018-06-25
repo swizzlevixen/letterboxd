@@ -5,8 +5,8 @@ Authentication API Documentation:
 http://api-docs.letterbotokend.com/#auth
 """
 
-import logging
 import datetime
+import logging
 
 logging.getLogger(__name__)
 
