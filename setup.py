@@ -7,7 +7,9 @@ with open("README.markdown", "r") as fh:
 setuptools.setup(
     name="letterboxd",
     packages=setuptools.find_packages(),
-    version="0.1.0a1",
+    version="0.1.0a2",
+    python_requires=">=3.6",
+    install_requires=["requests"],
     description="Python 3.6+ wrapper for the Letterboxd API",
     long_description=long_description,
     long_description_content_type="text/markdown",
