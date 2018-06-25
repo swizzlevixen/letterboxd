@@ -4,6 +4,7 @@ Version 0 of the Letterboxd API
 """
 
 import os
+
 from letterboxd.api import API
 from letterboxd.user import User
 from .services.auth import Authentication
