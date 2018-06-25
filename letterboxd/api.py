@@ -86,9 +86,9 @@ class API:
         )
 
         if form:
-            logging.debug("API.api_call() if form")
-            # TODO: Is there any other need to use `form` than for an oAuth call?
+            # `form` seems to only be used in an oAuth call?
             # should some of this code be in there instead?
+            logging.debug("API.api_call() if form")
             headers["Content-Type"] = "application/x-www-form-urlencoded"
             # Prepare the request
             prepared_dict = self.__prepare_request(
