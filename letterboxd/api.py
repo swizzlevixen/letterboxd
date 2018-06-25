@@ -71,14 +71,13 @@ class API:
 
         # If we have an oAuth token
         if self.user:
-            headers["Authorization"] = "Bearer {}".format(self.user.token)
+            headers["Authorization"] = f"Bearer {self.user.token}"
 
-        url = "{}/{}".format(self.api_base, path)
+        url = f"{self.api_base}/{path}"
 
         logging.debug(
-            "\nurl: {}\nparams: {}\nform: {}\nheaders: {}\nmethod: {}\n-------------------------".format(
-                url, params, form, headers, method
-            )
+            f"\nurl: {url}\nparams: {params}\nform: {form}\nheaders: {headers}"
+            f"\nmethod: {method}\n-------------------------"
         )
 
         if form:
@@ -93,7 +92,7 @@ class API:
             prepared_request = prepared_dict["prepared_request"]
             signature = prepared_dict["signature"]
             # Add the signature to the headers
-            prepared_request.headers["Authorization"] = "Signature {}".format(signature)
+            prepared_request.headers["Authorization"] = f"Signature {signature}"
         elif method.lower() in ["post", "put", "patch"]:
             logging.debug(
                 'API.api_call() elif method.lower() in ["post", "put", "patch"]:'
@@ -124,12 +123,11 @@ class API:
             prepared_request.prepare_url(prepared_request.url, {"signature": signature})
 
         logging.debug(
-            "API.api_call() prepared_request\nmethod: {}\nurl: {}\nheaders: {}\nbody: {}".format(
-                prepared_request.method,
-                prepared_request.url,
-                prepared_request.headers,
-                prepared_request.body,
-            )
+            f"API.api_call() prepared_request\n"
+            f"method: {prepared_request.method}\n"
+            f"url: {prepared_request.url}\n"
+            f"headers: {prepared_request.headers}\n"
+            f"body: {prepared_request.body}"
         )
 
         try:
@@ -150,12 +148,12 @@ class API:
                 logging.debug("Send prepared_request")
                 response = self.session.send(prepared_request)
         except ConnectionError as error:
-            logger.error(error)
+            logging.error(error)
             raise
 
         # Return the response
         logging.debug(f"api_call() response.status_code: {response.status_code}")
-        if response.status_code == requests.codes.ok:
+        if response.status_code is requests.codes.ok:
             return response
         else:
             response.raise_for_status()
@@ -184,7 +182,7 @@ class API:
         )
         prepared_request = self.session.prepare_request(request)
 
-        logging.debug("prepared url: {}".format(prepared_request.url))
+        logging.debug(f"prepared url: {prepared_request.url}")
         # Hash the request signature
         signature = self.__sign(
             method=prepared_request.method,
@@ -199,10 +197,10 @@ class API:
         :param dirty_dict: dict
         :return: dict
         """
-        logging.debug("params: {}".format(dirty_dict))
+        logging.debug(f"params: {dirty_dict}")
         cleaned_dict = {}
         for key, value in dirty_dict.items():
-            logging.debug("key: {}, value: {}".format(key, value))
+            logging.debug(f"key: {key}, value: {value}")
 
             if (value is None) or (value is ""):
                 logging.debug("Toss the value!")
@@ -214,7 +212,7 @@ class API:
             else:
                 cleaned_dict[key] = value
             logging.debug("-------------------------")
-        logging.debug("result: {}".format(cleaned_dict))
+        logging.debug(f"result: {cleaned_dict}")
         return cleaned_dict
 
     def __remove_empty_from_list(self, dirty_list):
@@ -227,16 +225,16 @@ class API:
         for __item in dirty_list:
             logging.debug(__item)
             if __item is "" or __item is None:
-                logging.debug("item {} is {}".format(__item, "None"))
+                logging.debug(f"item {__item} is None")
                 pass
             elif isinstance(__item, dict):
-                logging.debug("item {} is {}".format(__item, "dict"))
+                logging.debug(f"item {__item} is dict")
                 cleaned_list.append(self.__remove_empty_from_dict(__item))
             elif isinstance(__item, tuple) or isinstance(__item, list):
-                logging.debug("item {} is {}".format(__item, "tuple or list"))
+                logging.debug(f"item {__item} is tuple or list")
                 cleaned_list.append(self.__remove_empty_from_list(__item))
             else:
-                logging.debug("item {} is {}".format(__item, "else"))
+                logging.debug(f"item {__item} is else")
                 cleaned_list.append(__item)
         return cleaned_list
 
@@ -281,7 +279,7 @@ class API:
         signing_bytestring = b"\x00".join(
             [str.encode(method), str.encode(url), str.encode(body)]
         )
-        logging.debug("signing_bytestring: {}".format(signing_bytestring))
+        logging.debug(f"signing_bytestring: {signing_bytestring}")
         # applying an HMAC/SHA-256 transformation, using our API Secret
         signature = hmac.new(
             str.encode(self.api_secret), signing_bytestring, digestmod=hashlib.sha256
