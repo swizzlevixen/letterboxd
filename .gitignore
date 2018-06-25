@@ -2,3 +2,7 @@
 .pytest_cache/
 letterboxd/__pycache__/
 *.pyc
+/build/
+/letterboxd.egg-info/
+/dist/
+/docs/_build/

@@ -1,8 +1,5 @@
 """
 Communication methods for the Letterboxd API
-
-API Documentation:
-http://api-docs.letterboxd.com/
 """
 import hashlib
 import hmac
@@ -27,6 +24,12 @@ class API:
     """
 
     def __init__(self, api_base, api_key, api_secret):
+        """
+
+        :param api_base: str
+        :param api_key: str
+        :param api_secret: str
+        """
         self.api_base = api_base
         self.api_key = api_key
         self.api_secret = api_secret
@@ -60,12 +63,13 @@ class API:
 
     def api_call(self, path, params={}, form=None, headers={}, method="get"):
         """
+
         :param path: string - The endpoint for the service
         :param params: dictionary - of parameters
         :param form: string - the form information from the auth.py call
         :param headers: dictionary - dictionary of parameters
         :param method: string - HTML methods get, post, put, patch
-        :return: ??? response
+        :return: requests.Response object
         """
 
         # If we have an oAuth token
@@ -170,6 +174,7 @@ class API:
     ):
         """
         Prepare the request and sign it
+
         :param url: string
         :param params: dict
         :param form: bool
@@ -198,6 +203,7 @@ class API:
     def __remove_empty_from_dict(self, dirty_dict):
         """
         Takes a dictionary recursively removes all None and "" values
+
         :param dirty_dict: dict
         :return: dict
         """
@@ -222,6 +228,7 @@ class API:
     def __remove_empty_from_list(self, dirty_list):
         """
         Takes a tuple or list and recursively removes all None and "" values
+
         :param dirty_list: tuple or list
         :return: list
         """
@@ -245,6 +252,7 @@ class API:
     def __add_unique_params(self, params):
         """
         Adds the metabody params required for signing the request
+
         :param params: dict
         :return: dict
         """

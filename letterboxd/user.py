@@ -1,8 +1,5 @@
 """
 User-based features of the Letterboxd API
-
-API Documentation:
-http://api-docs.letterboxd.com/
 """
 import logging
 
@@ -12,9 +9,14 @@ logging.getLogger(__name__)
 
 
 class User(object):
+    """
+    Provices access token and shortcuts to user-focused methods
+    """
+
     def __init__(self, api, username, password):
         """
         Set up authentication for this user.
+
         :param api: Letterboxd.API - class instance
         :param username: str
         :param password: str
@@ -27,8 +29,9 @@ class User(object):
     @property
     def token(self):
         """
-        Make _auth get a token, and return the token string
-        :return: str
+        Ask services.auth to get a token, and return the token string
+
+        :return: str - oAuth token
         """
         return self._auth.token
 
@@ -38,6 +41,7 @@ class User(object):
         /me
         Get details about the authenticated member.
         http://api-docs.letterboxd.com/#path--me
+
         :return: dict - JSON response
         """
         response = self._api.api_call(path="me")
@@ -47,4 +51,9 @@ class User(object):
 
     @me.setter
     def me(self, value):
+        """
+
+        :param value: dict
+        :return: None
+        """
         self._me = value
