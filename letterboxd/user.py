@@ -5,6 +5,7 @@ API Documentation:
 http://api-docs.letterboxd.com/
 """
 import logging
+
 from letterboxd.services.auth import Authentication
 
 logging.getLogger(__name__)
