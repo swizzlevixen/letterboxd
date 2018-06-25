@@ -1,9 +1,11 @@
 #! /usr/bin/env python3
 import logging
+
 import requests
+
 from letterboxd.letterboxd import Letterboxd
 from letterboxd.services.member import Member
-from tests.test_letterboxd import load_user_pass, films_response_keys, film_summary_keys
+from tests.test_letterboxd import film_summary_keys, films_response_keys, load_user_pass
 
 
 def test_member_watchlist():
