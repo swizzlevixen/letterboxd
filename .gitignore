@@ -5,3 +5,4 @@ letterboxd/__pycache__/
 /build/
 /letterboxd.egg-info/
 /dist/
+/docs/_build/
