@@ -7,7 +7,7 @@ with open("README.markdown", "r") as fh:
 setuptools.setup(
     name="letterboxd",
     packages=setuptools.find_packages(),
-    version="0.1.0",
+    version="0.1.0a1",
     description="Python 3.6+ wrapper for the Letterboxd API",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -18,8 +18,14 @@ setuptools.setup(
     download_url="",
     keywords=[
         "api",
-        "movies",
-    ],  # movie, the movie database, movie database, tmdb, wrapper, database, themoviedb, moviedb, api
+        "movie",
+        "film",
+        "movie database",
+        "movie review",
+        "watchlist",
+        "letterboxd",
+        "moviedb",
+    ],
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Programming Language :: Python :: 3.6",
