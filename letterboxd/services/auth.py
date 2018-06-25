@@ -76,11 +76,9 @@ class Authentication:
         :param password: str
         :return: dict - either an AccessToken or OAuthError
         """
-        form = {"grant_type": "password", "username": username, "password": password}
-        form_str = "grant_type={}&username={}&password={}".format(
-            form["grant_type"], form["username"], form["password"]
-        )
-        logging.debug("form: {}".format(form_str))
+        grant_type = "password"
+        form_str = f"grant_type={grant_type}&username={username}&password={password}"
+        logging.debug(f"form: {form_str}")
         response = self._api.api_call(path="auth/token", method="post", form=form_str)
         response_data = response.json()
         logging.debug(response_data)
