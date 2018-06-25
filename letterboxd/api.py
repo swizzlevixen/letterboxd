@@ -76,8 +76,13 @@ class API:
         url = f"{self.api_base}/{path}"
 
         logging.debug(
-            f"\nurl: {url}\nparams: {params}\nform: {form}\nheaders: {headers}"
-            f"\nmethod: {method}\n-------------------------"
+            f"\n"
+            f"url: {url}\n"
+            f"params: {params}\n"
+            f"form: {form}\n"
+            f"headers: {headers}\n"
+            f"method: {method}\n"
+            f"-------------------------"
         )
 
         if form:
