@@ -9,11 +9,10 @@ import hmac
 import json
 import logging
 import os
-import requests
-import sys
 import time
-import urllib.parse
 import uuid
+
+import requests
 
 logging.getLogger(__name__)
 
