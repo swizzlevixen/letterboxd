@@ -33,6 +33,8 @@ class Film(object):
         """
         /film/{id}/availability
         Get availability data about a film by ID.
+        This data is currently availabke to first-party only.
+
         :param film_id: str - LID of the film
         :return: dict - FilmAvailabilityResponse
         """

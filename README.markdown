@@ -21,7 +21,7 @@ The library currently covers these Letterboxd API endpoints:
 #### Film
 
 - /film/{id}
-- /film/{id}/availability — this does not seem to return any data at this time
+- /film/{id}/availability — this data is first-party only
 - /film/{id}/me
 
 #### Me
