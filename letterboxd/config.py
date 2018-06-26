@@ -1,5 +1,7 @@
 """
 Configuration
+
+Constants for package use.
 """
 
 # -------------------------

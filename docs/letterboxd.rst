@@ -15,3 +15,8 @@ user module
 -----------------
 .. automodule:: letterboxd.user
    :members:
+
+config module
+-----------------
+.. automodule:: letterboxd.config
+   :members:
