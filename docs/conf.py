@@ -150,10 +150,10 @@ texinfo_documents = [
     (
         master_doc,
         "Letterboxd",
-        "Letterboxd Documentation",
-        author,
+        "Letterboxd - Python API Wrapper Documentation",
+        "Mark Boszko",
         "Letterboxd",
-        "One line description of project.",
+        "A Python 3 wrapper for the Letterboxd API.",
         "Miscellaneous",
     )
 ]
@@ -165,3 +165,7 @@ texinfo_documents = [
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
+
+
+# -- Read The Docs config ----------------------------------------------------
+html_theme = "default"
