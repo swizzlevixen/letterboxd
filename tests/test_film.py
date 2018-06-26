@@ -38,10 +38,6 @@ def test_film_me():
     # make login
     test_user = lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
     film_instance = lbxd.film(film_id="2bbs")  # Raiders of the Lost Ark
-    response = film_instance.me()
-    logging.debug(f"response: {response}")
-    assert isinstance(response, requests.Response)
-    assert response.status_code == 200
-    response_json = response.json()
+    response_json = film_instance.me()
     logging.debug(f"response_json: {response_json}")
     assert isinstance(response_json, dict)

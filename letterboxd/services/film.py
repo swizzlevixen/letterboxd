@@ -57,5 +57,6 @@ class Film(object):
         """
         if film_id is None:
             film_id = self._film_id
-        # TODO Return dict instead of Response
-        return self._api.api_call(path=f"film/{film_id}/me")
+        # TODO handle status code errors
+        me = self._api.api_call(path=f"film/{film_id}/me")
+        return me.json()
