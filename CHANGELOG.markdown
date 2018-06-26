@@ -34,3 +34,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
         - `Removed` for deprecated features removed in this release.
         - `Fixed` for any bug fixes.
         - `Security` to invite users to upgrade in case of vulnerabilities.
+    - Take a look at [this checklist for packaging a new version](http://www.sherifsoliman.com/2016/09/30/Python-package-with-GitHub-PyPI/).
