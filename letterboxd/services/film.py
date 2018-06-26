@@ -29,7 +29,8 @@ class Film(object):
         if film_id is None:
             film_id = self._film_id
         # TODO Return dict instead of Response
-        return self._api.api_call(path=f"film/{film_id}")
+        details = self._api.api_call(path=f"film/{film_id}")
+        return details.json()
 
     def availability(self, film_id=None):
         """
