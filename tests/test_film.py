@@ -15,11 +15,7 @@ def test_film_details():
     lbxd = Letterboxd()
     film_instance = lbxd.film(film_id="2bbs")  # Raiders of the Lost Ark
     assert isinstance(film_instance, Film)
-    response = film_instance.details()
-    logging.debug(f"response: {response}")
-    assert isinstance(response, requests.Response)
-    assert response.status_code == 200
-    response_json = response.json()
+    response_json = film_instance.details()
     logging.debug(f"response_json: {response_json}")
     assert isinstance(response_json, dict)
     assert response_json["id"] == "2bbs", "The ID should be in the response"
