@@ -38,3 +38,5 @@ setuptools.setup(
     ],
     license="MIT",
 )
+
+# TODO: Set up so Semaphore runs the test suite
