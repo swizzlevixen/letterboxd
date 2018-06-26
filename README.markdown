@@ -1,40 +1,28 @@
 # Letterboxd
 
-`v0.2.0a`
+`v0.2.0a0`
+
+A Python 3 implementation of the [Letterboxd API v0](http://api-docs.letterboxd.com/).
+
+Python 3.6+ is required, because this library uses formatted strings, among other modern niceties.
 
 **THE CODE IS CURRENTLY IN AN ALPHA STATE, AND MAY BE VERY BROKEN, AND/OR WHAT IS WORKING NOW MAY BREAK IN THE FUTURE.**
-
-A Python 3 implementation of the [Letterboxd API v0](http://api-docs.letterboxd.com/). Python 3.6+ is required, because this uses formatted strings.
  
-Currently a ***WORK-IN-PROGRESS,*** focusing first on retrieving watchlists and other lists.
+Currently a ***WORK-IN-PROGRESS,*** focusing first on retrieving watchlists and other lists for users.
+
+## Letterboxd API Access
 
 Letterboxd has posted an [example ruby client](https://github.com/grantyb/letterboxd-api-example-ruby-client), but as they say in the readme there:
 
 > Although the Letterboxd API isn’t public yet (as at 2017-06-12), we have seeded some developers with API keys.
 
-If you need more information about API access, please see https://letterboxd.com/api-coming-soon/
+If you need more information about API access, please see [https://letterboxd.com/api-coming-soon/]().
 
-## API Coverage
+## Documentation
 
-The library currently covers these Letterboxd API endpoints:
+Documentation is written in the `/docs` folder, and being generated for [human-readable documentation on Read the Docs](https://letterboxd.readthedocs.io).
 
-#### Film
-
-- /film/{id}
-- /film/{id}/availability — this data is first-party only
-- /film/{id}/me
-
-#### Me
-
-- /me
-
-#### Member
-
-- /member/{id}/watchlist
-
-## Contributions
-
-Code files should be passed through the [Black](https://github.com/ambv/black) Python code formatter before check-in.
+At the moment, most of the docs are generated automatically from the code’s docstrings. More human documentation will come as we approach v1.0.
 
 ## Usage
 
@@ -60,3 +48,5 @@ Set the `CHARLES` environment variable to `True` to turn the proxy settings on. 
 ```
 $ CHARLES="True" py.test
 ```
+
+Please see [Read the Docs](https://letterboxd.readthedocs.io) for more details on usage of the library classes.
