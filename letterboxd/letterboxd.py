@@ -5,6 +5,7 @@ Version 0 of the Letterboxd API
 
 import os
 
+from letterboxd.config import *
 from letterboxd.api import API
 from letterboxd.user import User
 from .services.auth import Authentication
@@ -16,9 +17,6 @@ from .services.member import Member
 # from .services.list import List
 # from .services.log_entry import LogEntry
 # from .services.search import Search
-
-# default API URL for v0
-API_BASE_URL = "https://api.letterboxd.com/api/v0"
 
 
 class Letterboxd(object):
