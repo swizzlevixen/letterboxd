@@ -23,6 +23,7 @@ class Authentication:
     def __init__(self, api, username, password):
         """
         Initializer
+
         :param api: Letterboxd.API class instance
         :param username: str - user name
         :param password: str - user password
@@ -35,6 +36,10 @@ class Authentication:
 
     @property
     def token(self):
+        """
+
+        :return: str - user token
+        """
         logging.debug("getter of token called")
         if self._token_dict == None:
             # We don't have a token yet
@@ -47,6 +52,11 @@ class Authentication:
 
     @token.setter
     def token(self, value):
+        """
+
+        :param value: dict - expects 'access_token', 'token_type', 'expires_in', and 'refresh_token' keys
+        :return: None
+        """
         logging.debug("setter of token called")
         # set with the whole token dictionary, e.g.:
         # {'access_token' : str,
@@ -61,6 +71,10 @@ class Authentication:
 
     @token.deleter
     def token(self):
+        """
+
+        :return: None
+        """
         logging.debug("deleter of token called")
         del self._token_dict
         # Reset the expiration to now (i.e., 'expired')
@@ -72,6 +86,7 @@ class Authentication:
         """
         User access to the Letterboxd API. Grabs a token for the user.
         http://api-docs.letterboxd.com/#path--auth-token
+
         :param username: str
         :param password: str
         :return: dict - either an AccessToken or OAuthError
