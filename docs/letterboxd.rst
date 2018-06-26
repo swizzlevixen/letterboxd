@@ -1,17 +1,17 @@
-The letterboxd API reference
-=============================
+letterboxd package reference
+============================
 
-The “letterboxd” module
+letterboxd module
 -----------------------
 .. automodule:: letterboxd.letterboxd
    :members:
 
-The “api” module
+api module
 ----------------
 .. automodule:: letterboxd.api
    :members:
 
-The “user” module
+user module
 -----------------
 .. automodule:: letterboxd.user
    :members:
