@@ -1,3 +1,5 @@
+[![Build Status](https://semaphoreci.com/api/v1/bobtiki/letterboxd/branches/master/badge.svg)](https://semaphoreci.com/bobtiki/letterboxd)
+
 # Letterboxd
 
 `v0.2.0a0`
