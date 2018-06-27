@@ -60,3 +60,18 @@ class Film(object):
         # TODO handle status code errors
         me = self._api.api_call(path=f"film/{film_id}/me")
         return me.json()
+
+    def member(self, film_id=None, params={}):
+        """
+        film/{id}/members
+        Get details of members’ relationships with a film by ID.
+
+        :param film_id: str - LID of the film
+        :param params: dict - MemberFilmRelationshipsRequest
+        :return: dict - MemberFilmRelationshipsResponse
+        """
+        if film_id is None:
+            film_id = self._film_id
+            # TODO handle status code errors
+        me = self._api.api_call(path=f"film/{film_id}/member", params=params)
+        return me.json()
