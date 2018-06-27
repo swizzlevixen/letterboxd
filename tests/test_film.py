@@ -86,7 +86,7 @@ def test_film_member():
 
 
 def test_film_statistics():
-    """Tests API call to get a film's details"""
+    """Tests API call to get a film's statistics"""
 
     # Assume use of environment variables for api key and secret
     lbxd = Letterboxd()
@@ -95,5 +95,5 @@ def test_film_statistics():
     film_statistics = film_instance.statistics()
     logging.debug(f"film_statistics: {film_statistics}")
     assert isinstance(film_statistics, dict)
-    assert film_statistics["id"] == "2bbs", "The ID should be in the response"
+    assert film_statistics["film"]["id"] == "2bbs", "The ID should be in the response"
     # TODO: test returned keys
