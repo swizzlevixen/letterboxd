@@ -97,3 +97,18 @@ class Film(object):
             path=f"film/{film_id}/report", params=report_film_request
         )
         return response.status_code
+
+    def statistics(self, film_id=None):
+        """
+        /film/{id}/statistics
+        Get statistical data about a film by ID.
+
+        :param film_id:
+        :return: dict - FilmStatistics
+        """
+        if film_id is None:
+            film_id = self._film_id
+        # TODO handle status code errors
+        response = self._api.api_call(path=f"film/{film_id}")
+        film_statistics = response.json()
+        return film_statistics

@@ -25,6 +25,7 @@ def test_film_details():
 
 
 def test_film_availability():
+    # This data is first-party only, so it doesn't return any data for me.
     lbxd = Letterboxd()
     film_instance = lbxd.film(film_id="2bbs")  # Raiders of the Lost Ark
     response_json = film_instance.availability()
@@ -41,6 +42,7 @@ def test_film_me():
     response_json = film_instance.me()
     logging.debug(f"response_json: {response_json}")
     assert isinstance(response_json, dict)
+    # TODO: test returned keys
 
 
 def test_film_member():
@@ -61,6 +63,7 @@ def test_film_member():
     )
     logging.debug(f"response_json: {member_film_relationships_response}")
     assert isinstance(member_film_relationships_response, dict)
+    # TODO: test returned keys
 
 
 # Disabled report() test because this returns a 405 Method Not Allowed status code
@@ -80,3 +83,17 @@ def test_film_member():
 #     )
 #     logging.debug(f"response_status_code: {response_status_code}")
 #     assert response_status_code is 204
+
+
+def test_film_details():
+    """Tests API call to get a film's details"""
+
+    # Assume use of environment variables for api key and secret
+    lbxd = Letterboxd()
+    film_instance = lbxd.film(film_id="2bbs")  # Raiders of the Lost Ark
+    assert isinstance(film_instance, Film)
+    film_statistics = film_instance.details()
+    logging.debug(f"film_statistics: {film_statistics}")
+    assert isinstance(film_statistics, dict)
+    assert film_statistics["id"] == "2bbs", "The ID should be in the response"
+    # TODO: test returned keys
