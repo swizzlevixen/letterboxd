@@ -45,7 +45,8 @@ class Film(object):
             film_id = self._film_id
         # TODO handle status code errors
         availability = self._api.api_call(path=f"film/{film_id}/availability")
-        return availability.json()
+        film_availability_response = availability.json()
+        return film_availability_response
 
     def me(self, film_id=None):
         """
@@ -58,20 +59,24 @@ class Film(object):
         if film_id is None:
             film_id = self._film_id
         # TODO handle status code errors
-        me = self._api.api_call(path=f"film/{film_id}/me")
-        return me.json()
+        response = self._api.api_call(path=f"film/{film_id}/me")
+        film_relationship = response.json()
+        return film_relationship
 
-    def member(self, film_id=None, params={}):
+    def member(self, film_id=None, member_film_relationships_request={}):
         """
         film/{id}/members
         Get details of members’ relationships with a film by ID.
 
         :param film_id: str - LID of the film
-        :param params: dict - MemberFilmRelationshipsRequest
+        :param member_film_relationships_request: dict - MemberFilmRelationshipsRequest
         :return: dict - MemberFilmRelationshipsResponse
         """
         if film_id is None:
             film_id = self._film_id
             # TODO handle status code errors
-        me = self._api.api_call(path=f"film/{film_id}/member", params=params)
-        return me.json()
+        response = self._api.api_call(
+            path=f"film/{film_id}/members", params=member_film_relationships_request
+        )
+        member_film_relationships_response = response.json()
+        return member_film_relationships_response
