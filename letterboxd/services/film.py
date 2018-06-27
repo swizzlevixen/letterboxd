@@ -109,6 +109,6 @@ class Film(object):
         if film_id is None:
             film_id = self._film_id
         # TODO handle status code errors
-        response = self._api.api_call(path=f"film/{film_id}")
+        response = self._api.api_call(path=f"film/{film_id}/statistics")
         film_statistics = response.json()
         return film_statistics

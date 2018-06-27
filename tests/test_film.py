@@ -85,14 +85,14 @@ def test_film_member():
 #     assert response_status_code is 204
 
 
-def test_film_details():
+def test_film_statistics():
     """Tests API call to get a film's details"""
 
     # Assume use of environment variables for api key and secret
     lbxd = Letterboxd()
     film_instance = lbxd.film(film_id="2bbs")  # Raiders of the Lost Ark
     assert isinstance(film_instance, Film)
-    film_statistics = film_instance.details()
+    film_statistics = film_instance.statistics()
     logging.debug(f"film_statistics: {film_statistics}")
     assert isinstance(film_statistics, dict)
     assert film_statistics["id"] == "2bbs", "The ID should be in the response"
