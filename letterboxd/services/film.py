@@ -81,20 +81,19 @@ class Film(object):
         member_film_relationships_response = response.json()
         return member_film_relationships_response
 
-    # Disabled test because this returns a 405 Method Not Allowed status code
-    # def report(self, film_id=None, report_film_request={}):
-    #     """
-    #     /film/{id}/report
-    #     Report a film by ID.
-    #
-    #     :param film_id: str - the LID of the film
-    #     :param report_film_request: dict - ReportFilmRequest
-    #     :return: requests.Response.status_code
-    #     """
-    #     # Does NOT default to the current Film instance LID,
-    #     #     because I don't want to submit unnecessary reports
-    #     # TODO handle status code errors
-    #     response = self._api.api_call(
-    #         path=f"film/{film_id}/report", params=report_film_request
-    #     )
-    #     return response.status_code
+    def report(self, film_id=None, report_film_request={}):
+        """
+        /film/{id}/report
+        Report a film by ID.
+
+        :param film_id: str - the LID of the film
+        :param report_film_request: dict - ReportFilmRequest
+        :return: requests.Response.status_code
+        """
+        # Does NOT default to the current Film instance LID,
+        #     because I don't want to submit unnecessary reports
+        # TODO handle status code errors
+        response = self._api.api_call(
+            path=f"film/{film_id}/report", params=report_film_request
+        )
+        return response.status_code
