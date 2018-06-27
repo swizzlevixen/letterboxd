@@ -103,7 +103,7 @@ class Film(object):
         /film/{id}/statistics
         Get statistical data about a film by ID.
 
-        :param film_id:
+        :param film_id: str - the LID of the film
         :return: dict - FilmStatistics
         """
         if film_id is None:
