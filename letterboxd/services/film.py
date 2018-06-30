@@ -148,9 +148,13 @@ class Films:
         """
         /films/film-services
 
+        Get a list of services supported by the /films endpoint.
 
+        Services are returned in alphabetical order. Some services are only
+        available to paying members, so results will vary based on the
+        authenticated member’s status.
 
-        :return:
+        :return: dict - FilmServicesResponse
         """
         response = self._api.api_call(path="films/film-services")
         # TODO handle status code errors
