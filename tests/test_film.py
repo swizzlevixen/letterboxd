@@ -101,7 +101,7 @@ def test_films():
     lbxd = Letterboxd()
     # FIXME: This doesn't seem to be constraining the list as expected
     films_request = {
-        "member": "11Ht",
+        "perPage": 10,
         "tagger": "11Ht",
         "tagCode": "caitlandia",
         "decade": 1990,
