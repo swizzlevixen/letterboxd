@@ -83,14 +83,6 @@ class Letterboxd(object):
         # noinspection PyArgumentList
         return Authentication(api=self.api)
 
-    def film(self, film_id):
-        """
-
-        :param film_id: str - the LID of a film on Letterboxd
-        :return: services.film.Film object
-        """
-        return Film(film_id=film_id, api=self.api)
-
     def user(self, username, password):
         """
         Signs in the user, and adds the oAuth token to future API calls
@@ -102,6 +94,22 @@ class Letterboxd(object):
         user = User(api=self.api, username=username, password=password)
         self.api.user = user
         return user
+
+    def film(self, film_id):
+        """
+
+        :param film_id: str - the LID of a film on Letterboxd
+        :return: services.film.Film object
+        """
+        return Film(film_id=film_id, api=self.api)
+
+    def films(self):
+        """
+
+        :return: services.film.Films object
+        """
+        films = Films(api=self.api)
+        return films
 
     def member(self, member_id):
         """
