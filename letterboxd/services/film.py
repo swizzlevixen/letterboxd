@@ -94,7 +94,7 @@ class Film(object):
         #     because I don't want to submit unnecessary reports
         # TODO handle status code errors
         response = self._api.api_call(
-            path=f"film/{film_id}/report", params=report_film_request
+            path=f"film/{film_id}/report", params=report_film_request, method="POST"
         )
         return response.status_code
 
