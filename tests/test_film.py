@@ -135,14 +135,18 @@ def test_films_services():
     LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
     test_user = lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
     films = lbxd.films()
-    services_response = films.services()
-    logging.debug(f"services_response: {services_response}")
+    services = films.services()
+    logging.debug(f"services_response: {services}")
 
-    assert isinstance(services_response, dict)
+    assert isinstance(services, dict)
 
     assert {"items"}.issubset(
-        services_response.keys()
-    ), "All keys should be in the response"
+        services.keys()
+    ), "All keys should be in FilmServicesResponse"
+
+    a_film = services["items"][0]
+    assert {"id", "name"}.issubset(a_film.keys()), "All keys should be in Service"
+
 
     a_film = services_response["items"][0]
     assert {"id", "name"}.issubset(
