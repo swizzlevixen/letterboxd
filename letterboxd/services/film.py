@@ -160,3 +160,20 @@ class Films:
         # TODO handle status code errors
         services = response.json()
         return services
+
+    def genres(self):
+        """
+        /films/film-services
+
+        Get a list of services supported by the /films endpoint.
+
+        Services are returned in alphabetical order. Some services are only
+        available to paying members, so results will vary based on the
+        authenticated member’s status.
+
+        :return: dict - FilmServicesResponse
+        """
+        response = self._api.api_call(path="films/genres")
+        # TODO handle status code errors
+        genres = response.json()
+        return genres
