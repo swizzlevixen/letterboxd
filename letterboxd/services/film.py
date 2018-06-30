@@ -112,3 +112,37 @@ class Film(object):
         response = self._api.api_call(path=f"film/{film_id}/statistics")
         film_statistics = response.json()
         return film_statistics
+
+
+class Films:
+    """
+    /films/* services for the Letterboxd API
+    """
+
+    def __init__(self, api):
+        """
+
+        :param api: API object
+        """
+        self._api = api
+
+    @classmethod
+    def films(self, api=None, films_request={}):
+        """
+        /films
+
+        A cursored window over the list of films.
+
+        Use the ‘next’ cursor to move through the list. The response will include
+        the film relationships for the signed-in member and the member indicated
+        by the member LID if specified.
+
+        :param films_request: dict - FilmsRequest
+        :return: dict
+        """
+        if api == None:
+            api = self._api
+        response = api.api_call(path=f"films")
+        # TODO handle status code errors
+        films = response.json()
+        return films
