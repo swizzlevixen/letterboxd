@@ -165,6 +165,7 @@ class API:
             return response
         else:
             response.raise_for_status()
+            return response
 
     # -------------------------
     # Private methods
