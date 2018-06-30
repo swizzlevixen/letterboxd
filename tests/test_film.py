@@ -99,9 +99,8 @@ def test_films():
     Test API call to /films
     """
     lbxd = Letterboxd()
-    film_instance = lbxd.film(film_id="2bbs")  # Raiders of the Lost Ark
-    films_request = {}
-    films_response = film_instance.films(films_request=films_request)
+    films_request = {"tagger": "11Ht", "tagCode": "caitlandia"}
+    films_response = lbxd.films().films(api=lbxd.api, films_request=films_request)
     logging.debug(f"films_response: {films_response}")
     assert isinstance(films_response, dict)
     # assert films_response ... something
