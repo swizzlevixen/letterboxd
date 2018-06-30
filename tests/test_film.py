@@ -1,8 +1,6 @@
 #! /usr/bin/env python3
 import logging
 
-import requests
-
 from letterboxd.letterboxd import Letterboxd
 from letterboxd.services.film import Film
 from tests.test_letterboxd import film_keys, load_user_pass
@@ -100,10 +98,20 @@ def test_films():
     """
     lbxd = Letterboxd()
     films_request = {
-        "perPage": 10,
-        "tagger": "11Ht",
-        "tagCode": "caitlandia",
-        "decade": 1990,
+        "perPage": 25,
+        "sort": "ReleaseDateEarliestFirst",
+        # "filmId": ["2bbs", "imdb:tt0087469", "tmdb:89"],
+        # "genre": "",  # TODO: Get the list of genre LIDs from /films/genres
+        # "decade": 1980,
+        # "year": 1989,
+        # "service": "",  # TODO: get a list of services from /films/film-services
+        # "where": ["NotReleased", "InWatchlist"],
+        "member": "3P",
+        "memberRelationship": "Favorited",
+        "includeFriends": "All",
+        # "tagCode": "stubs",
+        # "tagger": "11Ht",
+        # "includeTaggerFriends": "Only",
     }
     films = lbxd.films()
     films_response = films.films(films_request=films_request)
