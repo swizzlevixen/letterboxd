@@ -9,7 +9,7 @@ from letterboxd.config import *
 from letterboxd.api import API
 from letterboxd.user import User
 from .services.auth import Authentication
-from .services.film import Film
+from .services.film import Film, Films
 from .services.member import Member
 
 # TODO: Write these modules
@@ -108,8 +108,7 @@ class Letterboxd(object):
 
         :return: services.film.Films object
         """
-        films = Films(api=self.api)
-        return films
+        return Films(api=self.api)
 
     def member(self, member_id):
         """
