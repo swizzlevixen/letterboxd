@@ -108,7 +108,7 @@ def test_films():
     }
     films = lbxd.films()
     # FIXME: I shouldn't have to pass the api here
-    films_response = films.films(api=lbxd.api, films_request=films_request)
+    films_response = films.films(films_request=films_request)
     # logging.debug(f"films_response: {films_response}")
     assert isinstance(films_response, dict)
     # Debug print a simple list of the movies
