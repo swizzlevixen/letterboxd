@@ -99,9 +99,22 @@ def test_films():
     Test API call to /films
     """
     lbxd = Letterboxd()
-    films_request = {"tagger": "11Ht", "tagCode": "caitlandia"}
-    films_response = lbxd.films().films(api=lbxd.api, films_request=films_request)
-    logging.debug(f"films_response: {films_response}")
+    # FIXME: This doesn't seem to be constraining the list as expected
+    films_request = {
+        "member": "11Ht",
+        "tagger": "11Ht",
+        "tagCode": "caitlandia",
+        "decade": 1990,
+    }
+    films = lbxd.films()
+    # FIXME: I shouldn't have to pass the api here
+    films_response = films.films(api=lbxd.api, films_request=films_request)
+    # logging.debug(f"films_response: {films_response}")
     assert isinstance(films_response, dict)
+    # Debug print a simple list of the movies
+    film_num = 1
+    for film in films_response["items"]:
+        logging.debug(f"{film_num}. {film['name']}")
+        film_num += 1
     # assert films_response ... something
     # TODO: test returned keys
