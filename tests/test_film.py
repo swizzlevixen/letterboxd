@@ -99,7 +99,6 @@ def test_films():
     Test API call to /films
     """
     lbxd = Letterboxd()
-    # FIXME: This doesn't seem to be constraining the list as expected
     films_request = {
         "perPage": 10,
         "tagger": "11Ht",
@@ -107,7 +106,6 @@ def test_films():
         "decade": 1990,
     }
     films = lbxd.films()
-    # FIXME: I shouldn't have to pass the api here
     films_response = films.films(films_request=films_request)
     # logging.debug(f"films_response: {films_response}")
     assert isinstance(films_response, dict)
