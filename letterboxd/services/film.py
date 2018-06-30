@@ -93,10 +93,20 @@ class Film(object):
         # Does NOT default to the current Film instance LID,
         #     because I don't want to submit unnecessary reports
         # TODO handle status code errors
-        response = self._api.api_call(
-            path=f"film/{film_id}/report", params=report_film_request, method="POST"
-        )
-        return response.status_code
+        # 204 	Success
+        # 401 	There is no authenticated member
+        # 404 	No film matches the specified ID
+        try:
+            response = self._api.api_call(
+                path=f"film/{film_id}/report", params=report_film_request, method="POST"
+            )
+        except:
+            if response.status_code is 204:
+                pass
+            else:
+                return response.status_code
+        if response.status_code is 204:
+            return True
 
     def statistics(self, film_id=None):
         """
