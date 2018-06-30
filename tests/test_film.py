@@ -148,7 +148,18 @@ def test_films_services():
     assert {"id", "name"}.issubset(a_film.keys()), "All keys should be in Service"
 
 
-    a_film = services_response["items"][0]
-    assert {"id", "name"}.issubset(
-        a_film.keys()
-    ), "All keys should be in the film response"
+def test_films_genres():
+    """
+    Test API call to /films/genres
+    """
+    lbxd = Letterboxd()
+    films = lbxd.films()
+    genres = films.genres()
+    logging.debug(f"genres: {genres}")
+
+    assert isinstance(genres, dict)
+
+    assert {"items"}.issubset(genres.keys()), "All keys should be in GenresResponse"
+
+    a_genre = genres["items"][0]
+    assert {"id", "name"}.issubset(a_genre.keys()), "All keys should be in the Genre"
