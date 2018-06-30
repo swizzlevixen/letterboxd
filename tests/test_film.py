@@ -97,3 +97,17 @@ def test_film_statistics():
     assert isinstance(film_statistics, dict)
     assert film_statistics["film"]["id"] == "2bbs", "The ID should be in the response"
     # TODO: test returned keys
+
+
+def test_films():
+    """
+    Test API call to /films
+    """
+    lbxd = Letterboxd()
+    film_instance = lbxd.film(film_id="2bbs")  # Raiders of the Lost Ark
+    films_request = {}
+    films_response = film_instance.films(films_request=films_request)
+    logging.debug(f"films_response: {films_response}")
+    assert isinstance(films_response, dict)
+    # assert films_response ... something
+    # TODO: test returned keys
