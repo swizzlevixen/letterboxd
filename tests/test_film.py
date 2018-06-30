@@ -71,11 +71,11 @@ def test_film_report():
     test_user = lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
     film_instance = lbxd.film(film_id="9mMS")  # Kirk Cameron’s Saving Christmas
     report_film_request = {"reason": "Other", "message": "TEST — IGNORE"}
-    response_status_code = film_instance.report(
+    success = film_instance.report(
         film_id="9mMS", report_film_request=report_film_request
     )
-    logging.debug(f"response_status_code: {response_status_code}")
-    assert response_status_code is 204
+    logging.debug(f"success: {success}")
+    assert success is True
 
 
 def test_film_statistics():
