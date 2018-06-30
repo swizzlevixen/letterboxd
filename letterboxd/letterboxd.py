@@ -81,7 +81,8 @@ class Letterboxd(object):
         :return: services.auth.Authentication object
         """
         # noinspection PyArgumentList
-        return Authentication(api=self.api)
+        auth = Authentication(api=self.api)
+        return auth
 
     def user(self, username, password):
         """
@@ -101,14 +102,16 @@ class Letterboxd(object):
         :param film_id: str - the LID of a film on Letterboxd
         :return: services.film.Film object
         """
-        return Film(film_id=film_id, api=self.api)
+        film = Film(film_id=film_id, api=self.api)
+        return film
 
     def films(self):
         """
 
         :return: services.film.Films object
         """
-        return Films(api=self.api)
+        films = Films(api=self.api)
+        return films
 
     def member(self, member_id):
         """
