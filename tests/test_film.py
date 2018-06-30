@@ -101,10 +101,10 @@ def test_films():
         "perPage": 25,
         "sort": "ReleaseDateEarliestFirst",
         # "filmId": ["2bbs", "imdb:tt0087469", "tmdb:89"],
-        # "genre": "",  # TODO: Get the list of genre LIDs from /films/genres
+        # "genre": "9a",  # Science Fiction
         # "decade": 1980,
         # "year": 1989,
-        # "service": "",  # TODO: get a list of services from /films/film-services
+        # "service": "amazon",  # Amazon
         # "where": ["NotReleased", "InWatchlist"],
         "member": "3P",
         "memberRelationship": "Favorited",
