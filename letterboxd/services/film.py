@@ -126,8 +126,7 @@ class Films:
         """
         self._api = api
 
-    @classmethod
-    def films(self, api=None, films_request={}):
+    def films(self, films_request={}):
         """
         /films
 
@@ -140,9 +139,7 @@ class Films:
         :param films_request: dict - FilmsRequest
         :return: dict
         """
-        if api == None:
-            api = self._api
-        response = api.api_call(path=f"films")
+        response = self._api.api_call(path="films")
         # TODO handle status code errors
         films = response.json()
         return films
