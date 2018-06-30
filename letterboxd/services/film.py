@@ -139,7 +139,7 @@ class Films:
         :param films_request: dict - FilmsRequest
         :return: dict
         """
-        response = self._api.api_call(path="films")
+        response = self._api.api_call(path="films", params=films_request)
         # TODO handle status code errors
         films = response.json()
         return films
