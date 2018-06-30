@@ -143,3 +143,16 @@ class Films:
         # TODO handle status code errors
         films = response.json()
         return films
+
+    def services(self):
+        """
+        /films/film-services
+
+
+
+        :return:
+        """
+        response = self._api.api_call(path="films/film-services")
+        # TODO handle status code errors
+        services = response.json()
+        return services

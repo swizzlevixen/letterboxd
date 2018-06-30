@@ -124,3 +124,27 @@ def test_films():
         film_num += 1
     # assert films_response ... something
     # TODO: test returned keys
+
+
+def test_films_services():
+    """
+    Test API call to /films/film-services
+    """
+    lbxd = Letterboxd()
+    # login, so that we can see all of the services available to this member
+    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
+    test_user = lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
+    films = lbxd.films()
+    services_response = films.services()
+    logging.debug(f"services_response: {services_response}")
+
+    assert isinstance(services_response, dict)
+
+    assert {"items"}.issubset(
+        services_response.keys()
+    ), "All keys should be in the response"
+
+    a_film = services_response["items"][0]
+    assert {"id", "name"}.issubset(
+        a_film.keys()
+    ), "All keys should be in the film response"
