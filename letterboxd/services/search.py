@@ -23,6 +23,6 @@ class Search(object):
         :return: dict - SearchResponse
         """
         # TODO handle status code errors
-        response = self._api.api_call(path="search", search_request=search_request)
+        response = self._api.api_call(path="search", params=search_request)
         search_response = response.json()
         return search_response
