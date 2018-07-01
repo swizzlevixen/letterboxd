@@ -189,3 +189,38 @@ class Films:
         # TODO handle status code errors
         genres = response.json()
         return genres
+
+
+class FilmCollection:
+    """
+    /film-collection service for the Letterboxd API
+    """
+
+    def __init__(self, api):
+        """
+
+        :param api: API object
+        """
+        self._api = api
+
+    def film_collection(self, film_collection_id=None, film_collection_request={}):
+        """
+        /film-collection/{id}
+
+        Get details about a film collection by ID. The response will include the
+        film relationships for the signed-in member and the member indicated by
+        the member LID if specified.
+
+        :param film_collection_id: str - The LID of the film collection.
+        :param film_collection_request: dict - FilmCollectionRequest
+        :return: dict - FilmCollection
+        """
+        try:
+            response = self._api.api_call(
+                path=f"film-collection/{film_collection_id}",
+                params=film_collection_request,
+            )
+        except:
+            raise
+        film_collection = response.json()
+        return film_collection
