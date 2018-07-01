@@ -1,9 +1,11 @@
 #! /usr/bin/env python3
 import logging
 
+from _pytest.fixtures import fixture
+
 from letterboxd.letterboxd import Letterboxd
 from letterboxd.services.film import Film
-from tests.test_letterboxd import film_keys, load_user_pass
+from tests.test_letterboxd import load_user_pass
 
 
 def test_film_details():
@@ -163,3 +165,55 @@ def test_films_genres():
 
     a_genre = genres["items"][0]
     assert {"id", "name"}.issubset(a_genre.keys()), "All keys should be in the Genre"
+
+
+@fixture
+def film_keys():
+    # Film definition
+    # http://api-docs.letterboxd.com/#/definitions/Film
+    # Commented lines may not be returned by every film
+    return [
+        "id",
+        "name",
+        # "originalName",
+        # "alternativeNames",
+        "releaseYear",
+        "tagline",
+        "description",
+        "runTime",
+        "poster",
+        "backdrop",
+        "backdropFocalPoint",
+        "trailer",
+        "genres",
+        "contributions",
+        "filmCollectionId",
+        "links",
+    ]
+
+
+@fixture
+def film_summary_keys():
+    # FilmSummary definition
+    # http://api-docs.letterboxd.com/#/definitions/FilmSummary
+    # Commented lines may not be returned by every film
+    return [
+        "id",
+        "name",
+        # "originalName",
+        # "alternativeNames",
+        "releaseYear",
+        "directors",
+        "poster",
+        # "filmCollectionId",
+        "links",
+        "relationships",
+    ]
+
+
+@fixture
+def films_response_keys():
+    # FilmsResponse definition
+    # http://api-docs.letterboxd.com/#/definitions/FilmsResponse
+    # Responsible only for returning the test data
+    return ["next", "items"]
