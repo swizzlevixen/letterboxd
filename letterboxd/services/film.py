@@ -104,9 +104,11 @@ class Film(object):
             if response.status_code is 204:
                 pass
             else:
-                return response.status_code
+                raise
         if response.status_code is 204:
             return True
+        else:
+            return False
 
     def statistics(self, film_id=None):
         """
