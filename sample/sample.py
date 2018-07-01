@@ -6,7 +6,7 @@ import sys
 lbxd_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.append(lbxd_path)
 
-from letterboxd.letterboxd import Letterboxd
+import letterboxd
 
 
 def load_user_pass():
@@ -37,7 +37,7 @@ if __name__ == "__main__":
     prettyprinter = pprint.PrettyPrinter(indent=4)
 
     # Assuming use of environment variables:
-    lbxd = Letterboxd()
+    lbxd = letterboxd.new()
     # If not using environment variables, instead instantiate Letterboxd() with your secrets:
     # lbxd = Letterboxd(api_key='YOUR_KEY_HERE', api_secret='YOUR_SECRET_HERE')
 
@@ -56,13 +56,11 @@ if __name__ == "__main__":
     # request /film/{id} endpoint
     film = lbxd.film(film_id="2bbs")  # Raiders of the Lost Ark
     response = film.details()
-    response_json = response.json()
     print("\n-------------------------\nfilm/{id}\n-------------------------\n")
-    prettyprinter.pprint(response_json)
+    prettyprinter.pprint(response)
 
     # request /film/{id}/me endpoint,
     film_instance = lbxd.film(film_id="2bbs")  # Raiders of the Lost Ark
     response = film_instance.me()
-    response_json = response.json()
     print("\n-------------------------\nfilm/{id}/me\n-------------------------\n")
-    prettyprinter.pprint(response_json)
+    prettyprinter.pprint(response)
