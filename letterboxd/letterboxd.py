@@ -5,18 +5,19 @@ Version 0 of the Letterboxd API
 
 import os
 
-from letterboxd.config import *
 from letterboxd.api import API
+from letterboxd.config import *
 from letterboxd.user import User
 from .services.auth import Authentication
 from .services.film import Film, Films
 from .services.member import Member
+from .services.search import Search
+
 
 # TODO: Write these modules
 # from .services.comment import Comment
 # from .services.list import List
 # from .services.log_entry import LogEntry
-# from .services.search import Search
 
 
 class Letterboxd(object):
@@ -121,3 +122,14 @@ class Letterboxd(object):
         """
         member = Member(api=self.api, member_id=member_id)
         return member
+
+    def search(self, search_request):
+        """
+        /search
+
+        :param search_request: dict - SearchRequest
+        :return: dict - SearchResponse
+        """
+        search = Search(self.api)
+        search_response = search.search(search_request=search_request)
+        return search_response
