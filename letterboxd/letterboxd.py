@@ -9,7 +9,7 @@ from letterboxd.api import API
 from letterboxd.config import *
 from letterboxd.user import User
 from .services.auth import Authentication
-from .services.film import Film, Films
+from .services.film import Film, FilmCollection, Films
 from .services.member import Member
 from .services.search import Search
 
@@ -113,6 +113,14 @@ class Letterboxd(object):
         """
         films = Films(api=self.api)
         return films
+
+    def film_collection(self, film_collection_id, film_collection_request):
+        film_collection_object = FilmCollection(api=self.api)
+        film_collection_item = film_collection_object.film_collection(
+            film_collection_id=film_collection_id,
+            film_collection_request=film_collection_request,
+        )
+        return film_collection_item
 
     def member(self, member_id):
         """
