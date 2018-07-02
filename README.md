@@ -1,4 +1,6 @@
-[![Build Status](https://semaphoreci.com/api/v1/bobtiki/letterboxd/branches/master/badge.svg)](https://semaphoreci.com/bobtiki/letterboxd)
+| Semaphore | Travis |
+| --------- | ------ |
+| [![Build Status](https://semaphoreci.com/api/v1/bobtiki/letterboxd/branches/master/badge.svg)](https://semaphoreci.com/bobtiki/letterboxd) | [![Build Status](https://travis-ci.org/bobtiki/letterboxd.svg?branch=master)](https://travis-ci.org/bobtiki/letterboxd) |
 
 # Letterboxd
 
