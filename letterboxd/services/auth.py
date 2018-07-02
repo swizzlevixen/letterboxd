@@ -80,7 +80,8 @@ class Authentication:
         # Reset the expiration to now (i.e., 'expired')
         self._token_expiration = datetime.datetime.now()
 
-    # TODO: renew_token()
+    def renew_token(self):
+        pass
 
     def login(self, username, password):
         """
