@@ -85,7 +85,7 @@ class Authentication:
         Uses the current single-use refresh_token to request a new access token
         for the user
 
-        :return:
+        :return: dict - either an AccessToken or OAuthError
         """
         grant_type = "refresh_token"
         form_str = (
