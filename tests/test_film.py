@@ -3,6 +3,7 @@ import logging
 
 from _pytest.fixtures import fixture
 
+import letterboxd
 from letterboxd.letterboxd import Letterboxd
 from letterboxd.services.film import Film
 from tests.test_letterboxd import load_user_pass
@@ -165,6 +166,48 @@ def test_films_genres():
 
     a_genre = genres["items"][0]
     assert {"id", "name"}.issubset(a_genre.keys()), "All keys should be in the Genre"
+
+
+def test_film_collection():
+    """
+    Test API call to /film-collection/{id}
+    """
+    lbxd = letterboxd.new()
+    # Log in as a user
+    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
+    lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
+    film_collection_id = "Nb"  # Indiana Jones
+    film_collection_request = {
+        "sort": "ReleaseDateEarliestFirst",
+        "genre": "adventure",
+        "decade": 1980,
+        "year": 1989,
+        "service": "amazon",
+        "where": ["Watched", "Released"],
+        "member": "3P",
+        "memberRelationship": "Watched",
+        "includeFriends": "All",
+        "tagCode": "stubs",
+        "tagger": "11Ht",
+        "includeTaggerFriends": "Only",
+    }
+    film_collection = lbxd.film_collection(
+        film_collection_id=film_collection_id,
+        film_collection_request=film_collection_request,
+    )
+    logging.debug(f"film_collection: {film_collection}")
+
+    assert isinstance(film_collection, dict)
+
+    assert set(film_collection_keys()).issubset(
+        film_collection.keys()
+    ), "All keys should be in FilmCollection"
+
+
+@fixture
+def film_collection_keys():
+    # FilmCollection definition
+    return ["id", "name", "films", "links"]
 
 
 @fixture
