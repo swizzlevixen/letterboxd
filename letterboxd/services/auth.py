@@ -122,8 +122,7 @@ class Authentication:
         response_data = response.json()
         logging.debug(response_data)
         if not response_data["access_token"]:
-            # TODO: There's probably a better error we can throw instead
-            raise ConnectionRefusedError("No token received")
+            raise ConnectionRefusedError("Failed to retrieve access token")
         else:
             self.token = response_data
         return response_data
