@@ -18,6 +18,7 @@ from .services.search import Search
 # from .services.comment import Comment
 # from .services.list import List
 # from .services.log_entry import LogEntry
+# from .services.news import News
 
 
 class Letterboxd(object):
