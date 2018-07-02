@@ -46,7 +46,7 @@ def test_film_me():
     # TODO: test returned keys
 
 
-def test_film_member():
+def test_film_members():
     LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
     lbxd = Letterboxd()
     # login, even though we don't use this value
@@ -59,7 +59,7 @@ def test_film_member():
         "memberRelationship": "IsFollowedBy",
         "filmRelationship": "Liked",
     }
-    member_film_relationships_response = film_instance.member(
+    member_film_relationships_response = film_instance.members(
         member_film_relationships_request=member_film_relationships_request
     )
     logging.debug(f"response_json: {member_film_relationships_response}")
