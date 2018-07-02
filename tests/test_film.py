@@ -179,17 +179,17 @@ def test_film_collection():
     film_collection_id = "Nb"  # Indiana Jones
     film_collection_request = {
         "sort": "ReleaseDateEarliestFirst",
-        "genre": "adventure",
+        "genre": "9k",
         "decade": 1980,
         "year": 1989,
         "service": "amazon",
         "where": ["Watched", "Released"],
         "member": "3P",
         "memberRelationship": "Watched",
-        "includeFriends": "All",
+        "includeFriends": "Only",
         "tagCode": "stubs",
         "tagger": "11Ht",
-        "includeTaggerFriends": "Only",
+        "includeTaggerFriends": "All",
     }
     film_collection = lbxd.film_collection(
         film_collection_id=film_collection_id,
