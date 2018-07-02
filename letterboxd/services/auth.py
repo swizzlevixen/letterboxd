@@ -80,8 +80,31 @@ class Authentication:
         # Reset the expiration to now (i.e., 'expired')
         self._token_expiration = datetime.datetime.now()
 
-    def renew_token(self):
-        pass
+    def refresh_token(self):
+        """
+        Uses the current single-use refresh_token to request a new access token
+        for the user
+
+        :return:
+        """
+        grant_type = "refresh_token"
+        form_str = (
+            f"grant_type={grant_type}&refresh_token={self._token_dict['refresh_token']}"
+        )
+        logging.debug(f"form: {form_str}")
+        try:
+            response = self._api.api_call(
+                path="auth/token", method="post", form=form_str
+            )
+        except:
+            raise
+        response_data = response.json()
+        logging.debug(response_data)
+        if not response_data["access_token"]:
+            raise ConnectionRefusedError("Failed to retrieve access token")
+        else:
+            self.token = response_data
+        return response_data
 
     def login(self, username, password):
         """
