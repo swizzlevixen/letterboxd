@@ -28,7 +28,6 @@ class Film(object):
         """
         if film_id is None:
             film_id = self._film_id
-        # TODO handle status code errors
         details = self._api.api_call(path=f"film/{film_id}")
         return details.json()
 
@@ -43,7 +42,6 @@ class Film(object):
         """
         if film_id is None:
             film_id = self._film_id
-        # TODO handle status code errors
         availability = self._api.api_call(path=f"film/{film_id}/availability")
         film_availability_response = availability.json()
         return film_availability_response
@@ -58,7 +56,6 @@ class Film(object):
         """
         if film_id is None:
             film_id = self._film_id
-        # TODO handle status code errors
         response = self._api.api_call(path=f"film/{film_id}/me")
         film_relationship = response.json()
         return film_relationship
@@ -74,7 +71,6 @@ class Film(object):
         """
         if film_id is None:
             film_id = self._film_id
-            # TODO handle status code errors
         response = self._api.api_call(
             path=f"film/{film_id}/members", params=member_film_relationships_request
         )
@@ -92,20 +88,18 @@ class Film(object):
         """
         # Does NOT default to the current Film instance LID,
         #     because I don't want to submit unnecessary reports
-        # TODO handle status code errors
-        # 204 	Success
-        # 401 	There is no authenticated member
-        # 404 	No film matches the specified ID
         try:
             response = self._api.api_call(
                 path=f"film/{film_id}/report", params=report_film_request, method="POST"
             )
         except:
             if response.status_code is 204:
+                # 204: Success
                 pass
             else:
                 raise
         if response.status_code is 204:
+            # 204: Success
             return True
         else:
             return False
@@ -120,7 +114,6 @@ class Film(object):
         """
         if film_id is None:
             film_id = self._film_id
-        # TODO handle status code errors
         response = self._api.api_call(path=f"film/{film_id}/statistics")
         film_statistics = response.json()
         return film_statistics
@@ -152,7 +145,6 @@ class Films:
         :return: dict
         """
         response = self._api.api_call(path="films", params=films_request)
-        # TODO handle status code errors
         films = response.json()
         return films
 
@@ -169,7 +161,6 @@ class Films:
         :return: dict - FilmServicesResponse
         """
         response = self._api.api_call(path="films/film-services")
-        # TODO handle status code errors
         services = response.json()
         return services
 
@@ -186,7 +177,6 @@ class Films:
         :return: dict - FilmServicesResponse
         """
         response = self._api.api_call(path="films/genres")
-        # TODO handle status code errors
         genres = response.json()
         return genres
 
@@ -215,12 +205,8 @@ class FilmCollection:
         :param film_collection_request: dict - FilmCollectionRequest
         :return: dict - FilmCollection
         """
-        try:
-            response = self._api.api_call(
-                path=f"film-collection/{film_collection_id}",
-                params=film_collection_request,
-            )
-        except:
-            raise
+        response = self._api.api_call(
+            path=f"film-collection/{film_collection_id}", params=film_collection_request
+        )
         film_collection = response.json()
         return film_collection
