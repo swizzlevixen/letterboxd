@@ -43,3 +43,5 @@ class Member(object):
             path=f"member/{member_id}/watchlist", params=watchlist_request
         )
         return watchlist.json()
+
+    # TODO: Write the rest of Member / Members functions
