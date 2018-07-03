@@ -1,6 +1,3 @@
-"""
-Communication methods for the Letterboxd API
-"""
 import hashlib
 import hmac
 import json
@@ -20,15 +17,18 @@ CHARLES = os.environ.get("CHARLES", None)
 
 class API:
     """
-    Letterboxd API helpers
+    Communication methods for the Letterboxd API
     """
 
     def __init__(self, api_base, api_key, api_secret):
         """
+        This method will start the shared requests session for the Letterboxd
+        API. If the API key and secret are not passed, the initializer will
+        attempt to get them from the environment variables.
 
-        :param api_base: str
-        :param api_key: str
-        :param api_secret: str
+        :param api_base: str - the base URL of the API endpoints, including version number
+        :param api_key: str - API key provided by Letterboxd
+        :param api_secret: str - API shared secret provided by Letterboxd
         """
         self.api_base = api_base
         self.api_key = api_key
@@ -63,12 +63,13 @@ class API:
 
     def api_call(self, path, params={}, form=None, headers={}, method="get"):
         """
+        The workhorse method of calls to the Letterboxd API
 
-        :param path: string - The endpoint for the service
-        :param params: dictionary - of parameters
-        :param form: string - the form information from the auth.py call
-        :param headers: dictionary - dictionary of parameters
-        :param method: string - HTML methods get, post, put, patch
+        :param path: str - URL endpoint path for the desired service
+        :param params: dict - request parameters
+        :param form: str - form information, likely from the auth.py call
+        :param headers: dict - request parameters
+        :param method: str - HTML methods, [get, post, put, patch]
         :return: requests.Response object
         """
 

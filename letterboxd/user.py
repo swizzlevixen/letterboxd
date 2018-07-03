@@ -39,8 +39,8 @@ class User(object):
     def me(self):
         """
         /me
+
         Get details about the authenticated member.
-        http://api-docs.letterboxd.com/#path--me
 
         :return: dict - JSON response
         """
