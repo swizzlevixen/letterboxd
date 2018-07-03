@@ -40,6 +40,8 @@ class Film(object):
         Get availability data about a film by ID.  If no film ID passed, uses
         the initialized film.
 
+        NOTE: This data is currently available to first-party only.
+
         :param film_id: str - LID of the film
         :return: dict - FilmAvailabilityResponse
         """
