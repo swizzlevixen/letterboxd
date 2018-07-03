@@ -42,7 +42,10 @@ class User(object):
 
         Get details about the authenticated member.
 
-        :return: dict - JSON response
+        Calls to this endpoint must include the access token for an
+        authenticated member.
+
+        :return: dict - MemberAccount
         """
         response = self._api.api_call(path="me")
         data = response.json()
@@ -57,3 +60,6 @@ class User(object):
         :return: None
         """
         self._me = value
+        # TODO: Write /me PATCH call here
+
+    # TODO: Write method for /me/validation-request
