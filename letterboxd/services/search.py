@@ -10,6 +10,7 @@ class Search(object):
 
     def __init__(self, api):
         """
+        Initialze the Search object with the shared API instance.
 
         :param api: API object
         """
