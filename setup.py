@@ -6,7 +6,7 @@
 import setuptools
 
 # Read in the README file, for the long_description.
-with open("README.markdown", "r") as readme_file:
+with open("README.md", "r") as readme_file:
     readme = readme_file.read()
 
 with open("CHANGELOG.md") as changelog_file:
@@ -53,22 +53,9 @@ setuptools.setup(
         "Topic :: Utilities",
     ],
     license="MIT",
-)
-
-
-# -----------------------------------
-# Boilerplate below: merge in.
-# -----------------------------------
-
-setup(
     include_package_data=True,
-    keywords="letterboxd",
-    name="letterboxd",
-    packages=find_packages(include=["letterboxd"]),
     setup_requires=setup_requirements,
     test_suite="tests",
     tests_require=test_requirements,
-    url="https://github.com/bobtiki/letterboxd",
-    version="0.1.0",
     zip_safe=False,
 )
