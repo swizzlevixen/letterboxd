@@ -8,7 +8,7 @@ logging.getLogger(__name__).addHandler(logging.NullHandler())
 name = "letterboxd"
 
 
-def new(api_base=API_BASE_URL, api_key=None, api_secret=None):
+def new(api_base=API_BASE_URL, api_key="", api_secret=""):
     """
     Create a new instance of the Letterboxd class
 
