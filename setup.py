@@ -1,20 +1,31 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""The setup script."""
+
 import setuptools
 
 # Read in the README file, for the long_description.
-with open("README.markdown", "r") as fh:
-    long_description = fh.read()
+with open("README.markdown", "r") as readme_file:
+    readme = readme_file.read()
 
-with open("CHANGELOG.md") as history_file:
-    history = history_file.read()
+with open("CHANGELOG.md") as changelog_file:
+    changelog = changelog_file.read()
+
+requirements = ["requests"]
+
+setup_requirements = ["pytest-runner"]
+
+test_requirements = ["pytest"]
 
 setuptools.setup(
     name="letterboxd",
     packages=setuptools.find_packages(exclude=["contrib", "docs", "tests*", "sample"]),
     version="0.1.0a5",
     python_requires=">=3.6",
-    install_requires=["requests"],
-    description="Python 3.6+ wrapper for the Letterboxd API",
-    long_description=long_description,
+    install_requires=requirements,
+    description="Python 3 wrapper for the Letterboxd API",
+    long_description=readme + "\n\n" + changelog,
     long_description_content_type="text/markdown",
     author="Mark Boszko",
     author_email="mboszko@mac.com",
@@ -33,11 +44,13 @@ setuptools.setup(
     ],
     classifiers=[
         "Development Status :: 3 - Alpha",
-        "Programming Language :: Python :: 3.6",
-        "Operating System :: OS Independent",
+        "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
-        "Topic :: Utilities",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
         "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+        "Topic :: Utilities",
     ],
     license="MIT",
 )
@@ -47,44 +60,7 @@ setuptools.setup(
 # Boilerplate below: merge in.
 # -----------------------------------
 
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-"""The setup script."""
-
-from setuptools import setup, find_packages
-
-with open("README.rst") as readme_file:
-    readme = readme_file.read()
-
-with open("HISTORY.rst") as history_file:
-    history = history_file.read()
-
-requirements = []
-
-setup_requirements = ["pytest-runner"]
-
-test_requirements = ["pytest"]
-
 setup(
-    author="Mark Boszko",
-    author_email="mboszko@mac.com",
-    classifiers=[
-        "Development Status :: 2 - Pre-Alpha",
-        "Intended Audience :: Developers",
-        "License :: OSI Approved :: MIT License",
-        "Natural Language :: English",
-        "Programming Language :: Python :: 2",
-        "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.4",
-        "Programming Language :: Python :: 3.5",
-        "Programming Language :: Python :: 3.6",
-    ],
-    description="Python 3 wrapper for the Letterboxd API.",
-    install_requires=requirements,
-    license="MIT license",
-    long_description=readme + "\n\n" + history,
     include_package_data=True,
     keywords="letterboxd",
     name="letterboxd",
