@@ -1,4 +1,5 @@
 import logging
+
 from letterboxd.config import *
 from letterboxd.letterboxd import Letterboxd
 
@@ -7,6 +8,14 @@ logging.getLogger(__name__).addHandler(logging.NullHandler())
 name = "letterboxd"
 
 
-def new(api_base=API_BASE_URL, api_key="", api_secret=""):
+def new(api_base=API_BASE_URL, api_key=None, api_secret=None):
+    """
+    Create a new instance of the Letterboxd class
+
+    :param api_base: str - the base URL of the API endpoints, including version number
+    :param api_key: str - API key provided by Letterboxd
+    :param api_secret: str - API shared secret provided by Letterboxd
+    :return: Letterboxd instance
+    """
     lbxd = Letterboxd(api_base=api_base, api_key=api_key, api_secret=api_secret)
     return lbxd
