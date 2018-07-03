@@ -37,6 +37,9 @@ class Authentication:
     @property
     def token(self):
         """
+        Checks if the user authentication token already exists. If not, it tries
+        to get one. If it does exist, it checks to see if it is expired, and if
+        so, it attempts to refresh the token.
 
         :return: str - user token
         """
@@ -53,6 +56,7 @@ class Authentication:
     @token.setter
     def token(self, value):
         """
+        Sets the takue of the token, and also calculates the expiration time.
 
         :param value: dict - expects 'access_token', 'token_type', 'expires_in', and 'refresh_token' keys
         :return: None
@@ -72,6 +76,7 @@ class Authentication:
     @token.deleter
     def token(self):
         """
+        Deletes the token entirely.
 
         :return: None
         """
@@ -108,8 +113,7 @@ class Authentication:
 
     def login(self, username, password):
         """
-        User access to the Letterboxd API. Grabs a token for the user.
-        http://api-docs.letterboxd.com/#path--auth-token
+        User access to the Letterboxd API. Requests a token for the user.
 
         :param username: str
         :param password: str
