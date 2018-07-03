@@ -10,9 +10,10 @@ class Film(object):
 
     def __init__(self, api, film_id=None):
         """
+        Initializes a Film object with a specific film.
 
         :param api: API object
-        :param film_id: str - the LID for the film on Letterboxd
+        :param film_id: str - LID for the film on Letterboxd
         """
         self._api = api
         self._film_id = film_id
@@ -20,8 +21,9 @@ class Film(object):
     def details(self, film_id=None):
         """
         /film/{id}
-        Get details about a film by ID.
-        http://api-docs.letterboxd.com/#path--film--id-
+
+        Get details about a film by ID. If no film ID passed, uses the
+        initialized film.
 
         :param film_id: str - LID of the film
         :return: dict - Film
@@ -34,8 +36,9 @@ class Film(object):
     def availability(self, film_id=None):
         """
         /film/{id}/availability
-        Get availability data about a film by ID.
-        This data is currently available to first-party only.
+
+        Get availability data about a film by ID.  If no film ID passed, uses
+        the initialized film.
 
         :param film_id: str - LID of the film
         :return: dict - FilmAvailabilityResponse
@@ -49,7 +52,9 @@ class Film(object):
     def me(self, film_id=None):
         """
         /film/{id}/me
+
         Get details of the authenticated member’s relationship with a film by ID.
+        If no film ID passed, uses the initialized film.
 
         :param film_id: str - LID of the film
         :return: dict - FilmRelationship
@@ -63,7 +68,9 @@ class Film(object):
     def members(self, film_id=None, member_film_relationships_request={}):
         """
         film/{id}/members
-        Get details of members’ relationships with a film by ID.
+
+        Get details of members’ relationships with a film by ID. If no film ID
+        passed, uses the initialized film.
 
         :param film_id: str - LID of the film
         :param member_film_relationships_request: dict - MemberFilmRelationshipsRequest
@@ -80,14 +87,14 @@ class Film(object):
     def report(self, film_id=None, report_film_request={}):
         """
         /film/{id}/report
-        Report a film by ID.
+
+        Report problems with a film by ID. Does NOT default to the initialized
+        Film instance LID, so as to not submit unnecessary reports.
 
         :param film_id: str - the LID of the film
         :param report_film_request: dict - ReportFilmRequest
         :return: requests.Response.status_code
         """
-        # Does NOT default to the current Film instance LID,
-        #     because I don't want to submit unnecessary reports
         try:
             response = self._api.api_call(
                 path=f"film/{film_id}/report", params=report_film_request, method="POST"
@@ -107,6 +114,7 @@ class Film(object):
     def statistics(self, film_id=None):
         """
         /film/{id}/statistics
+
         Get statistical data about a film by ID.
 
         :param film_id: str - the LID of the film
