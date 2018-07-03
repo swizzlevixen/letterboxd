@@ -50,9 +50,10 @@ class Member(object):
         """
         if member_id is None:
             member_id = self._member_id
-        watchlist = self._api.api_call(
+        response = self._api.api_call(
             path=f"member/{member_id}/watchlist", params=watchlist_request
         )
-        return watchlist.json()
+        films_response = response.json()
+        return films_response
 
     # TODO: Write the rest of Member / Members functions
