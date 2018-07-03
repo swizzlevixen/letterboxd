@@ -2,9 +2,10 @@
 
 language: python
 python:
-- 3.6
+    - 3.6
 
 # Command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
+install: pip install -r requirements.txt
 install: pip install -r requirements_dev.txt
 
 # Command to run tests, e.g. python setup.py test
@@ -15,13 +16,12 @@ script: py.test
 # following command to finish PyPI deployment setup:
 # $ travis encrypt --add deploy.password
 deploy:
-  provider: pypi
-  distributions: sdist bdist_wheel
-  user: bobtiki
-  password:
-    secure: PLEASE_REPLACE_ME
-  on:
-    tags: true
-    repo: bobtiki/letterboxd
-    python: 3.6
-  secure: "P4aG3J8qBp0OgKXLy8yxHBW/yUoznZaEXlarTx12rWqyNjup3nKa2jnhJuo06ZoyqwJ4Z5sVbqtuXdd9sXCm1MN7kKwOHWL9/c+isP0Nodg4UZa/E8odR7zZsmSyx9S4VNgJ8H3U+VPIhzHws0r/9LcUpu5jxm10Z9KzvMP0a8oW/q2nsYgyOIpJGzm9/NBQdVzFD/V8exkEiVQvEe1IWa2ityA28VW24KMX0iFEWbwdbimg4njZlWfKErj5GQ1wiTBYJjHDJewlr0vV4MeQcjFLrcja420LkaCdh3oECPpR8eRwmV2hlFOwNUf63tV6gGGvbHiaULSFoY5q1o1hU+Y/p+d2Ew/uOiLe/b1hwV/c4rjrxJ6GUFY1t3h05lde6GEnBDynfnS+xBHNG1bJHdPiwLNaHFtL5GLYDJNHIFViciw1kFZc810hmyXDxfRF8eoTEKNyCSE3UyJ8a5mlSasYeoNZKLVrlRwORDUPczgJ/Q+srh1USvDaBCmqrt06u0Fii7tgZjwCwgDZaGoXUluXeFqaZPPv8QroulXZfUY9YAa0tZShME7x92Nuc+LruiZb+ho0Ofv/lmzVuCV9TSe8HwMs9lmYhOsFpOaC/ffjF8c8FzXQdfZf18wVjys1RhHskQVLlAZnkfD1hNZpnOMakb0o6M4aAmZRqKdsfek="
+    provider: pypi
+    distributions: sdist bdist_wheel
+    user: bobtiki
+    password:
+        secure: "P4aG3J8qBp0OgKXLy8yxHBW/yUoznZaEXlarTx12rWqyNjup3nKa2jnhJuo06ZoyqwJ4Z5sVbqtuXdd9sXCm1MN7kKwOHWL9/c+isP0Nodg4UZa/E8odR7zZsmSyx9S4VNgJ8H3U+VPIhzHws0r/9LcUpu5jxm10Z9KzvMP0a8oW/q2nsYgyOIpJGzm9/NBQdVzFD/V8exkEiVQvEe1IWa2ityA28VW24KMX0iFEWbwdbimg4njZlWfKErj5GQ1wiTBYJjHDJewlr0vV4MeQcjFLrcja420LkaCdh3oECPpR8eRwmV2hlFOwNUf63tV6gGGvbHiaULSFoY5q1o1hU+Y/p+d2Ew/uOiLe/b1hwV/c4rjrxJ6GUFY1t3h05lde6GEnBDynfnS+xBHNG1bJHdPiwLNaHFtL5GLYDJNHIFViciw1kFZc810hmyXDxfRF8eoTEKNyCSE3UyJ8a5mlSasYeoNZKLVrlRwORDUPczgJ/Q+srh1USvDaBCmqrt06u0Fii7tgZjwCwgDZaGoXUluXeFqaZPPv8QroulXZfUY9YAa0tZShME7x92Nuc+LruiZb+ho0Ofv/lmzVuCV9TSe8HwMs9lmYhOsFpOaC/ffjF8c8FzXQdfZf18wVjys1RhHskQVLlAZnkfD1hNZpnOMakb0o6M4aAmZRqKdsfek="
+    on:
+        tags: true
+        repo: bobtiki/letterboxd
+        python: 3.6
