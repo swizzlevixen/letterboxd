@@ -116,6 +116,17 @@ class Letterboxd(object):
         return films
 
     def film_collection(self, film_collection_id, film_collection_request):
+        """
+        /film-collection/{id}
+
+        Get details about a film collection by ID. The response will include the
+        film relationships for the signed-in member and the member indicated by
+        the member LID if specified.
+
+        :param film_collection_id: str - LID of the FilmCollection
+        :param film_collection_request: str - FilmCollectionRequest
+        :return: dict - FilmCollection
+        """
         film_collection_object = FilmCollection(api=self.api)
         film_collection_item = film_collection_object.film_collection(
             film_collection_id=film_collection_id,
