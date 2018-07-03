@@ -124,7 +124,7 @@ class Letterboxd(object):
         the member LID if specified.
 
         :param film_collection_id: str - LID of the FilmCollection
-        :param film_collection_request: str - FilmCollectionRequest
+        :param film_collection_request: dict - FilmCollectionRequest
         :return: dict - FilmCollection
         """
         film_collection_object = FilmCollection(api=self.api)
