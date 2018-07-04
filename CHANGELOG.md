@@ -9,6 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - This `CHANGELOG.markdown`
 - Documentation written with reStructuredText and Sphinx, being built to [Read the Docs](https://letterboxd.readthedocs.io/)
+- Added a number of files/tests provided as defaults in [cookiecutter-pypackage](https://github.com/audreyr/cookiecutter-pypackage)
+- Added an easy initializer with `import letterboxd` and then `letterboxd.new()`
+- `User.refresh_token()` to refresh the user authentication oAuth token
+- Coverage for Letterboxd API endpoints:
+    - /film/{id}/members
+    - /film/{id}/report
+    - /film/{id}/statistics
+    - /films
+    - /films/film-services
+    - /films/genres
+    - /film-collection/{id}
+    - /search
+
+### Changed
+
+- All api-calling methods now return the dictionary from the response JSON, instead of the entire `requests.Response`.
 
 ## [0.1.0] - 2018-06-24
 ### Added
