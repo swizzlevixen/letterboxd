@@ -176,19 +176,17 @@ class Films:
 
     def genres(self):
         """
-        /films/film-services
+        /films/genres
 
-        Get a list of services supported by the /films endpoint.
+        Get a list of genres supported by the /films endpoint.
 
-        Services are returned in alphabetical order. Some services are only
-        available to paying members, so results will vary based on the
-        authenticated member’s status.
+        Genres are returned in alphabetical order.
 
-        :return: dict - FilmServicesResponse
+        :return: dict - GenresResponse
         """
         response = self._api.api_call(path="films/genres")
-        genres = response.json()
-        return genres
+        genres_response = response.json()
+        return genres_response
 
 
 class FilmCollection:
