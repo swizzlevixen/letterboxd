@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+
+"""Top-level package for Letterboxd."""
+
 import logging
 
 from letterboxd.config import *
@@ -6,6 +10,9 @@ from letterboxd.letterboxd import Letterboxd
 logging.getLogger(__name__).addHandler(logging.NullHandler())
 
 name = "letterboxd"
+__author__ = """Mark Boszko"""
+__email__ = "mboszko@mac.com"
+__version__ = "0.1.0"
 
 
 def new(api_base=API_BASE_URL, api_key="", api_secret=""):

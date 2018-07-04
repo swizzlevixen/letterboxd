@@ -14,6 +14,13 @@ This software is very much in an alpha state, and things that are working now ma
 
    letterboxd
    services
+   readme
+   installation
+   usage
+   modules
+   contributing
+   authors
+   history
 
 
 Indices and tables
