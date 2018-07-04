@@ -69,7 +69,7 @@ class Film(object):
 
     def members(self, film_id=None, member_film_relationships_request={}):
         """
-        film/{id}/members
+        /film/{id}/members
 
         Get details of members’ relationships with a film by ID. If no film ID
         passed, uses the initialized film.
