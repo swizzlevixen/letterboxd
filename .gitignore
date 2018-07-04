@@ -6,3 +6,4 @@ letterboxd/__pycache__/
 /letterboxd.egg-info/
 /dist/
 /docs/_build/
+/.tox
