@@ -4,19 +4,19 @@
 
 # Letterboxd
 
-`v0.2.0a0`
+Python 3 implementation of the [Letterboxd API v0](http://api-docs.letterboxd.com/).
 
-A Python 3 implementation of the [Letterboxd API v0](http://api-docs.letterboxd.com/).
+Python ≥3.6 is required.
 
-Python 3.6+ is required, because this library uses formatted strings, among other modern niceties.
+**THIS PROJECT IS CURRENTLY IN ALPHA:**
 
-**THE CODE IS CURRENTLY IN AN ALPHA STATE, AND MAY BE VERY BROKEN, AND/OR WHAT IS WORKING NOW MAY BREAK IN THE FUTURE.**
- 
-Currently a ***WORK-IN-PROGRESS,*** focusing first on retrieving watchlists and other lists for users.
+- **IT MAY BE BROKEN**
+- **WHAT IS WORKING NOW MAY BREAK IN THE FUTURE**
+- Initial focus is on implementing endpoints related to retrieving watchlists and other lists for users.
 
 ## Letterboxd API Access
 
-Letterboxd has posted an [example ruby client](https://github.com/grantyb/letterboxd-api-example-ruby-client), but as they say in the readme there:
+Letterboxd has posted an [example Ruby client](https://github.com/grantyb/letterboxd-api-example-ruby-client), but as they say in the readme there:
 
 > Although the Letterboxd API isn’t public yet (as at 2017-06-12), we have seeded some developers with API keys.
 
