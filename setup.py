@@ -6,7 +6,7 @@
 import setuptools
 
 # Read in the README file, for the long_description.
-with open("README.md", "r") as readme_file:
+with open("README.rst", "r") as readme_file:
     readme = readme_file.read()
 
 with open("CHANGELOG.md") as changelog_file:
