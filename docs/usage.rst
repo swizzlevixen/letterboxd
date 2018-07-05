@@ -32,4 +32,4 @@ Set the ``CHARLES`` environment variable to ``True`` to turn the proxy settings 
 
     $ CHARLES="True" pytest
 
-Please see `Modules <modules>`_ for more details on usage of the classes.
+Please see `Modules <modules.html>`_ for more details on usage of the classes.
