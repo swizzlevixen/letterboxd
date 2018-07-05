@@ -24,7 +24,7 @@ def test_user_auth_bad():
     lbxd = Letterboxd()
     # make login
     try:
-        test_user = lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
+        lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
     except Exception as e:
         logging.error(e.args)
 

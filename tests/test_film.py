@@ -38,7 +38,7 @@ def test_film_me():
     LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
     lbxd = Letterboxd()
     # login, even though we don't use this value
-    test_user = lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
+    lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
     film_instance = lbxd.film(film_id="2bbs")  # Raiders of the Lost Ark
     response_json = film_instance.me()
     logging.debug(f"response_json: {response_json}")
@@ -50,7 +50,7 @@ def test_film_members():
     LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
     lbxd = Letterboxd()
     # login, even though we don't use this value
-    test_user = lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
+    lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
     film_instance = lbxd.film(film_id="2bbs")  # Raiders of the Lost Ark
     member_film_relationships_request = {
         "perPage": 100,
@@ -71,7 +71,7 @@ def test_film_report():
     LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
     lbxd = Letterboxd()
     # login, even though we don't use this value
-    test_user = lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
+    lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
     film_instance = lbxd.film(film_id="9mMS")  # Kirk Cameron’s Saving Christmas
     report_film_request = {"reason": "Other", "message": "TEST — IGNORE"}
     success = film_instance.report(
@@ -136,7 +136,7 @@ def test_films_services():
     lbxd = Letterboxd()
     # login, so that we can see all of the services available to this member
     LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
-    test_user = lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
+    lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
     films = lbxd.films()
     services = films.services()
     logging.debug(f"services_response: {services}")
