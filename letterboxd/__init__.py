@@ -12,7 +12,7 @@ logging.getLogger(__name__).addHandler(logging.NullHandler())
 name = "letterboxd"
 __author__ = """Mark Boszko"""
 __email__ = "mboszko@mac.com"
-__version__ = "0.2.4"
+__version__ = "0.2.5"
 
 
 def new(api_base=API_BASE_URL, api_key="", api_secret=""):
