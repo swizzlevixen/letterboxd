@@ -10,9 +10,10 @@
 .. image:: https://readthedocs.org/projects/letterboxd/badge/?version=latest
    :target: https://letterboxd.readthedocs.io/en/latest/?badge=latest
 
-# Letterboxd
+Letterboxd
+==========
 
-Python 3 implementation of the [Letterboxd API v0](http://api-docs.letterboxd.com/).
+Python 3 implementation of the `Letterboxd API v0 <http://api-docs.letterboxd.com/>`_.
 
 Python ≥3.6 is required.
 
@@ -22,28 +23,32 @@ Python ≥3.6 is required.
 - **WHAT IS WORKING NOW MAY BREAK IN THE FUTURE**
 - Initial focus is on implementing endpoints related to retrieving watchlists and other lists for users.
 
-## Letterboxd API Access
+Letterboxd API Access
+---------------------
 
-Letterboxd has posted an [example Ruby client](https://github.com/grantyb/letterboxd-api-example-ruby-client), but as they say in the readme there:
+Letterboxd has posted an `example Ruby client <https://github.com/grantyb/letterboxd-api-example-ruby-client>`_, but as they say in the readme there:
 
-> Although the Letterboxd API isn’t public yet (as at 2017-06-12), we have seeded some developers with API keys.
+    Although the Letterboxd API isn’t public yet (as at 2017-06-12), we have seeded some developers with API keys.
 
-If you need more information about API access, please see [https://letterboxd.com/api-coming-soon/]().
+If you need more information about API access, please see `<https://letterboxd.com/api-coming-soon/>`_.
 
-## Documentation
+Documentation
+-------------
 
-Documentation is written in the `/docs` folder, and being generated for [human-readable documentation on Read the Docs](https://letterboxd.readthedocs.io).
+Documentation is written in the ``/docs`` folder, and being generated for `human-readable documentation on Read the Docs <https://letterboxd.readthedocs.io>`_.
 
 At the moment, most of the docs are generated automatically from the code’s docstrings. More human documentation will come as we approach v1.0.
 
-## Usage
+Usage
+-----
 
-Instantiate the `Letterboxd` class, and provide it with the `api_base` URL for the API, your `api_key`, and your `api_secret`. You can pass it as a variable to the class initializer, or add it to your environment variables as:
+Instantiate the ``Letterboxd`` class, and provide it with the ``api_base`` URL for the API, your ``api_key``, and your ``api_secret``. You can pass it as a variable to the class initializer, or add it to your environment variables as:
 
-```
-export LBXD_API_KEY="YOUR_KEY_HERE"
-export LBXD_API_SECRET="YOUR_SECRET_HERE"
-```
+.. code-block:: bash
+   :linenos:
+
+    export LBXD_API_KEY="YOUR_KEY_HERE"
+    export LBXD_API_SECRET="YOUR_SECRET_HERE"
 
 If you do not provide an `api_base`, it currently defaults to `https://api.letterboxd.com/api/v0`.
 
