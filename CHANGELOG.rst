@@ -7,10 +7,45 @@ The format is based on `Keep a Changelog <https://keepachangelog.com/en/1.0.0/>`
 and this project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_.
 
 [Unreleased]
-------------
+-----------------------------
 
-[0.2.0]
-------------
+ADDED
+.....
+
+- Issue and pull request templates
+- Code of Conduct
+
+
+[0.2.6] - 2018-07-04
+-----------------------------
+
+CHANGED
+.......
+
+- Getting the Travis CI integration with PyPI to work properly.
+
+[0.2.5] - 2018-07-04 [YANKED]
+-----------------------------
+
+[0.2.4] - 2018-07-04
+-----------------------------
+
+CHANGED
+.......
+
+- Getting ``bumpversion`` to work properly.
+
+[0.2.3] - 2018-07-04 [YANKED]
+-----------------------------
+
+[0.2.2] - 2018-07-04 [YANKED]
+-----------------------------
+
+[0.2.1] - 2018-07-04 [YANKED]
+-----------------------------
+
+[0.2.0] - 2018-07-04
+--------------------
 
 Added
 .....
