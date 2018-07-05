@@ -21,7 +21,7 @@ test_requirements = ["pytest"]
 setuptools.setup(
     name="letterboxd",
     packages=setuptools.find_packages(exclude=["contrib", "docs", "tests*", "sample"]),
-    version="version='0.2.1'",
+    version="version='version="0.2.2"'",
     python_requires=">=3.6",
     install_requires=requirements,
     description="Python 3 wrapper for the Letterboxd API",
