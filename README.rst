@@ -1,9 +1,14 @@
+.. Semaphore Build Status
 .. image:: https://semaphoreci.com/api/v1/bobtiki/letterboxd/branches/master/badge.svg
    :target: https://semaphoreci.com/bobtiki/letterboxd
 
-[![Build Status](https://travis-ci.org/bobtiki/letterboxd.svg?branch=master)](https://travis-ci.org/bobtiki/letterboxd)
+.. Travis CI build status
+.. image:: https://travis-ci.org/bobtiki/letterboxd.svg?branch=master
+   :target: https://travis-ci.org/bobtiki/letterboxd
 
-[![Documentation Status](https://readthedocs.org/projects/letterboxd/badge/?version=latest)](https://letterboxd.readthedocs.io/en/latest/?badge=latest)
+.. ReadTheDocs document status
+.. image:: https://readthedocs.org/projects/letterboxd/badge/?version=latest
+   :target: https://letterboxd.readthedocs.io/en/latest/?badge=latest
 
 # Letterboxd
 
