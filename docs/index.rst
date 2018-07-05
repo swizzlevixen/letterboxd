@@ -12,8 +12,6 @@ This software is very much in an alpha state, and things that are working now ma
    :maxdepth: 2
    :caption: Contents:
 
-   letterboxd
-   services
    readme
    installation
    usage

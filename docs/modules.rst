@@ -1,10 +1,6 @@
 Modules reference
 ============================
 
-letterboxd package
------------------------
-.. import letterboxd.rst
+.. include:: letterboxd.rst
 
-services package
------------------
-.. import services.rst
+.. include:: services.rst
