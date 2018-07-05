@@ -21,8 +21,8 @@ Python ≥3.6 is required.
 
     **THIS PROJECT IS CURRENTLY IN ALPHA:**
 
-    - **IT MAY BE BROKEN**
-    - **WHAT IS WORKING NOW MAY BREAK IN THE FUTURE**
+    - It may be broken.
+    - What is working now may break between now and v1.0
     - Initial focus is on implementing endpoints related to retrieving watchlists and other lists for users.
 
 Letterboxd API Access
