@@ -7,3 +7,4 @@ letterboxd/__pycache__/
 /dist/
 /docs/_build/
 /.tox
+.DS_Store
