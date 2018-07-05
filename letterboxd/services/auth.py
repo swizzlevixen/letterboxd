@@ -44,7 +44,7 @@ class Authentication:
         :return: str - user token
         """
         logging.debug("getter of token called")
-        if self._token_dict == None:
+        if self._token_dict is None:
             # We don't have a token yet
             self._token_dict = self.login(self._username, self._password)
         elif self._token_expiration < datetime.datetime.now():
@@ -58,7 +58,8 @@ class Authentication:
         """
         Sets the takue of the token, and also calculates the expiration time.
 
-        :param value: dict - expects 'access_token', 'token_type', 'expires_in', and 'refresh_token' keys
+        :param value: dict - expects 'access_token', 'token_type', 'expires_in',
+                      and 'refresh_token' keys
         :return: None
         """
         logging.debug("setter of token called")
@@ -101,8 +102,8 @@ class Authentication:
             response = self._api.api_call(
                 path="auth/token", method="post", form=form_str
             )
-        except:
-            raise
+        except Exception as e:
+            raise e
         response_data = response.json()
         logging.debug(response_data)
         if not response_data["access_token"]:

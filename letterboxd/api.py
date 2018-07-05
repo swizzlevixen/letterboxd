@@ -26,7 +26,8 @@ class API:
         API. If the API key and secret are not passed, the initializer will
         attempt to get them from the environment variables.
 
-        :param api_base: str - the base URL of the API endpoints, including version number
+        :param api_base: str - the base URL of the API endpoints,
+                         including version number
         :param api_key: str - API key provided by Letterboxd
         :param api_secret: str - API shared secret provided by Letterboxd
         """
@@ -288,7 +289,7 @@ class API:
         :return: str
         """
         # Create the salted bytestring
-        if body == None:
+        if body is None:
             body = ""
         signing_bytestring = b"\x00".join(
             [str.encode(method), str.encode(url), str.encode(body)]

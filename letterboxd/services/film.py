@@ -101,12 +101,12 @@ class Film(object):
             response = self._api.api_call(
                 path=f"film/{film_id}/report", params=report_film_request, method="POST"
             )
-        except:
+        except Exception as e:
             if response.status_code is 204:
                 # 204: Success
                 pass
             else:
-                raise
+                raise e
         if response.status_code is 204:
             # 204: Success
             return True
