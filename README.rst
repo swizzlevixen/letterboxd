@@ -53,18 +53,18 @@ Instantiate the ``Letterboxd`` class, and provide it with the ``api_base`` URL f
 
 If you do not provide an ``api_base``, it currently defaults to ``https://api.letterboxd.com/api/v0``.
 
-For testing, you can also add environment variables for an account user name and password, and the location of your [Charles proxy SSL certificate](https://www.charlesproxy.com/documentation/using-charles/ssl-certificates/).
+For testing, you can also add environment variables for an account user name and password, and the location of your `Charles proxy SSL certificate <https://www.charlesproxy.com/documentation/using-charles/ssl-certificates/>`_.
 
-```
-export LBXD_USERNAME="YOUR_USERNAME"
-export LBXD_PASSWORD="YOUR_PASSWORD"
-export CHARLES_CERTIFICATE="/path/to/charles-ssl-proxying-certificate.pem"
-```
+.. code-block:: bash
 
-Set the `CHARLES` environment variable to `True` to turn the proxy settings on. For example, if you want to use it on a case-by-case basis for testing, run the tests like this:
+    export LBXD_USERNAME="YOUR_USERNAME"
+    export LBXD_PASSWORD="YOUR_PASSWORD"
+    export CHARLES_CERTIFICATE="/path/to/charles-ssl-proxying-certificate.pem"
 
-```
-$ CHARLES="True" py.test
-```
+Set the ``CHARLES`` environment variable to ``True`` to turn the proxy settings on. For example, if you want to use it on a case-by-case basis for testing, run the tests like this:
 
-Please see [Read the Docs](https://letterboxd.readthedocs.io) for more details on usage of the library classes.
+.. code-block:: bash
+
+    $ CHARLES="True" py.test
+
+Please see `Read the Docs <https://letterboxd.readthedocs.io>`_ for more details on usage of the library classes.
