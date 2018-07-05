@@ -26,7 +26,7 @@ setuptools.setup(
     install_requires=requirements,
     description="Python 3 wrapper for the Letterboxd API",
     long_description=readme + "\n\n" + changelog,
-    long_description_content_type="text/markdown",
+    long_description_content_type="text/x-rst",
     author="Mark Boszko",
     author_email="mboszko@mac.com",
     copyright="Copyright (c) 2018 Mark Boszko",
