@@ -17,11 +17,13 @@ Python 3 implementation of the `Letterboxd API v0 <http://api-docs.letterboxd.co
 
 Python ≥3.6 is required.
 
-**THIS PROJECT IS CURRENTLY IN ALPHA:**
+.. warning::
 
-- **IT MAY BE BROKEN**
-- **WHAT IS WORKING NOW MAY BREAK IN THE FUTURE**
-- Initial focus is on implementing endpoints related to retrieving watchlists and other lists for users.
+    **THIS PROJECT IS CURRENTLY IN ALPHA:**
+
+    - **IT MAY BE BROKEN**
+    - **WHAT IS WORKING NOW MAY BREAK IN THE FUTURE**
+    - Initial focus is on implementing endpoints related to retrieving watchlists and other lists for users.
 
 Letterboxd API Access
 ---------------------
@@ -45,12 +47,11 @@ Usage
 Instantiate the ``Letterboxd`` class, and provide it with the ``api_base`` URL for the API, your ``api_key``, and your ``api_secret``. You can pass it as a variable to the class initializer, or add it to your environment variables as:
 
 .. code-block:: bash
-   :linenos:
 
     export LBXD_API_KEY="YOUR_KEY_HERE"
     export LBXD_API_SECRET="YOUR_SECRET_HERE"
 
-If you do not provide an `api_base`, it currently defaults to `https://api.letterboxd.com/api/v0`.
+If you do not provide an ``api_base``, it currently defaults to ``https://api.letterboxd.com/api/v0``.
 
 For testing, you can also add environment variables for an account user name and password, and the location of your [Charles proxy SSL certificate](https://www.charlesproxy.com/documentation/using-charles/ssl-certificates/).
 
