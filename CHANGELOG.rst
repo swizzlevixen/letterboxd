@@ -12,9 +12,10 @@ and this project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0
 Added
 .....
 
-- This ``CHANGELOG.markdown``
+- This ``CHANGELOG.rst``
+- Converted ``README.md`` to ``.rst``
 - Documentation written with reStructuredText and Sphinx, being built to `Read the Docs <https://letterboxd.readthedocs.io/>`_
-- Added a number of files/tests provided as defaults in `cookiecutter-pypackage <https://github.com/audreyr/cookiecutter-pypackage>`_
+- Added a number of defaults and tests as provided in `cookiecutter-pypackage <https://github.com/audreyr/cookiecutter-pypackage>`_
 - Added an easy initializer with ``import letterboxd`` and then ``letterboxd.new()``
 - ``User.refresh_token()`` to refresh the user authentication oAuth token
 - Coverage for Letterboxd API endpoints:
