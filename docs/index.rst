@@ -18,7 +18,7 @@ This software is very much in an alpha state, and things that are working now ma
    modules
    contributing
    authors
-   history
+   changelog
 
 
 Indices and tables
