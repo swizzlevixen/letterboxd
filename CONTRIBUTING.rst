@@ -82,7 +82,7 @@ Ready to contribute? Here's how to set up `letterboxd` for local development.
 
     $ black letterboxd
     $ flake8 letterboxd tests
-    $ python setup.py test or py.test
+    $ python setup.py test or pytest
     $ tox
 
    To get flake8 and tox, just pip install them into your virtualenv.
@@ -113,7 +113,7 @@ Tips
 
 To run a subset of tests::
 
-$ py.test tests.test_letterboxd
+$ pytest tests.test_letterboxd
 
 
 Deploying
