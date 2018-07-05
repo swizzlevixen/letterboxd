@@ -4,7 +4,7 @@
 
 import logging
 
-from letterboxd.config import *
+from letterboxd.config import API_BASE_URL
 from letterboxd.letterboxd import Letterboxd
 
 logging.getLogger(__name__).addHandler(logging.NullHandler())

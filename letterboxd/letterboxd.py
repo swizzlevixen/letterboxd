@@ -6,7 +6,7 @@ Version 0 of the Letterboxd API
 import os
 
 from letterboxd.api import API
-from letterboxd.config import *
+from letterboxd.config import API_BASE_URL
 from letterboxd.user import User
 from .services.auth import Authentication
 from .services.film import Film, FilmCollection, Films
