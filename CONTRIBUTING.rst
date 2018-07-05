@@ -107,6 +107,7 @@ Before you submit a pull request, check that it meets these guidelines:
 3. The pull request should work for Python 3.6 and 3.7. (Once `PyPy <http://pypy.org/>`_ adds support for Python 3.6, the pull request should also work for ``pypy3``.) Check
    https://travis-ci.org/bobtiki/letterboxd/pull_requests
    and make sure that the tests pass for all supported Python versions.
+4. Use the pull request template to format the description and changelog information for your pull request.
 
 Tips
 ----
