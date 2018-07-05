@@ -15,6 +15,10 @@ Letterboxd
 
 Python 3 implementation of the `Letterboxd API v0 <http://api-docs.letterboxd.com/>`_.
 
+* GitHub repo: https://github.com/bobtiki/letterboxd
+* Documentation: https://letterboxd.readthedocs.io
+* Free software: MIT license
+
 Python ≥3.6 is required.
 
 .. warning::
@@ -33,10 +37,3 @@ Letterboxd has posted an `example Ruby client <https://github.com/grantyb/letter
     Although the Letterboxd API isn’t public yet (as at 2017-06-12), we have seeded some developers with API keys.
 
 If you need more information about API access, please see `<https://letterboxd.com/api-coming-soon/>`_.
-
-Documentation
--------------
-
-Documentation is written in the ``/docs`` folder, and being generated for `human-readable documentation on Read the Docs <https://letterboxd.readthedocs.io>`_.
-
-At the moment, most of the docs are generated automatically from the code’s docstrings. More human documentation will come as we approach v1.0.
