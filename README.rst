@@ -15,6 +15,7 @@ Letterboxd
 
 Python 3 implementation of the `Letterboxd API v0 <http://api-docs.letterboxd.com/>`_.
 
+* PyPI package: https://pypi.org/project/letterboxd/
 * GitHub repo: https://github.com/bobtiki/letterboxd
 * Documentation: https://letterboxd.readthedocs.io
 * Free software: MIT license
