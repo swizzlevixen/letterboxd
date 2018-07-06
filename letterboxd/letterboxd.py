@@ -153,3 +153,6 @@ class Letterboxd(object):
         search = Search(self.api)
         search_response = search.search(search_request=search_request)
         return search_response
+
+    def lists(self, lists_request):
+        pass
