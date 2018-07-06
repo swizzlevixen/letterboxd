@@ -3,5 +3,5 @@ import logging
 logging.getLogger(__name__)
 
 
-class List(object):
+class Lists(object):
     pass
