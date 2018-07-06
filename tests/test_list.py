@@ -21,11 +21,23 @@ def test_lists():
     # Login as a user
     LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
     lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
-    # FIXME: This is copied from another test.
-    lists = lbxd.lists()
+    lists_request = {
+        "perPage": 20,
+        "sort": "ListName",
+        "film": "2bbs",
+        "clonedFrom": None,
+        "tagCode": None,
+        "tagger": None,
+        "includeTaggerFriends": "All",
+        "member": "u7kj",
+        "memberRelationship": "Owner",
+        "includeFriends": "None",
+        "where": "Published",
+        "filter": None,
+    }
+    lists = lbxd.lists(lists_request)
     assert isinstance(lists, Lists)
-    # film_instance = lbxd.film(film_id="2bbs")  # Raiders of the Lost Ark
-    # assert isinstance(film_instance, Film)
+    # FIXME: This is copied from another test.
     # response_json = film_instance.details()
     # logging.debug(f"response_json: {response_json}")
     # assert isinstance(response_json, dict)
