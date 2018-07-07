@@ -14,6 +14,9 @@ ADDED
 
 - Issue and pull request templates
 - Code of Conduct
+- Coverage for Letterboxd API endpoints:
+    - /lists
+    - /lists [POST]
 
 
 [0.2.6] - 2018-07-04
