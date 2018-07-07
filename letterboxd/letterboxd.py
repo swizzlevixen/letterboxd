@@ -12,6 +12,7 @@ from .services.auth import Authentication
 from .services.film import Film, FilmCollection, Films
 from .services.member import Member
 from .services.search import Search
+from .services.list import Lists
 
 
 # TODO: Write these modules
@@ -155,4 +156,5 @@ class Letterboxd(object):
         return search_response
 
     def lists(self, lists_request):
-        pass
+        lists = Lists()
+        return lists
