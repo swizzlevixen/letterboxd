@@ -157,5 +157,5 @@ class Letterboxd(object):
 
     def lists(self, lists_request):
         lists = Lists(self.api)
-        lists_response = lists.lists(self, lists_request=lists_request)
+        lists_response = lists.lists(lists_request=lists_request)
         return lists_response
