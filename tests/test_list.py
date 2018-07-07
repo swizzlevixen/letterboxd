@@ -31,7 +31,7 @@ def test_lists():
         "includeTaggerFriends": "All",
         "member": "u7kj",
         "memberRelationship": "Owner",
-        "includeFriends": "None",
+        "includeFriends": "All",
         "where": "Published",
         "filter": None,
     }
