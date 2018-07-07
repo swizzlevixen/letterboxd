@@ -27,5 +27,6 @@ class Lists(object):
         :return: dict - ListsResponse
         """
         response = self._api.api_call(path="lists", params=lists_request)
-        lists = response.json()
-        return lists
+        lists_response = response.json()
+        logging.debug(lists_response)
+        return lists_response
