@@ -35,7 +35,7 @@ def test_lists():
         "where": "Published",
         "filter": None,
     }
-    lists = lbxd.lists(lists_request)
+    lists = lbxd.lists(lists_request=lists_request)
     assert isinstance(lists, dict)
     # FIXME: This is copied from another test.
     logging.debug(f"lists: {lists}")
