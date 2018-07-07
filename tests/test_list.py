@@ -10,7 +10,7 @@ from tests.test_letterboxd import load_user_pass
 
 @fixture
 def lists_response_keys():
-    pass
+    return ["next", "items"]
 
 
 def test_lists():
@@ -40,6 +40,6 @@ def test_lists():
     # FIXME: This is copied from another test.
     logging.debug(f"lists: {lists}")
     # assert lists[___something___] == "2bbs", "The ID should be in the response"
-    # assert set(lists_response_keys()).issubset(
-    #     lists.keys()
-    # ), "All keys should be in the response"
+    assert set(lists_response_keys()).issubset(
+        lists.keys()
+    ), "All keys should be in the response"
