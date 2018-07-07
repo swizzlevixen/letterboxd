@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 import logging
+import pprint
 
 from _pytest.fixtures import fixture
 
@@ -14,18 +15,22 @@ def lists_response_keys():
 
 
 def list_summary_keys():
+    """
+    Returns the keys for ListSummary. The commented items may not exist
+    :return:
+    """
     return [
         "id",
         "name",
         "filmCount",
         "published",
         "ranked",
-        "descriptionLbml",
-        "descriptionTruncated",
+        # "descriptionLbml",
+        # "descriptionTruncated",
         "owner",
-        "clonedFrom",
+        # "clonedFrom",
         "previewEntries",
-        "description",
+        # "description",
     ]
 
 
@@ -41,7 +46,7 @@ def test_lists():
     lists_request = {
         "perPage": 20,
         "sort": "ListName",
-        # "film": "2bbs",
+        "film": "2bbs",
         "clonedFrom": None,
         "tagCode": None,
         "tagger": None,
@@ -49,13 +54,21 @@ def test_lists():
         # "member": "u7kj",
         # "memberRelationship": "Owner",
         # "includeFriends": "All",
-        # "where": "Published",
+        "where": "Published",
         "filter": None,
     }
     lists = lbxd.lists(lists_request=lists_request)
     assert isinstance(lists, dict)
-    # FIXME: This is copied from another test.
-    logging.debug(f"lists: {lists}")
+    # logging.debug("-------------------------\nlists:")
+    # logging.debug(pprint.pformat(lists))
     assert set(lists_response_keys()).issubset(
         lists.keys()
-    ), "All keys should be in the response"
+    ), "All keys should be in the lists_response."
+
+    list_summary = lists["items"][0]
+    assert isinstance(list_summary, dict)
+    # logging.debug("-------------------------\nlist_summary:")
+    # logging.debug(pprint.pformat(list_summary))
+    assert set(list_summary_keys()).issubset(
+        list_summary.keys()
+    ), "All keys should be in list_summary."
