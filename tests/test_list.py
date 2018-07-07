@@ -36,12 +36,10 @@ def test_lists():
         "filter": None,
     }
     lists = lbxd.lists(lists_request)
-    assert isinstance(lists, Lists)
+    assert isinstance(lists, dict)
     # FIXME: This is copied from another test.
-    # response_json = film_instance.details()
-    # logging.debug(f"response_json: {response_json}")
-    # assert isinstance(response_json, dict)
-    # assert response_json["id"] == "2bbs", "The ID should be in the response"
-    # assert set(film_keys()).issubset(
-    #     response_json.keys()
+    logging.debug(f"lists: {lists}")
+    # assert lists[___something___] == "2bbs", "The ID should be in the response"
+    # assert set(lists_response_keys()).issubset(
+    #     lists.keys()
     # ), "All keys should be in the response"
