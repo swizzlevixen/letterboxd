@@ -4,4 +4,5 @@ logging.getLogger(__name__)
 
 
 class Lists(object):
-    pass
+    def lists(self, lists_request):
+        pass
