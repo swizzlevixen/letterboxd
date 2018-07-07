@@ -156,5 +156,5 @@ class Letterboxd(object):
         return search_response
 
     def lists(self, lists_request):
-        lists = Lists()
+        lists = Lists(lists_request)
         return lists
