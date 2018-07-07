@@ -159,3 +159,10 @@ class Letterboxd(object):
         lists = Lists(self.api)
         lists_response = lists.lists(lists_request=lists_request)
         return lists_response
+
+    def create_list(self, list_creation_request):
+        lists = Lists(self.api)
+        list_create_response = lists.create_list(
+            list_creation_request=list_creation_request
+        )
+        return list_create_response
