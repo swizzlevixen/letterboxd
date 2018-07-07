@@ -13,6 +13,22 @@ def lists_response_keys():
     return ["next", "items"]
 
 
+def list_summary_keys():
+    return [
+        "id",
+        "name",
+        "filmCount",
+        "published",
+        "ranked",
+        "descriptionLbml",
+        "descriptionTruncated",
+        "owner",
+        "clonedFrom",
+        "previewEntries",
+        "description",
+    ]
+
+
 def test_lists():
     """Tests API call to get a film's details"""
 
@@ -25,22 +41,21 @@ def test_lists():
     lists_request = {
         "perPage": 20,
         "sort": "ListName",
-        "film": "2bbs",
+        # "film": "2bbs",
         "clonedFrom": None,
         "tagCode": None,
         "tagger": None,
-        "includeTaggerFriends": "All",
-        "member": "u7kj",
-        "memberRelationship": "Owner",
-        "includeFriends": "All",
-        "where": "Published",
+        # "includeTaggerFriends": "All",
+        # "member": "u7kj",
+        # "memberRelationship": "Owner",
+        # "includeFriends": "All",
+        # "where": "Published",
         "filter": None,
     }
     lists = lbxd.lists(lists_request=lists_request)
     assert isinstance(lists, dict)
     # FIXME: This is copied from another test.
     logging.debug(f"lists: {lists}")
-    # assert lists[___something___] == "2bbs", "The ID should be in the response"
     assert set(lists_response_keys()).issubset(
         lists.keys()
     ), "All keys should be in the response"
