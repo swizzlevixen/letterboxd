@@ -8,6 +8,13 @@ class Lists(object):
     /lists service for the Letterboxd API
     """
 
+    def __init__(self, api):
+        """
+
+        :param api: API object
+        """
+        self._api = api
+
     def lists(self, lists_request={}):
         """
         /lists
