@@ -43,7 +43,6 @@ def test_lists():
     # Login as a user
     LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
     lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
-    # FIXME: Adjust this so it actually returns some lists
     lists_request = {
         "perPage": 20,
         "sort": "ListName",
