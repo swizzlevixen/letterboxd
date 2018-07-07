@@ -17,7 +17,7 @@ class Lists(object):
 
     def lists(self, lists_request={}):
         """
-        /lists
+        [GET] /lists
 
         A cursored window over a list of lists.
 
@@ -30,3 +30,21 @@ class Lists(object):
         lists_response = response.json()
         logging.debug(lists_response)
         return lists_response
+
+    def create_list(self, list_creation_request={}):
+        """
+        [POST] /lists
+
+        Create a list.
+
+        Calls to this endpoint must include the access token for an authenticated member.
+
+        :param lists_request: dict - ListCreationRequest
+        :return: dict - ListCreateResponse
+        """
+        response = self._api.api_call(
+            path="lists", params=list_creation_request, method="POST"
+        )
+        list_create_response = response.json()
+        logging.debug(list_create_response)
+        return list_create_response
