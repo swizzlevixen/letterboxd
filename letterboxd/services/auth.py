@@ -131,3 +131,21 @@ class Authentication:
         else:
             self.token = response_data
         return response_data
+
+    def forgotten_password_request(self, forgotten_password_request):
+        """
+        /auth/forgotten-password-request
+
+        Request a link via email to reset the password for a member’s account.
+
+        :request: forgotten_password_request - ForgottenPasswordRequest
+        :return: int - HTTP status code
+        """
+        response = self._api.api_call(
+            path="auth/forgotten-password-request",
+            params=forgotten_password_request,
+            method="POST",
+        )
+        status_code = response.status_code
+        logging.debug(f"status_code: {status_code}")
+        return status_code
