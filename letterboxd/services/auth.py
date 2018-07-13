@@ -132,7 +132,8 @@ class Authentication:
             self.token = response_data
         return response_data
 
-    def forgotten_password_request(self, forgotten_password_request):
+    @classmethod
+    def forgotten_password_request(cls, api, forgotten_password_request):
         """
         /auth/forgotten-password-request
 
@@ -141,7 +142,7 @@ class Authentication:
         :request: forgotten_password_request - ForgottenPasswordRequest
         :return: int - HTTP status code
         """
-        response = self._api.api_call(
+        response = api.api_call(
             path="auth/forgotten-password-request",
             params=forgotten_password_request,
             method="POST",
