@@ -132,8 +132,8 @@ class Authentication:
             self.token = response_data
         return response_data
 
-    @classmethod
-    def forgotten_password_request(cls, api, forgotten_password_request):
+    @staticmethod
+    def forgotten_password_request(api, forgotten_password_request):
         """
         /auth/forgotten-password-request
 
@@ -151,8 +151,8 @@ class Authentication:
         logging.debug(f"status_code: {status_code}")
         return status_code
 
-    @classmethod
-    def username_check(cls, api, username):
+    @staticmethod
+    def username_check(api, username):
         response = api.api_call(
             path="auth/username-check", params={"username": username}
         )
