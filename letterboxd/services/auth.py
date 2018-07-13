@@ -152,5 +152,5 @@ class Authentication:
         return status_code
 
     @classmethod
-    def username_check(cls):
+    def username_check(cls, api):
         pass
