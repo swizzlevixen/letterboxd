@@ -150,3 +150,7 @@ class Authentication:
         status_code = response.status_code
         logging.debug(f"status_code: {status_code}")
         return status_code
+
+    @classmethod
+    def username_check(cls):
+        pass
