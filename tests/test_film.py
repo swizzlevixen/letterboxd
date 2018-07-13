@@ -8,6 +8,9 @@ from letterboxd.letterboxd import Letterboxd
 from letterboxd.services.film import Film
 from tests.test_letterboxd import load_user_pass
 
+logging.getLogger(__name__)
+logging.basicConfig(level=logging.DEBUG)
+
 
 def test_film_details():
     """Tests API call to get a film's details"""

@@ -5,6 +5,9 @@ from letterboxd.letterboxd import Letterboxd
 from letterboxd.user import User
 from tests.test_letterboxd import load_user_pass
 
+logging.getLogger(__name__)
+logging.basicConfig(level=logging.DEBUG)
+
 
 def test_user_auth():
     LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()

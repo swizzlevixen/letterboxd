@@ -6,8 +6,10 @@ import pprint
 from _pytest.fixtures import fixture
 
 import letterboxd
-from letterboxd.services.list import Lists
 from tests.test_letterboxd import load_user_pass
+
+logging.getLogger(__name__)
+logging.basicConfig(level=logging.DEBUG)
 
 
 @fixture

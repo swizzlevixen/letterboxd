@@ -6,6 +6,9 @@ from letterboxd.services.member import Member
 from tests.test_film import film_summary_keys, films_response_keys
 from tests.test_letterboxd import load_user_pass
 
+logging.getLogger(__name__)
+logging.basicConfig(level=logging.DEBUG)
+
 
 def test_member_watchlist():
     # set up
