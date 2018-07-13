@@ -1,9 +1,13 @@
 #! /usr/bin/env python3
 
+import logging
 from random import randint
 
 import letterboxd
 from letterboxd.services.auth import Authentication
+
+logging.getLogger(__name__)
+logging.basicConfig(level=logging.DEBUG)
 
 
 def test_forgotten_password_request():
@@ -18,7 +22,9 @@ def test_username_check():
     lbxd = letterboxd.new()
     # Hopefully this random username is available; not actually guaranteed
     sort_of_random_username = f"taco{randint(100, 999)}cat"
+    logging.debug(f"sort_of_random_username: {sort_of_random_username}")
     username_check_response = Authentication.username_check(
         api=lbxd.api, username=sort_of_random_username
     )
+    logging.debug(f"username_check_response: {username_check_response}")
     assert username_check_response["result"] is "Available"
