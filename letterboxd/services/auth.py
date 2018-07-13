@@ -153,4 +153,9 @@ class Authentication:
 
     @classmethod
     def username_check(cls, api, username):
-        pass
+        response = api.api_call(
+            path="auth/username-check", params={"username": username}
+        )
+        username_check_response = response.json()
+        logging.debug(f"username_check_response: {username_check_response}")
+        return username_check_response
