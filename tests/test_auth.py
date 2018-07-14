@@ -27,4 +27,4 @@ def test_username_check():
         api=lbxd.api, username=sort_of_random_username
     )
     logging.debug(f"username_check_response: {username_check_response}")
-    assert username_check_response["result"] is "Available"
+    assert username_check_response["result"] == "Available"
