@@ -67,6 +67,21 @@ class Film(object):
         film_relationship = response.json()
         return film_relationship
 
+    def patch_me(self, film_id, film_relationship_update_request):
+        """
+        /film/{id}/me [PATCH]
+
+        Update the authenticated member’s relationship with a film by ID.
+
+        Calls to this endpoint must include the access token for an authenticated member
+
+
+        :param film_id: str - LID of the film
+        :param film_relationship_update_request: dict - FilmRelationshipUpdateRequest
+        :return:
+        """
+        pass
+
     def members(self, film_id=None, member_film_relationships_request={}):
         """
         /film/{id}/members
