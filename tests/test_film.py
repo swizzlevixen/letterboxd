@@ -47,7 +47,41 @@ def test_film_me():
     logging.debug(f"response_json: {response_json}")
     assert isinstance(response_json, dict)
     # TODO: test returned keys
-
+    
+def test_film_patch_me():
+    # Instantiate and log in
+    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
+    lbxd = Letterboxd()
+    lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
+    # Test the film with a movie this user hasn't seen, and isn't likely to ever see.
+    film_instance = lbxd.film(film_id="1HIc")  # Shark Attack 3: Megalodon
+    # Add it to my watchlist
+    film_relationship_update_request = {
+        "inWatchlist": True,
+    }
+    film_relationship_update_response = film_instance.patch_me(film_relationship_update_request=film_relationship_update_request)
+    logging.debug(f"film_relationship_update_response: {film_relationship_update_response}")
+    assert isinstance(film_relationship_update_response, dict)
+    # Mark it watched, liked, and rate it
+    film_relationship_update_request = {
+        "watched": True,
+        "liked": True,
+        "rating": 2.5,
+    }
+    film_relationship_update_response = film_instance.patch_me(film_relationship_update_request=film_relationship_update_request)
+    logging.debug(f"film_relationship_update_response: {film_relationship_update_response}")
+    assert isinstance(film_relationship_update_response, dict)
+    # Remove activity and reset rating
+    film_relationship_update_request = {
+        "watched": False,
+        "liked": False,
+        "inWatchlist": False,
+        "rating": None
+    }
+    film_relationship_update_response = film_instance.patch_me(film_relationship_update_request=film_relationship_update_request)
+    logging.debug(f"film_relationship_update_response: {film_relationship_update_response}")
+    assert isinstance(film_relationship_update_response, dict)
+    # TODO: test returned keys
 
 def test_film_members():
     LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
