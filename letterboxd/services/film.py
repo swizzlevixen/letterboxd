@@ -75,12 +75,19 @@ class Film(object):
 
         Calls to this endpoint must include the access token for an authenticated member
 
-
         :param film_id: str - LID of the film
         :param film_relationship_update_request: dict - FilmRelationshipUpdateRequest
-        :return:
+        :return: dict - FilmRelationshipUpdateResponse
         """
-        pass
+        if film_id is None:
+            film_id = self._film_id
+        response = self._api.api_call(
+            path=f"film/{film_id}/me",
+            method="PATCH",
+            params=film_relationship_update_request,
+        )
+        film_relationship_update_response = response.json()
+        return film_relationship_update_response
 
     def members(self, film_id=None, member_film_relationships_request={}):
         """
