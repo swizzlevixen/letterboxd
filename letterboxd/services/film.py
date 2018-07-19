@@ -67,7 +67,7 @@ class Film(object):
         film_relationship = response.json()
         return film_relationship
 
-    def patch_me(self, film_relationship_update_request, film_id=None):
+    def me_update(self, film_relationship_update_request, film_id=None):
         """
         /film/{id}/me [PATCH]
 

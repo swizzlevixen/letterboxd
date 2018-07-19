@@ -58,7 +58,7 @@ def test_film_patch_me():
     film_instance = lbxd.film(film_id="1HIc")  # Shark Attack 3: Megalodon
     # Add it to my watchlist
     film_relationship_update_request = {"inWatchlist": True}
-    film_relationship_update_response = film_instance.patch_me(
+    film_relationship_update_response = film_instance.me_update(
         film_relationship_update_request=film_relationship_update_request
     )
     logging.debug(
@@ -68,7 +68,7 @@ def test_film_patch_me():
 
     # Mark it watched, liked, and rate it
     film_relationship_update_request = {"watched": True, "liked": True, "rating": 2.5}
-    film_relationship_update_response = film_instance.patch_me(
+    film_relationship_update_response = film_instance.me_update(
         film_relationship_update_request=film_relationship_update_request
     )
     logging.debug(
@@ -83,7 +83,7 @@ def test_film_patch_me():
         "inWatchlist": False,
         "rating": "null",  # I had this as Null, but my params cleaner was stripping it out.
     }
-    film_relationship_update_response = film_instance.patch_me(
+    film_relationship_update_response = film_instance.me_update(
         film_relationship_update_request=film_relationship_update_request
     )
     logging.debug(
