@@ -1,10 +1,9 @@
 #! /usr/bin/env python3
 import logging
 
-from _pytest.fixtures import fixture
-
 from letterboxd.letterboxd import Letterboxd
 from letterboxd.user import User
+from tests.letterboxd_definitions import *
 from tests.test_letterboxd import load_user_pass
 
 logging.getLogger(__name__)
@@ -42,14 +41,6 @@ def test_user_me():
     me_dict = test_user.me
     logging.debug(f"me_dict: {me_dict}")
     assert isinstance(me_dict, dict)
-
-
-@fixture
-def member_settings_update_response_keys():
-    """
-    MemberSettingsUpdateResponse keys definition
-    """
-    return ["data", "messages"]
 
 
 def test_user_me_update():

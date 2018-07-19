@@ -3,7 +3,7 @@ import logging
 
 from letterboxd.letterboxd import Letterboxd
 from letterboxd.services.member import Member
-from tests.test_film import film_summary_keys, films_response_keys
+from tests.letterboxd_definitions import film_summary_keys, films_response_keys
 from tests.test_letterboxd import load_user_pass
 
 logging.getLogger(__name__)
