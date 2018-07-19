@@ -35,7 +35,6 @@ class User(object):
         """
         return self._auth.token
 
-    @property
     def me(self):
         """
         /me
@@ -52,14 +51,21 @@ class User(object):
         self.me = data
         return self._me
 
-    @me.setter
-    def me(self, value):
+    def me_update(self, member_settings_update_request):
         """
+        /me
 
-        :param value: dict
-        :return: None
+        Update the profile settings for the authenticated member.
+
+        Calls to this endpoint must include the access token for an authenticated member
+
+        :param member_settings_update_request: dict - MemberSettingsUpdateRequest
+        :return: dict - MemberSettingsUpdateResponse
         """
-        self._me = value
-        # TODO: Write /me PATCH call here
+        response = self._api.api_call(
+            path="me", method="PATCH", params=member_settings_update_request
+        )
+        member_settings_update_response = response.json()
+        return member_settings_update_response
 
     # TODO: Write method for /me/validation-request
