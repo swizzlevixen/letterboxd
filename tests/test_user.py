@@ -1,6 +1,8 @@
 #! /usr/bin/env python3
 import logging
 
+from _pytest.fixtures import fixture
+
 from letterboxd.letterboxd import Letterboxd
 from letterboxd.user import User
 from tests.test_letterboxd import load_user_pass
@@ -40,6 +42,41 @@ def test_user_me():
     me_dict = test_user.me
     logging.debug(f"me_dict: {me_dict}")
     assert isinstance(me_dict, dict)
+
+
+@fixture
+def member_settings_update_response_keys():
+    """
+    MemberSettingsUpdateResponse keys definition
+    """
+    return ["data", "messages"]
+
+
+def test_user_me_update():
+    """
+
+    :return:
+    """
+    # login
+    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
+    lbxd = Letterboxd()
+    test_user = lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
+    # test
+    member_settings_update_request = {
+        "emailWhenFollowed": True,
+        "emailComments": True,
+        "emailNews": True,
+        "emailRushes": True,
+    }
+    member_settings_update_response = test_user.me_update(
+        member_settings_update_request=member_settings_update_request
+    )
+    logging.debug(f"member_settings_update_response: {member_settings_update_response}")
+    assert isinstance(member_settings_update_response, dict)
+    # TODO: Test against response keys
+    assert set(member_settings_update_response_keys()).issubset(
+        member_settings_update_response.keys()
+    ), "All keys should be in MemberSettingsUpdateResponse"
 
 
 # TODO: test_refresh_token():
