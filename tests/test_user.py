@@ -73,7 +73,6 @@ def test_user_me_update():
     )
     logging.debug(f"member_settings_update_response: {member_settings_update_response}")
     assert isinstance(member_settings_update_response, dict)
-    # TODO: Test against response keys
     assert set(member_settings_update_response_keys()).issubset(
         member_settings_update_response.keys()
     ), "All keys should be in MemberSettingsUpdateResponse"
