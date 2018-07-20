@@ -15,7 +15,7 @@ class Lists(object):
         """
         self._api = api
 
-    def lists(self, lists_request={}):
+    def lists(self, lists_request=None):
         """
         [GET] /lists
 
@@ -31,7 +31,7 @@ class Lists(object):
         logging.debug(lists_response)
         return lists_response
 
-    def create_list(self, list_creation_request={}):
+    def create_list(self, list_creation_request=None):
         """
         [POST] /lists
 
