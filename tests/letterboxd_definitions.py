@@ -187,3 +187,13 @@ def member_settings_update_response_keys():
     MemberSettingsUpdateResponse definition
     """
     return ["data", "messages"]
+
+
+@fixture
+def search_response_keys():
+    return ["next", "items"]
+
+
+@fixture
+def abstract_search_item_keys():
+    return ["type", "score"]
