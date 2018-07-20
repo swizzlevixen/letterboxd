@@ -37,7 +37,8 @@ class Lists(object):
 
         Create a list.
 
-        Calls to this endpoint must include the access token for an authenticated member.
+        Calls to this endpoint must include the access token
+        for an authenticated member.
 
         :param lists_request: dict - ListCreationRequest
         :return: dict - ListCreateResponse
