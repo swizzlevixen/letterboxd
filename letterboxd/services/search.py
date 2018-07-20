@@ -16,7 +16,7 @@ class Search(object):
         """
         self._api = api
 
-    def search(self, search_request={}):
+    def search(self, search_request=None):
         """
         /search
 
