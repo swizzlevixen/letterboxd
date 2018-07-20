@@ -156,7 +156,7 @@ class Films:
         """
         self._api = api
 
-    def films(self, films_request={}):
+    def films(self, films_request=None):
         """
         /films
 
@@ -216,7 +216,7 @@ class FilmCollection:
         """
         self._api = api
 
-    def film_collection(self, film_collection_id=None, film_collection_request={}):
+    def film_collection(self, film_collection_id=None, film_collection_request=None):
         """
         /film-collection/{id}
 
