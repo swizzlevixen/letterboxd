@@ -47,8 +47,8 @@ class Film(object):
         """
         if film_id is None:
             film_id = self._film_id
-        availability = self._api.api_call(path=f"film/{film_id}/availability")
-        film_availability_response = availability.json()
+        response = self._api.api_call(path=f"film/{film_id}/availability")
+        film_availability_response = response.json()
         return film_availability_response
 
     def me(self, film_id=None):
