@@ -121,3 +121,4 @@ def test_create_list():
         list_create_response.keys()
     ), "All keys should be in the lists_response."
     # TODO: Clean up: delete the list after creation
+    # How do I do this?
