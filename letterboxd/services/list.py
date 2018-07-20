@@ -40,7 +40,7 @@ class Lists(object):
         Calls to this endpoint must include the access token
         for an authenticated member.
 
-        :param lists_request: dict - ListCreationRequest
+        :param list_creation_request: dict - ListCreationRequest
         :return: dict - ListCreateResponse
         """
         response = self._api.api_call(
