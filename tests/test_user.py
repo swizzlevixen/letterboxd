@@ -36,7 +36,7 @@ def test_user_auth_bad():
 def test_user_me():
     LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
     lbxd = Letterboxd()
-    # make login
+    # login
     test_user = lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
     me_dict = test_user.me
     logging.debug(f"me_dict: {me_dict}")
