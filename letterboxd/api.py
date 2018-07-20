@@ -163,7 +163,7 @@ class API:
 
         # Return the response
         logging.debug(f"api_call() response.status_code: {response.status_code}")
-        if response.status_code is requests.codes.ok:
+        if response.ok:
             return response
         else:
             response.raise_for_status()
