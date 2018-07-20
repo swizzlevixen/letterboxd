@@ -31,7 +31,7 @@ class Member(object):
         """
         pass
 
-    def watchlist(self, member_id=None, watchlist_request={}):
+    def watchlist(self, member_id=None, watchlist_request=None):
         """
         /member/{id}/watchlist
 
