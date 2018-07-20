@@ -22,7 +22,9 @@ def test_member_watchlist():
     member = lbxd.member(member_id=member_id)
     logging.debug(f"member: {member}")
     assert isinstance(member, Member)
-    films_response = member.watchlist()
+    # watchlist_request
+    watchlist_request = {"perPage": 20}
+    films_response = member.watchlist(watchlist_request=watchlist_request)
     logging.debug(f"films_response (watchlist): {films_response}")
     assert isinstance(films_response, dict)
     assert set(films_response_keys()).issubset(
