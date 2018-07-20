@@ -3,6 +3,39 @@ import logging
 logging.getLogger(__name__)
 
 
+class List(object):
+    """
+    /list/* services for the Letterboxd API
+    """
+
+    def __init__(self, api, list_id=None):
+        """
+        Initializes a Film object with a specific film.
+
+        :param api: API object
+        :param list_id: str - LID for the film on Letterboxd
+        """
+        self._api = api
+        self._list_id = list_id
+
+    def details(self, list_id=None):
+        """
+        /list/{id}
+
+        Get details of a list by LID. If no list ID passed, uses the
+        initialized list.
+
+        :param list_id: str - LID of the film
+        :return: dict - Film
+        """
+        if list_id is None:
+            list_id = self._list_id
+        response = self._api.api_call(path=f"list/{list_id}")
+        return response.json()
+
+    # TODO: Implement the rest of /list/* endpoints
+
+
 class Lists(object):
     """
     /lists service for the Letterboxd API
@@ -49,6 +82,3 @@ class Lists(object):
         list_create_response = response.json()
         logging.debug(list_create_response)
         return list_create_response
-
-
-# TODO: Implement /list/* endpoints
