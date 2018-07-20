@@ -35,6 +35,7 @@ class User(object):
         """
         return self._auth.token
 
+    @property
     def me(self):
         """
         /me
@@ -47,8 +48,8 @@ class User(object):
         :return: dict - MemberAccount
         """
         response = self._api.api_call(path="me")
-        data = response.json()
-        self.me = data
+        member_account = response.json()
+        self._me = member_account
         return self._me
 
     def me_update(self, member_settings_update_request):
