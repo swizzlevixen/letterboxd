@@ -89,7 +89,7 @@ class Film(object):
         film_relationship_update_response = response.json()
         return film_relationship_update_response
 
-    def members(self, film_id=None, member_film_relationships_request={}):
+    def members(self, film_id=None, member_film_relationships_request=None):
         """
         /film/{id}/members
 
@@ -108,7 +108,7 @@ class Film(object):
         member_film_relationships_response = response.json()
         return member_film_relationships_response
 
-    def report(self, film_id=None, report_film_request={}):
+    def report(self, film_id=None, report_film_request=None):
         """
         /film/{id}/report
 
