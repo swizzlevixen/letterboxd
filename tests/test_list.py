@@ -3,38 +3,12 @@ import datetime
 import logging
 import pprint
 
-from _pytest.fixtures import fixture
-
 import letterboxd
+from tests.letterboxd_definitions import *
 from tests.test_letterboxd import load_user_pass
 
 logging.getLogger(__name__)
 logging.basicConfig(level=logging.DEBUG)
-
-
-@fixture
-def lists_response_keys():
-    return ["next", "items"]
-
-
-def list_summary_keys():
-    """
-    Returns the keys for ListSummary. The commented items may not exist
-    :return:
-    """
-    return [
-        "id",
-        "name",
-        "filmCount",
-        "published",
-        "ranked",
-        # "descriptionLbml",
-        # "descriptionTruncated",
-        "owner",
-        # "clonedFrom",
-        "previewEntries",
-        # "description",
-    ]
 
 
 def test_lists():
@@ -74,11 +48,6 @@ def test_lists():
     assert set(list_summary_keys()).issubset(
         list_summary.keys()
     ), "All keys should be in list_summary."
-
-
-def list_create_response_keys():
-    """Returns list of keys in ListCreateResponse"""
-    return ["data", "messages"]
 
 
 def test_create_list():

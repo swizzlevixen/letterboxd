@@ -197,3 +197,24 @@ def search_response_keys():
 @fixture
 def abstract_search_item_keys():
     return ["type", "score"]
+
+
+@fixture
+def lists_response_keys():
+    return ["next", "items"]
+
+
+@fixture
+def list_summary_keys():
+    """
+    ListSummary definition
+
+    Optional keys: "descriptionLbml", "descriptionTruncated", "clonedFrom",
+        "description",
+    """
+    return ["id", "name", "filmCount", "published", "ranked", "owner", "previewEntries"]
+
+
+def list_create_response_keys():
+    """Returns list of keys in ListCreateResponse"""
+    return ["data", "messages"]
