@@ -11,6 +11,11 @@ logging.getLogger(__name__)
 logging.basicConfig(level=logging.DEBUG)
 
 
+def test_list_details():
+    lbxd = letterboxd.new()
+    list_id = ""
+
+
 def test_lists():
     """Tests API call to get a film's details"""
 
