@@ -53,6 +53,32 @@ def test_list_comments():
     ), "All keys should be in ListComment"
 
 
+def test_list_create_comment():
+    lbxd = letterboxd.new()
+    # Login
+    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
+    lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
+    comment_creation_request = {
+        "comment": "Here's a comment with some <strong>strong</strong> language, <em>emphasized</em>, <b>bold</b>, <i>italics</i>, a <a href=\"http://opticalpodcast.com\">link</a>, and here's a quote:\n\n<blockquote>We have nothing to fear but fear itself. And werewolves.\n\n—FDR, Werewolf Hunter</blockquote>"
+    }
+    list_id = "1UxUo"
+
+    list = lbxd.list(list_id=list_id)
+    list_comment = list.create_comment(
+        comment_creation_request=comment_creation_request
+    )
+    logging.debug(f"list_comment: {list_comment}")
+    assert isinstance(list_comment, dict)
+
+    logging.debug(f"list_comment.keys(): {list_comment.keys()}")
+    assert set(list_comment_keys()).issubset(
+        list_comment.keys()
+    ), "All keys should be in ListComment"
+
+
+# TODO: Test all /list/* endpoints
+
+
 # -------------------------
 # Lists
 # -------------------------

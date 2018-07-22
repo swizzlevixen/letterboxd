@@ -50,6 +50,28 @@ class List(object):
         list_comments_response = response.json()
         return list_comments_response
 
+    def create_comment(self, list_id=None, comment_creation_request=None):
+        """
+        /list/{id}/comments
+
+        Create a comment on a list.
+
+        Calls to this endpoint must include the access token for an authenticated member.
+
+        :param list_id: str - LID for the list
+        :param comment_creation_request: dict - CommentCreationRequest
+        :return: dict - ListComment
+        """
+        if list_id is None:
+            list_id = self._list_id
+        response = self._api.api_call(
+            path=f"list/{list_id}/comments",
+            method="POST",
+            params=comment_creation_request,
+        )
+        list_comment = response.json()
+        return list_comment
+
     # TODO: Implement the rest of /list/* endpoints
 
 
