@@ -105,7 +105,8 @@ class API:
             prepared_request.headers["Authorization"] = f"Signature {signature}"
         elif method.lower() in ["post", "put", "patch", "delete"]:
             logging.debug(
-                'API.api_call() elif method.lower() in ["post", "put", "patch", "delete"]:'
+                "API.api_call() elif method.lower() in "
+                '["post", "put", "patch", "delete"]:'
             )
             params = self.__remove_empty_from_dict(params)
             # JSON-encode the body
