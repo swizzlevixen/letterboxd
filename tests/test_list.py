@@ -12,8 +12,17 @@ logging.basicConfig(level=logging.DEBUG)
 
 
 def test_list_details():
+    """
+    /list/{id}
+    """
     lbxd = letterboxd.new()
-    list_id = ""
+    list_id = "3kP6"  # AFI 100 Years... 100 Movies (2007)
+    list = lbxd.list(list_id=list_id)
+    list_details = list.details()
+    assert isinstance(list_details, dict)
+    logging.debug(f"list_details: {list_details}")
+    logging.debug(f"list_details.keys(): {list_details.keys()}")
+    assert set(list_keys()).issubset(list_details.keys()), "All keys should be in Keys."
 
 
 def test_lists():
