@@ -53,6 +53,27 @@ class List(object):
         )
         return response.json()
 
+    def delete(self, list_id=None):
+        """
+        /list/{id}
+
+        Delete a list by ID. Does NOT default to the initialized
+        List instance LID, so as to not accidentally delete the instance list.
+
+        Calls to this endpoint must include the access token for an
+        authenticated member, and the authenticated member must be
+        the owner of the specified list.
+
+        :param list_id: str - LID of the list
+        :return: bool - Success
+        """
+        response = self._api.api_call(path=f"list/{list_id}", method="DELETE")
+        if response.status_code is 204:
+            # 204: Success
+            return True
+        else:
+            return False
+
     def comments(self, list_id=None, comments_request=None):
         """
         /list/{id}/comments

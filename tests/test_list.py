@@ -261,7 +261,7 @@ def test_lists():
     ), "All keys should be in list_summary."
 
 
-def test_create_list():
+def test_create_and_delete_list():
     """
     /lists [POST]
     """
@@ -300,5 +300,10 @@ def test_create_list():
     assert set(list_create_response_keys()).issubset(
         list_create_response.keys()
     ), "All keys should be in the lists_response."
-    # I can't clean up and delete the list after creation,
-    # because there is no API for deleting a list.
+
+    # Clean up and delete this list
+    created_list_id = list_create_response["data"]["id"]
+    logging.debug(f"created_list_id: {created_list_id}")
+    list = lbxd.list(created_list_id)
+    success = list.delete(created_list_id)
+    assert success == True
