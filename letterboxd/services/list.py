@@ -129,6 +129,28 @@ class List(object):
         list_relationship_update_response = response.json()
         return list_relationship_update_response
 
+    def report(self, list_id=None, report_list_request=None):
+        """
+        /list/{id}/report
+
+        Report a list by ID. Does NOT default to the initialized
+        List instance LID, so as to not submit erroneous reports.
+
+        Calls to this endpoint must include the access token for an authenticated member.
+
+        :param list_id: str - LID of the list
+        :param report_list_request: dict - ReportListRequest
+        :return: bool - Success
+        """
+        response = self._api.api_call(
+            path=f"list/{list_id}/report", params=report_list_request, method="POST"
+        )
+        if response.status_code is 204:
+            # 204: Success
+            return True
+        else:
+            return False
+
     # TODO: Implement the rest of /list/* endpoints
 
 

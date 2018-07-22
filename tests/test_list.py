@@ -103,7 +103,7 @@ def test_list_me():
     LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
     lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
 
-    list_id = "1UxUo"
+    list_id = "1UxUo"  # test_optical: "These are Twenty Films to Test With"
     list = lbxd.list(list_id=list_id)
     list_relationship = list.me()
     logging.debug(f"list_relationship: {list_relationship}")
@@ -138,6 +138,19 @@ def test_me_update():
     assert set(list_relationship_update_response_keys()).issubset(
         list_relationship_update_response.keys()
     ), "All keys should be in ListRelationshipUpdateResponse"
+
+
+def test_list_report():
+    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
+    lbxd = letterboxd.new()
+    lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
+    list_id = "1UxUo"  # test_optical: "These are Twenty Films to Test With"
+    report_list_request = {"reason": "Other", "message": "TEST — IGNORE"}
+
+    list = lbxd.list(list_id=list_id)
+    success = list.report(list_id=list_id, report_list_request=report_list_request)
+    logging.debug(f"success: {success}")
+    assert success is True
 
 
 # TODO: Test all /list/* endpoints
