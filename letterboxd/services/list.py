@@ -56,7 +56,8 @@ class List(object):
 
         Create a comment on a list.
 
-        Calls to this endpoint must include the access token for an authenticated member.
+        Calls to this endpoint must include the access token for an
+        authenticated member.
 
         :param list_id: str - LID for the list
         :param comment_creation_request: dict - CommentCreationRequest
@@ -96,7 +97,8 @@ class List(object):
 
         Get details of the authenticated member’s relationship with a list by ID.
 
-        Calls to this endpoint must include the access token for an authenticated member.
+        Calls to this endpoint must include the access token for an
+        authenticated member.
 
         :param list_id: str - LID of the list
         :return: dict - ListRelationship
@@ -113,7 +115,8 @@ class List(object):
 
         Update the authenticated member’s relationship with a list by ID.
 
-        Calls to this endpoint must include the access token for an authenticated member.
+        Calls to this endpoint must include the access token for an
+        authenticated member.
 
         :param list_id: str - LID for the list
         :param list_relationship_update_request: dict - ListRelationshipUpdateRequest
@@ -136,7 +139,8 @@ class List(object):
         Report a list by ID. Does NOT default to the initialized
         List instance LID, so as to not submit erroneous reports.
 
-        Calls to this endpoint must include the access token for an authenticated member.
+        Calls to this endpoint must include the access token for an
+        authenticated member.
 
         :param list_id: str - LID of the list
         :param report_list_request: dict - ReportListRequest
