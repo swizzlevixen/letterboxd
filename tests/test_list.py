@@ -84,7 +84,7 @@ def test_create_list():
     LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
     lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
     list_creation_request = {
-        "published": False,
+        "published": True,
         "name": f"Top Two Movies in this Test List {datetime.datetime.now().isoformat()}",
         "ranked": True,
         "description": "This is the description that I'm testing with.",
