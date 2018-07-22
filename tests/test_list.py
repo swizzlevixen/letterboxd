@@ -40,9 +40,17 @@ def test_list_comments():
     list_comments_response = list.comments(comments_request=comments_request)
     assert isinstance(list_comments_response, dict)
     logging.debug(f"list_comments_response: {list_comments_response}")
-    assert set(list_comments_response_jeys()).issubset(
+    assert set(list_comments_response_keys()).issubset(
         list_comments_response.keys()
     ), "All keys should be in ListCommentsResponse"
+
+    list_comment = list_comments_response["items"][0]
+    assert list_comment["list"]["id"] == list_id
+    logging.debug(f"list_comment: {list_comment}")
+    logging.debug(f"list_comment.keys(): {list_comment.keys()}")
+    assert set(list_comment_keys()).issubset(
+        list_comment.keys()
+    ), "All keys should be in ListComment"
 
 
 # -------------------------

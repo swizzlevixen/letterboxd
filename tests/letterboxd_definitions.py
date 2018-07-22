@@ -231,6 +231,38 @@ def list_keys():
     ]
 
 
+@fixture
+def list_comments_response_keys():
+    """
+    ListCommentsResponse definition
+
+    Optional key: "next"
+    """
+    return ["items"]
+
+
+@fixture
+def list_comment_keys():
+    """
+    ListComment definition
+
+    Optional keys: 
+    """
+    return [
+        "id",
+        "member",
+        "whenCreated",
+        "whenUpdated",
+        "commentLbml",
+        "removedByAdmin",
+        "deleted",
+        "blocked",
+        "blockedByOwner",
+        "list",
+        "comment",
+    ]
+
+
 # -------------------------
 # Lists
 # -------------------------

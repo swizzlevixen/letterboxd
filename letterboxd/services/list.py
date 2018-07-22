@@ -33,6 +33,23 @@ class List(object):
         response = self._api.api_call(path=f"list/{list_id}")
         return response.json()
 
+    def comments(self, list_id=None, comments_request=None):
+        """
+        /list/{id}/comments
+
+        A cursored window over the comments for a list.
+        Use the ‘next’ cursor to move through the comments.
+
+        :param list_id: str - LID of the list
+        :param comments_request: dict - CommentsRequest
+        :return:
+        """
+        if list_id is None:
+            list_id = self._list_id
+        response = self._api.api_call(path=f"list/{list_id}/comments")
+        list_comments_response = response.json()
+        return list_comments_response
+
     # TODO: Implement the rest of /list/* endpoints
 
 
