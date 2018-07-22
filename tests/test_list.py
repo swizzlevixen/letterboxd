@@ -29,6 +29,22 @@ def test_list_details():
     assert set(list_keys()).issubset(list_details.keys()), "All keys should be in Keys."
 
 
+def test_list_comments():
+    """
+    /list/{id}/comments
+    """
+    lbxd = letterboxd.new()
+    list_id = "lITC"  # Films Directed by Women
+    comments_request = {"perPage": 25, "sort": "Updates", "includeDeletions": True}
+    list = lbxd.list(list_id=list_id)
+    list_comments_response = list.comments(comments_request=comments_request)
+    assert isinstance(list_comments_response, dict)
+    logging.debug(f"list_comments_response: {list_comments_response}")
+    assert set(list_comments_response_jeys()).issubset(
+        list_comments_response.keys()
+    ), "All keys should be in ListCommentsResponse"
+
+
 # -------------------------
 # Lists
 # -------------------------
