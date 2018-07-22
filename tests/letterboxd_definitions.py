@@ -142,8 +142,12 @@ def film_summary_keys():
 
 @fixture
 def films_response_keys():
-    """FilmsResponse definition"""
-    return ["next", "items"]
+    """
+    FilmsResponse definition
+
+    Optional key: "next"
+    """
+    return ["items"]
 
 
 @fixture

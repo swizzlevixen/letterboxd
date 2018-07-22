@@ -31,9 +31,10 @@ def test_member_watchlist():
         films_response.keys()
     ), "All keys should be in the FilmsResponse"
     # Test the first movie in the watchlist
-    film_summary = films_response["items"][0]
-    logging.debug(f"film_summary: {film_summary}")
-    logging.debug(f"film_summary.keys(): {film_summary.keys()}")
-    assert set(film_summary_keys()).issubset(
-        film_summary.keys()
-    ), "All keys should be in the FilmSummary"
+    if len(films_response["items"]) > 0:
+        film_summary = films_response["items"][0]
+        logging.debug(f"film_summary: {film_summary}")
+        logging.debug(f"film_summary.keys(): {film_summary.keys()}")
+        assert set(film_summary_keys()).issubset(
+            film_summary.keys()
+        ), "All keys should be in the FilmSummary"

@@ -281,7 +281,7 @@ def test_film_collection():
         "decade": 1980,
         "year": 1989,
         "service": "amazon",
-        "where": ["Watched", "Released"],
+        "where": ["Released"],
         "member": "3P",
         "memberRelationship": "Watched",
         "includeFriends": "Only",
