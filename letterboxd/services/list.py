@@ -33,6 +33,26 @@ class List(object):
         response = self._api.api_call(path=f"list/{list_id}")
         return response.json()
 
+    def update(self, list_id=None, list_update_request=None):
+        """
+        /list/{id} [PATCH]
+
+        Update a list by ID.
+
+        Calls to this endpoint must include the access token for an
+        authenticated member.
+
+        :param list_id: str - LID of the list
+        :param list_update_request: dict - ListUpdateRequest
+        :return: dict - ListUpdateResponse
+        """
+        if list_id is None:
+            list_id = self._list_id
+        response = self._api.api_call(
+            path=f"list/{list_id}", method="PATCH", params=list_update_request
+        )
+        return response.json()
+
     def comments(self, list_id=None, comments_request=None):
         """
         /list/{id}/comments

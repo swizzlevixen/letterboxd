@@ -232,6 +232,14 @@ def list_keys():
 
 
 @fixture
+def list_update_response_keys():
+    """
+    ListUpdateResponse definition
+    """
+    return ["data", "messages"]
+
+
+@fixture
 def list_comments_response_keys():
     """
     ListCommentsResponse definition

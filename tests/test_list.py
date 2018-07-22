@@ -2,6 +2,7 @@
 import datetime
 import logging
 import pprint
+from random import randint
 
 import letterboxd
 from tests.letterboxd_definitions import *
@@ -27,6 +28,51 @@ def test_list_details():
     logging.debug(f"list_details: {list_details}")
     logging.debug(f"list_details.keys(): {list_details.keys()}")
     assert set(list_keys()).issubset(list_details.keys()), "All keys should be in Keys."
+
+
+def test_list_update():
+    """
+    /list/{id} [PATCH]
+    """
+    lbxd = letterboxd.new()
+    # Login
+    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
+    lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
+    list_id = "1UxUo"  # test_optical: "These are Twenty Films to Test With"
+    rand_int_str = (
+        f"{randint(0, 9)}{randint(0, 9)}{randint(0, 9)}{randint(0, 9)}{randint(0, 9)}"
+    )
+    list_update_request = {
+        "published": True,
+        "name": f"Twenty Films to Test With {rand_int_str}",
+        "ranked": True,
+        "description": f"API TEST - IGNORE\n\nHere's a description with some <strong>strong</strong> language, <em>emphasized</em>, <b>bold</b>, <i>italics</i>, a <a href=\"http://opticalpodcast.com\">link</a>, and here's a quote:\n\n<blockquote>We have nothing to fear but fear itself. And werewolves.\n\n—FDR, Werewolf Hunter</blockquote>\n\nUpdated {datetime.datetime.now().isoformat()}",
+        "tags": ["api", "test", rand_int_str],
+        "entries": [
+            {
+                "film": "1WRy",
+                "rank": randint(1, 20),
+                "notes": "Random rank the first",
+                "containsSpoilers": False,
+            },
+            {
+                "film": "2TRW",
+                "rank": randint(1, 20),
+                "notes": "Random rank the second",
+                "containsSpoilers": True,
+            },
+        ],
+    }
+
+    list = lbxd.list(list_id=list_id)
+    list_update_response = list.update(list_update_request=list_update_request)
+    logging.debug(f"list_update_response: {list_update_response}")
+    assert isinstance(list_update_response, dict)
+
+    logging.debug(f"list_update_response.keys(): {list_update_response.keys()}")
+    assert set(list_update_response_keys()).issubset(
+        list_update_response.keys()
+    ), "All keys should be in ListUpdateResponse"
 
 
 def test_list_comments():
@@ -59,7 +105,7 @@ def test_list_create_comment():
     LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
     lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
     comment_creation_request = {
-        "comment": "Here's a comment with some <strong>strong</strong> language, <em>emphasized</em>, <b>bold</b>, <i>italics</i>, a <a href=\"http://opticalpodcast.com\">link</a>, and here's a quote:\n\n<blockquote>We have nothing to fear but fear itself. And werewolves.\n\n—FDR, Werewolf Hunter</blockquote>"
+        "comment": "API TEST - IGNORE\n\nHere's a comment with some <strong>strong</strong> language, <em>emphasized</em>, <b>bold</b>, <i>italics</i>, a <a href=\"http://opticalpodcast.com\">link</a>, and here's a quote:\n\n<blockquote>We have nothing to fear but fear itself. And werewolves.\n\n—FDR, Werewolf Hunter</blockquote>"
     }
     list_id = "1UxUo"
 
@@ -78,7 +124,7 @@ def test_list_create_comment():
 
 def test_list_entries():
     lbxd = letterboxd.new()
-    list_id = "1UxUo"
+    list_id = "1UxUo"  # test_optical: "These are Twenty Films to Test With"
     list_entries_request = {
         "perPage": 10,
         "sort": "AverageRatingHighToLow",
@@ -115,7 +161,7 @@ def test_list_me():
     ), "All keys should be in ListRelationship."
 
 
-def test_me_update():
+def test_list_me_update():
     lbxd = letterboxd.new()
     # Login
     LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
