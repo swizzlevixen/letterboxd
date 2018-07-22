@@ -70,7 +70,7 @@ class API:
         :param params: dict - request parameters
         :param form: str - form information, likely from the auth.py call
         :param headers: dict - request parameters
-        :param method: str - HTML methods, [get, post, put, patch]
+        :param method: str - HTML methods, [get, post, put, patch, delete]
         :return: requests.Response object
         """
 
@@ -103,9 +103,9 @@ class API:
             signature = prepared_dict["signature"]
             # Add the signature to the headers
             prepared_request.headers["Authorization"] = f"Signature {signature}"
-        elif method.lower() in ["post", "put", "patch"]:
+        elif method.lower() in ["post", "put", "patch", "delete"]:
             logging.debug(
-                'API.api_call() elif method.lower() in ["post", "put", "patch"]:'
+                'API.api_call() elif method.lower() in ["post", "put", "patch", "delete"]:'
             )
             params = self.__remove_empty_from_dict(params)
             # JSON-encode the body
@@ -182,7 +182,7 @@ class API:
         :param params: dict
         :param form: bool
         :param headers: dict
-        :param method: string - get, post, put, patch
+        :param method: string - get, post, put, patch, delete
         :return: dict - {'prepared_request', 'signature'}
         """
         # Add the request params required for uniquely identifying the request
@@ -283,7 +283,7 @@ class API:
         API request. The timestamp parameter is the number of seconds since
         Jan 1, 1970 (UTC), also know as "UNIX Epoch time."
 
-        :param method: str - get, post, put, patch
+        :param method: str - get, post, put, patch, delete
         :param url: str
         :param body: str - JSON-encoded
         :return: str
