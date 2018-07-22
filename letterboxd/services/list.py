@@ -67,7 +67,11 @@ class List(object):
         :param list_id: str - LID of the list
         :return: bool - Success
         """
-        response = self._api.api_call(path=f"list/{list_id}", method="DELETE")
+        # API call for DELETE expects params,
+        # so I need to at least give it a blank dict
+        response = self._api.api_call(
+            path=f"list/{list_id}", method="DELETE", params={}
+        )
         if response.status_code is 204:
             # 204: Success
             return True
