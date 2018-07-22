@@ -281,6 +281,14 @@ def list_relationship_keys():
     return ["liked", "subscribed", "subscriptionState", "commentThreadState"]
 
 
+@fixture
+def list_relationship_update_response_keys():
+    """
+    ListRelationshipUpdateResponse definition
+    """
+    return ["data", "messages"]
+
+
 # -------------------------
 # Lists
 # -------------------------

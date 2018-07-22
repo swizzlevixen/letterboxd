@@ -107,6 +107,28 @@ class List(object):
         list_relationship = response.json()
         return list_relationship
 
+    def me_update(self, list_id=None, list_relationship_update_request=None):
+        """
+        /list/{id}/me
+
+        Update the authenticated member’s relationship with a list by ID.
+
+        Calls to this endpoint must include the access token for an authenticated member.
+
+        :param list_id: str - LID for the list
+        :param list_relationship_update_request: dict - ListRelationshipUpdateRequest
+        :return: dict - ListRelationshipUpdateResponse
+        """
+        if list_id is None:
+            list_id = self._list_id
+        response = self._api.api_call(
+            path=f"list/{list_id}/me",
+            method="PATCH",
+            params=list_relationship_update_request,
+        )
+        list_relationship_update_response = response.json()
+        return list_relationship_update_response
+
     # TODO: Implement the rest of /list/* endpoints
 
 

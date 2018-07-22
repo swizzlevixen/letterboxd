@@ -97,7 +97,7 @@ def test_list_entries():
     ), "All keys should be in ListEntriesResponse."
 
 
-def test_list_relationship():
+def test_list_me():
     lbxd = letterboxd.new()
     # Login
     LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
@@ -113,6 +113,31 @@ def test_list_relationship():
     assert set(list_relationship_keys()).issubset(
         list_relationship.keys()
     ), "All keys should be in ListRelationship."
+
+
+def test_me_update():
+    lbxd = letterboxd.new()
+    # Login
+    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
+    lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
+    list_id = "j4lQ"  # bobtiki: "Personal Top 100"
+    list_relationship_update_request = {"liked": True, "subscribed": True}
+
+    list = lbxd.list(list_id=list_id)
+    list_relationship_update_response = list.me_update(
+        list_relationship_update_request=list_relationship_update_request
+    )
+    logging.debug(
+        f"list_relationship_update_response: {list_relationship_update_response}"
+    )
+    assert isinstance(list_relationship_update_response, dict)
+
+    logging.debug(
+        f"list_relationship_update_response.keys(): {list_relationship_update_response.keys()}"
+    )
+    assert set(list_relationship_update_response_keys()).issubset(
+        list_relationship_update_response.keys()
+    ), "All keys should be in ListRelationshipUpdateResponse"
 
 
 # TODO: Test all /list/* endpoints
