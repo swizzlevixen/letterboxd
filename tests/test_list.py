@@ -10,6 +10,10 @@ from tests.test_letterboxd import load_user_pass
 logging.getLogger(__name__)
 logging.basicConfig(level=logging.DEBUG)
 
+# -------------------------
+# List
+# -------------------------
+
 
 def test_list_details():
     """
@@ -25,12 +29,19 @@ def test_list_details():
     assert set(list_keys()).issubset(list_details.keys()), "All keys should be in Keys."
 
 
-def test_lists():
-    """Tests API call to get a film's details"""
+# -------------------------
+# Lists
+# -------------------------
 
-    # Assume use of environment variables for api key and secret
+
+def test_lists():
+    """
+    /lists
+
+    Assume use of environment variables for api key and secret
+    """
     lbxd = letterboxd.new()
-    # Login as a user
+    # Login
     LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
     lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
     lists_request = {
@@ -65,11 +76,11 @@ def test_lists():
 
 
 def test_create_list():
-    """Tests API call to get a film's details"""
-
-    # Assume use of environment variables for api key and secret
+    """
+    /lists [POST]
+    """
     lbxd = letterboxd.new()
-    # Login as a user
+    # Login
     LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
     lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
     list_creation_request = {
@@ -103,5 +114,5 @@ def test_create_list():
     assert set(list_create_response_keys()).issubset(
         list_create_response.keys()
     ), "All keys should be in the lists_response."
-    # TODO: Clean up: delete the list after creation
-    # How do I do this?
+    # I can't clean up and delete the list after creation,
+    # because there is no API for deleting a list.
