@@ -9,14 +9,42 @@ and this project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0
 [Unreleased]
 -----------------------------
 
+[0.3.0] - 2018-07-22
+-----------------------------
+
 ADDED
 .....
 
 - Issue and pull request templates
 - Code of Conduct
-- Coverage for Letterboxd API endpoints:
+- Coverage for Letterboxd API endpoints
+    - /auth/forgotten-password-request
+    - /auth/username-check
+    - /list/{id}
+    - /list/{id} [PATCH]
+    - /list/{id} [DELETE]
+    - /list/{id}/comments
+    - /list/{id}/comments [POST]
+    - /list/{id}/entries
+    - /list/{id}/me
+    - /list/{id}/me [PATCH]
+    - /list/{id}/report [POST]
+    - /list/{id}/statistics
     - /lists
     - /lists [POST]
+    - /me [PATCH]
+- A TON more pytest unit tests, and made existing ones more comprehensive
+
+CHANGED
+.......
+
+- Internally refactored API object definitions into their own file, for pytest
+- Internally changed some variable names to better reflect Letterboxd API nomenclature (I don't *think* this affects any method arguments.)
+
+FIXED
+.....
+
+- Removed mutable default arguments on several methods
 
 
 [0.2.6] - 2018-07-04
