@@ -72,6 +72,18 @@ class List(object):
         list_comment = response.json()
         return list_comment
 
+    def entries(self, list_id=None, list_entries_request=None):
+        """
+        /list/{id}/entries
+
+        Get entries for a list by ID.
+
+        :param list_id: str - LID of the list
+        :param list_entries_request: dict - ListEntriesRequest
+        :return: dict - ListEntriesResponse
+        """
+        pass
+
     # TODO: Implement the rest of /list/* endpoints
 
 

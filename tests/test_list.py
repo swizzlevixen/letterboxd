@@ -76,6 +76,27 @@ def test_list_create_comment():
     ), "All keys should be in ListComment"
 
 
+def test_list_entries():
+    lbxd = letterboxd.new()
+    list_id = "1UxUo"
+    list_entries_request = {
+        "perPage": 10,
+        "sort": "AverageRatingHighToLow",
+        "decade": 1990,
+        "service": "amazon",
+        "where": "Released",
+    }
+    list = lbxd.list(list_id=list_id)
+    list_entries_response = list.entries(list_entries_request=list_entries_request)
+    logging.debug(f"list_entries_response: {list_entries_response}")
+    assert isinstance(list_entries_response, dict)
+
+    logging.debug(f"list_entries_response.keys(): {list_entries_response.keys()}")
+    assert set(list_entries_response_keys()).issubset(
+        list_entries_response.keys()
+    ), "All keys should be in ListEntriesResponse."
+
+
 # TODO: Test all /list/* endpoints
 
 
