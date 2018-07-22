@@ -82,7 +82,13 @@ class List(object):
         :param list_entries_request: dict - ListEntriesRequest
         :return: dict - ListEntriesResponse
         """
-        pass
+        if list_id is None:
+            list_id = self._list_id
+        response = self._api.api_call(
+            path=f"list/{list_id}/entries", params=list_entries_request
+        )
+        list_entries_response = response.json()
+        return list_entries_response
 
     # TODO: Implement the rest of /list/* endpoints
 

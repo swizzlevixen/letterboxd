@@ -263,6 +263,16 @@ def list_comment_keys():
     ]
 
 
+@fixture
+def list_entries_response_keys():
+    """
+    ListEntriesResponse definition
+
+    Optional keys: "next"
+    """
+    return ["items", "metadata", "relationships"]
+
+
 # -------------------------
 # Lists
 # -------------------------
