@@ -289,6 +289,12 @@ def list_relationship_update_response_keys():
     return ["data", "messages"]
 
 
+@fixture
+def list_statistics_keys():
+    """ListStatistics definition"""
+    return ["list", "counts"]
+
+
 # -------------------------
 # Lists
 # -------------------------

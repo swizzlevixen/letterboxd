@@ -153,6 +153,22 @@ def test_list_report():
     assert success is True
 
 
+def test_list_statistics():
+    lbxd = letterboxd.new()
+    list_id = "1UxUo"  # test_optical: "These are Twenty Films to Test With"
+
+    list = lbxd.list(list_id=list_id)
+    list_statistics = list.statistics()
+    logging.debug(f"list_statistics: {list_statistics}")
+    assert isinstance(list_statistics, dict)
+
+    logging.debug(f"list_statistics.keys(): {list_statistics.keys()}")
+    assert set(list_statistics_keys()).issubset(
+        list_statistics.keys()
+    ), "All keys should be in ListStatistics"
+    assert list_statistics["list"]["id"] == list_id
+
+
 # TODO: Test all /list/* endpoints
 
 

@@ -151,6 +151,21 @@ class List(object):
         else:
             return False
 
+    def statistics(self, list_id=None):
+        """
+        /list/{id}/statistics
+
+        Get statistical data about a list by ID.
+
+        :param list_id: str - LID of the list
+        :return: dict - ListStatistics
+        """
+        if list_id is None:
+            list_id = self._list_id
+        response = self._api.api_call(path=f"list/{list_id}/statistics")
+        list_statistics = response.json()
+        return list_statistics
+
     # TODO: Implement the rest of /list/* endpoints
 
 
