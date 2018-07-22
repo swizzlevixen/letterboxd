@@ -166,8 +166,6 @@ class List(object):
         list_statistics = response.json()
         return list_statistics
 
-    # TODO: Implement the rest of /list/* endpoints
-
 
 class Lists(object):
     """

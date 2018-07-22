@@ -169,9 +169,6 @@ def test_list_statistics():
     assert list_statistics["list"]["id"] == list_id
 
 
-# TODO: Test all /list/* endpoints
-
-
 # -------------------------
 # Lists
 # -------------------------
