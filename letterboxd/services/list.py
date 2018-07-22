@@ -90,6 +90,23 @@ class List(object):
         list_entries_response = response.json()
         return list_entries_response
 
+    def me(self, list_id=None):
+        """
+        /list/{id}/me
+
+        Get details of the authenticated member’s relationship with a list by ID.
+
+        Calls to this endpoint must include the access token for an authenticated member.
+
+        :param list_id: str - LID of the list
+        :return: dict - ListRelationship
+        """
+        if list_id is None:
+            list_id = self._list_id
+        response = self._api.api_call(path=f"list/{list_id}/me")
+        list_relationship = response.json()
+        return list_relationship
+
     # TODO: Implement the rest of /list/* endpoints
 
 

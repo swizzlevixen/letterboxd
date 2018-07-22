@@ -97,6 +97,24 @@ def test_list_entries():
     ), "All keys should be in ListEntriesResponse."
 
 
+def test_list_relationship():
+    lbxd = letterboxd.new()
+    # Login
+    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
+    lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
+
+    list_id = "1UxUo"
+    list = lbxd.list(list_id=list_id)
+    list_relationship = list.me()
+    logging.debug(f"list_relationship: {list_relationship}")
+    assert isinstance(list_relationship, dict)
+
+    logging.debug(f"list_relationship.keys(): {list_relationship.keys()}")
+    assert set(list_relationship_keys()).issubset(
+        list_relationship.keys()
+    ), "All keys should be in ListRelationship."
+
+
 # TODO: Test all /list/* endpoints
 
 

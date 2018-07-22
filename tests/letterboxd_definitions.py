@@ -273,6 +273,14 @@ def list_entries_response_keys():
     return ["items", "metadata", "relationships"]
 
 
+@fixture
+def list_relationship_keys():
+    """
+    ListRelationship definition
+    """
+    return ["liked", "subscribed", "subscriptionState", "commentThreadState"]
+
+
 # -------------------------
 # Lists
 # -------------------------
