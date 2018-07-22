@@ -199,6 +199,39 @@ def abstract_search_item_keys():
     return ["type", "score"]
 
 
+# -------------------------
+# List
+# -------------------------
+
+
+@fixture
+def list_keys():
+    """
+    Keys definition
+
+    Optional keys: "canShareOn", "sharedOn", "descriptionLbml", "description",
+    """
+    return [
+        "id",
+        "name",
+        "filmCount",
+        "published",
+        "ranked",
+        "hasEntriesWithNotes",
+        "tags2",
+        "whenCreated",
+        "whenPublished",
+        "owner",
+        "previewEntries",
+        "links",
+    ]
+
+
+# -------------------------
+# Lists
+# -------------------------
+
+
 @fixture
 def lists_response_keys():
     return ["next", "items"]
