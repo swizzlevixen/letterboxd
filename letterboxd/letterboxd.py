@@ -10,6 +10,7 @@ from letterboxd.config import API_BASE_URL
 from letterboxd.user import User
 from .services.auth import Authentication
 from .services.film import Film, FilmCollection, Films
+from .services.list import List
 from .services.member import Member
 from .services.search import Search
 from .services.list import Lists
@@ -17,7 +18,6 @@ from .services.list import Lists
 
 # TODO: Write these modules
 # from .services.comment import Comment
-# from .services.list import List
 # from .services.log_entry import LogEntry
 # from .services.news import News
 
@@ -154,6 +154,15 @@ class Letterboxd(object):
         search = Search(self.api)
         search_response = search.search(search_request=search_request)
         return search_response
+
+    def list(self, list_id):
+        """
+
+        :param list_id: str - the LID of a list on Letterboxd
+        :return: services.list.List object
+        """
+        list = List(list_id=list_id, api=self.api)
+        return list
 
     def lists(self, lists_request):
         lists = Lists(self.api)
