@@ -38,3 +38,10 @@ Letterboxd has posted an `example Ruby client <https://github.com/grantyb/letter
     Although the Letterboxd API isn’t public yet (as at 2017-06-12), we have seeded some developers with API keys.
 
 If you need more information about API access, please see `<https://letterboxd.com/api-coming-soon/>`_.
+
+Acknowledgements
+----------------
+
+Thanks to Kevin Ndung'u Gathuku of Semaphore for `this article on writing and testing an API wrapper <https://semaphoreci.com/community/tutorials/building-and-testing-an-api-wrapper-in-python>`_ from which I learned many of the techniques I used to build this wrapper.
+
+And of course, many thanks to Matthew Buchanan and Grant Berridge at `Letterboxd <https://letterboxd.com>`_ for allowing me beta access to the Letterboxd API, and providing helpful assistance when I stumbled.
