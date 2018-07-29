@@ -16,20 +16,20 @@ CHARLES = os.environ.get("CHARLES", None)
 
 
 class API:
-    """
-    Communication methods for the Letterboxd API
-    """
+    """Communication methods for the Letterboxd API"""
 
-    def __init__(self, api_base, api_key, api_secret):
-        """
-        This method will start the shared requests session for the Letterboxd
-        API. If the API key and secret are not passed, the initializer will
+    def __init__(self, api_base: str, api_key: str, api_secret: str) -> None:
+        """Start the shared requests session for the Letterboxd API.
+
+        If the API key and secret are not passed, the initializer will
         attempt to get them from the environment variables.
 
-        :param api_base: str - the base URL of the API endpoints,
-                         including version number
-        :param api_key: str - API key provided by Letterboxd
-        :param api_secret: str - API shared secret provided by Letterboxd
+        :param api_base: The base URL of the API endpoints, including version number
+        :type api_base: str
+        :param api_key: API key provided by Letterboxd
+        :type api_key: str
+        :param api_secret: API shared secret provided by Letterboxd
+        :type api_secret: str
         """
         self.api_base = api_base
         self.api_key = api_key
@@ -62,20 +62,34 @@ class API:
         self.session = requests.Session()
         self.session.params = {}
 
-    def api_call(self, path, params={}, form=None, headers={}, method="get"):
-        """
-        The workhorse method of calls to the Letterboxd API
+    def api_call(
+        self,
+        path: str = None,
+        params: dict = None,
+        form: str = None,
+        headers: dict = None,
+        method: str = "get",
+    ) -> requests.Response:
+        """The workhorse method of calls to the Letterboxd API
 
-        :param path: str - URL endpoint path for the desired service
-        :param params: dict - request parameters
-        :param form: str - form information, likely from the auth.py call
-        :param headers: dict - request parameters
-        :param method: str - HTML methods, [get, post, put, patch, delete]
-        :return: requests.Response object
+        :param path: URL endpoint path for the desired service
+        :type path: str
+        :param params: Request parameters
+        :type params: dict
+        :param form: Form information, likely from the auth.py call
+        :type form: str
+        :param headers: Request parameters
+        :type headers: dict
+        :param method: HTML method, of [get, post, put, patch, delete]
+        :param method: str
+        :return: The full response object
+        :rtype: requests.Response
         """
 
         # If we have an oAuth token
         if self.user:
+            if headers is None:
+                headers = {}
             headers["Authorization"] = f"Bearer {self.user.token}"
 
         url = f"{self.api_base}/{path}"
@@ -94,6 +108,8 @@ class API:
             # `form` seems to only be used in an oAuth call?
             # should some of this code be in there instead?
             logging.debug("API.api_call() if form")
+            if headers is None:
+                headers = {}
             headers["Content-Type"] = "application/x-www-form-urlencoded"
             # Prepare the request
             prepared_dict = self.__prepare_request(
@@ -111,6 +127,8 @@ class API:
             params = self.__remove_empty_from_dict(params)
             # JSON-encode the body
             body = json.dumps(params)
+            if headers is None:
+                headers = {}
             headers["Content-Type"] = "application/json"
             # prepare the request
             prepared_dict = self.__prepare_request(
@@ -174,17 +192,25 @@ class API:
     # Private methods
 
     def __prepare_request(
-        self, url, params={}, body=[], headers={}, method="get", form=False
-    ):
-        """
-        Prepare the request and sign it
+        self,
+        url: str,
+        params: dict = None,
+        body: str = None,
+        headers: dict = None,
+        method: str = "get",
+    ) -> dict:
+        """Prepare the request and sign it
 
-        :param url: string
-        :param params: dict
-        :param form: bool
-        :param headers: dict
-        :param method: string - get, post, put, patch, delete
-        :return: dict - {'prepared_request', 'signature'}
+        :param url: Fully qualified URL for the endpoint
+        :type url: str
+        :param params: Parameters for the request
+        :type params: dict
+        :param body: Body of the request for methods other than "GET"
+        :type headers: dict
+        :param method: HTTP method, of ("get", "post", "put", "patch", "delete")
+        :type method: str
+        :return: {'prepared_request', 'signature'}
+        :rtype: dict
         """
         # Add the request params required for uniquely identifying the request
         params = self.__add_unique_params(params)
@@ -204,12 +230,13 @@ class API:
         )
         return {"prepared_request": prepared_request, "signature": signature}
 
-    def __remove_empty_from_dict(self, dirty_dict):
-        """
-        Takes a dictionary recursively removes all None and "" values
+    def __remove_empty_from_dict(self, dirty_dict: dict) -> dict:
+        """Takes a dictionary recursively removes all None and "" values
 
-        :param dirty_dict: dict
-        :return: dict
+        :param dirty_dict: Dictionary that needs to be cleaned
+        :type dirty_dict: dict
+        :return: Cleaned dictionary
+        :rtype: dict
         """
         logging.debug(f"params: {dirty_dict}")
         cleaned_dict = {}
@@ -229,12 +256,13 @@ class API:
         logging.debug(f"result: {cleaned_dict}")
         return cleaned_dict
 
-    def __remove_empty_from_list(self, dirty_list):
-        """
-        Takes a tuple or list and recursively removes all None and "" values
+    def __remove_empty_from_list(self, dirty_list: list) -> list:
+        """Takes a tuple or list and recursively removes all None and "" values
 
-        :param dirty_list: tuple or list
-        :return: list
+        :param dirty_list: List that might have None or empty values
+        :type dirty_list: list
+        :return: Cleaned list
+        :rtype: list
         """
         cleaned_list = []
         for __item in dirty_list:
@@ -253,13 +281,16 @@ class API:
                 cleaned_list.append(__item)
         return cleaned_list
 
-    def __add_unique_params(self, params):
-        """
-        Adds the metabody params required for signing the request
+    def __add_unique_params(self, params: dict = None):
+        """Adds the meta params required for signing the request
 
-        :param params: dict
-        :return: dict
+        :param params: The HTTP request params
+        :type params: dict
+        :return: Params with the signing params added
+        :rtype: dict
         """
+        if params is None:
+            params = {}
         params["apikey"] = self.api_key
         # nonce: UUID string, must be unique for each API request
         params["nonce"] = uuid.uuid4()
@@ -267,8 +298,9 @@ class API:
         params["timestamp"] = int(time.time())
         return params
 
-    def __sign(self, method, url, body=""):
-        """
+    def __sign(self, method: str, url: str, body: str = "") -> str:
+        """Crypographically sign the request
+
         Create a salted string as bytes, of the form [METHOD]\x00[URL]\x00[BODY],
         where [METHOD] is GET, POST, etc., [URL] is the fully-qualified request
         URL including the apikey, nonce, timestamp and any other method parameters,
@@ -284,10 +316,14 @@ class API:
         API request. The timestamp parameter is the number of seconds since
         Jan 1, 1970 (UTC), also know as "UNIX Epoch time."
 
-        :param method: str - get, post, put, patch, delete
-        :param url: str
-        :param body: str - JSON-encoded
-        :return: str
+        :param method: HTTP method, of "get", "post", "put", patch", "delete"
+        :type method: str
+        :param url: Fully qualified URL for the endpoint
+        :type url: str
+        :param body: JSON-encoded body data
+        :type body: str
+        :return: Signature
+        :rtype: str
         """
         # Create the salted bytestring
         if body is None:
