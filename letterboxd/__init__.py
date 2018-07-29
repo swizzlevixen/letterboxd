@@ -15,14 +15,19 @@ __email__ = "mboszko@mac.com"
 __version__ = "0.3.0"
 
 
-def new(api_base=API_BASE_URL, api_key="", api_secret=""):
-    """
-    Create a new instance of the Letterboxd class
+def new(
+    api_base: str = API_BASE_URL, api_key: str = "", api_secret: str = ""
+) -> Letterboxd:
+    """Instantiate the Letterboxd class
 
-    :param api_base: str - the base URL of the API endpoints, including version number
-    :param api_key: str - API key provided by Letterboxd
-    :param api_secret: str - API shared secret provided by Letterboxd
+    :param api_base: Base URL of the API endpoints, including version
+    :type api_base: str
+    :param api_key: API key provided by Letterboxd
+    :type api_key: str
+    :param api_secret: API shared secret provided by Letterboxd
+    :type api_secret: str
     :return: Letterboxd instance
+    :rtype: Letterboxd
     """
     lbxd = Letterboxd(api_base=api_base, api_key=api_key, api_secret=api_secret)
     return lbxd
