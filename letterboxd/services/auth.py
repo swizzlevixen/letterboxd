@@ -12,21 +12,22 @@ logging.getLogger(__name__)
 
 
 class Authentication:
-    """
-    User authentication services for Letterboxd
+    """User authentication services for Letterboxd
 
     This token business mostly takes care of itself. Instantiate authentication
     with username and password, then call token(), and if there isn't a token
     already, or if it's expired, it will go and get one.
     """
 
-    def __init__(self, api, username, password):
-        """
-        Initializer
+    def __init__(self, api, username: str, password: str) -> None:
+        """Initializer
 
         :param api: Letterboxd.API class instance
-        :param username: str - user name
-        :param password: str - user password
+        :type api: API
+        :param username: Letterboxd user name
+        :type username: str
+        :param password: Password
+        :type password: str
         """
         self._token_dict = None
         self._api = api
@@ -35,13 +36,15 @@ class Authentication:
         self._token_expiration = datetime.datetime.now()
 
     @property
-    def token(self):
-        """
+    def token(self) -> str:
+        """Gets and returns a user authentication token
+
         Checks if the user authentication token already exists. If not, it tries
         to get one. If it does exist, it checks to see if it is expired, and if
         so, it attempts to refresh the token.
 
-        :return: str - user token
+        :return: User authentication token
+        :rtype: str
         """
         logging.debug("getter of token called")
         if self._token_dict is None:
@@ -54,13 +57,12 @@ class Authentication:
         return self._token_dict["access_token"]
 
     @token.setter
-    def token(self, value):
-        """
-        Sets the takue of the token, and also calculates the expiration time.
+    def token(self, value: dict) -> None:
+        """Set the value of the token, and calculate the expiration time.
 
-        :param value: dict - expects 'access_token', 'token_type', 'expires_in',
-                      and 'refresh_token' keys
-        :return: None
+        :param value: expects 'access_token', 'token_type', 'expires_in',
+            and 'refresh_token' keys
+        :type value: dict
         """
         logging.debug("setter of token called")
         # set with the whole token dictionary, e.g.:
@@ -75,23 +77,20 @@ class Authentication:
         )
 
     @token.deleter
-    def token(self):
-        """
-        Deletes the token entirely.
-
-        :return: None
-        """
+    def token(self) -> None:
+        """Deletes the user authentication token."""
         logging.debug("deleter of token called")
         del self._token_dict
         # Reset the expiration to now (i.e., 'expired')
         self._token_expiration = datetime.datetime.now()
 
-    def refresh_token(self):
+    def refresh_token(self) -> dict:
         """
         Uses the current single-use refresh_token to request a new access token
         for the user
 
-        :return: dict - either an AccessToken or OAuthError
+        :return: Either an AccessToken or OAuthError
+        :rtype: dict
         """
         grant_type = "refresh_token"
         form_str = (
@@ -112,13 +111,15 @@ class Authentication:
             self.token = response_data
         return response_data
 
-    def login(self, username, password):
-        """
-        User access to the Letterboxd API. Requests a token for the user.
+    def login(self, username: str, password: str) -> dict:
+        """Sends user credentials to get user access token.
 
-        :param username: str
-        :param password: str
-        :return: dict - either an AccessToken or OAuthError
+        :param username: Letterboxd user name
+        :type username: str
+        :param password: Password
+        :type password: str
+        :return: Either an AccessToken or OAuthError
+        :rtype: dict
         """
         grant_type = "password"
         form_str = f"grant_type={grant_type}&username={username}&password={password}"
@@ -133,14 +134,16 @@ class Authentication:
         return response_data
 
     @staticmethod
-    def forgotten_password_request(api, forgotten_password_request):
+    def forgotten_password_request(api, forgotten_password_request: dict) -> int:
         """
         /auth/forgotten-password-request
 
         Request a link via email to reset the password for a member’s account.
 
-        :request: forgotten_password_request - ForgottenPasswordRequest
-        :return: int - HTTP status code
+        :param forgotten_password_request: ForgottenPasswordRequest
+        :type forgotten_password_request: dict
+        :return: HTTP status code
+        :rtype: int
         """
         response = api.api_call(
             path="auth/forgotten-password-request",
@@ -152,7 +155,16 @@ class Authentication:
         return status_code
 
     @staticmethod
-    def username_check(api, username):
+    def username_check(api, username: str) -> dict:
+        """
+
+        :param api: API object
+        :type api: API
+        :param username: Letterboxd user name
+        :type username: str
+        :return: UsernameCheckResponse
+        :rtype: dict
+        """
         response = api.api_call(
             path="auth/username-check", params={"username": username}
         )
