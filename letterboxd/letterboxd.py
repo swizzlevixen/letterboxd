@@ -10,10 +10,9 @@ from letterboxd.config import API_BASE_URL
 from letterboxd.user import User
 from .services.auth import Authentication
 from .services.film import Film, FilmCollection, Films
-from .services.list import List
+from .services.list import List, Lists
 from .services.member import Member
 from .services.search import Search
-from .services.list import Lists
 
 
 # TODO: Write these modules
@@ -31,13 +30,18 @@ class Letterboxd(object):
     environment variables, as LBXD_API_KEY and LBXD_API_SECRET.
     """
 
-    # noinspection PyPep8Naming
-    def __init__(self, api_base=API_BASE_URL, api_key="", api_secret=""):
-        """
+    def __init__(
+        self, api_base: str = API_BASE_URL, api_key: str = "", api_secret: str = ""
+    ) -> None:
+        """Load in the API information
 
-        :param api_base: str - the base URL of the API, including version number
-        :param api_key: str
-        :param api_secret: str
+        :param api_base: The base URL of the API, including version number,
+            with no trailing slash
+        :type api_base: str
+        :param api_key: Letterboxd API key
+        :type api_key: str
+        :param api_secret: Letterboxd API secret
+        :type api_secret: str
         """
         self.api_base = api_base
         self.api_key = api_key
@@ -79,54 +83,55 @@ class Letterboxd(object):
 
         self.api = API(self.api_base, self.api_key, self.api_secret)
 
-    def auth(self):
+    def auth(self) -> Authentication:
         """
-        :return: services.auth.Authentication object
+        :return: Authentication object
+        :rtype: Authentication
         """
-        # noinspection PyArgumentList
         auth = Authentication(api=self.api)
         return auth
 
-    def user(self, username, password):
-        """
-        Signs in the user, and adds the oAuth token to future API calls
+    def user(self, username: str, password: str) -> User:
+        """Sign in the user, and add the oAuth token to future API calls
 
-        :param username: str
-        :param password: str
-        :return: user.User object
+        :param username: Letterboxd user name
+        :type username: str
+        :param password: Password
+        :type password: str
+        :return: User object
+        :rtype: User
         """
         user = User(api=self.api, username=username, password=password)
         self.api.user = user
         return user
 
-    def film(self, film_id):
-        """
+    def film(self, film_id: str) -> Film:
+        """Instantiate a fim object
 
-        :param film_id: str - the LID of a film on Letterboxd
-        :return: services.film.Film object
+        :param film_id: LID of a film on Letterboxd
+        :type film_id: str
+        :return: Film object
+        :rtype: Film
         """
         film = Film(film_id=film_id, api=self.api)
         return film
 
-    def films(self):
-        """
+    def films(self) -> Films:
+        """Instantiate a Films object
 
-        :return: services.film.Films object
+        :return: Films object
+        :rtype: Films
         """
         films = Films(api=self.api)
         return films
 
-    def film_collection(self, film_collection_id, film_collection_request):
-        """
-        /film-collection/{id}
+    def film_collection(
+        self, film_collection_id: str, film_collection_request: dict
+    ) -> FilmCollection:
+        """Instantiate a FilmCollection object, return one item
 
-        Get details about a film collection by ID. The response will include the
-        film relationships for the signed-in member and the member indicated by
-        the member LID if specified.
-
-        :param film_collection_id: str - LID of the FilmCollection
-        :param film_collection_request: dict - FilmCollectionRequest
-        :return: dict - FilmCollection
+        :return: FilmCollection item
+        :rtype: dict
         """
         film_collection_object = FilmCollection(api=self.api)
         film_collection_item = film_collection_object.film_collection(
@@ -135,41 +140,61 @@ class Letterboxd(object):
         )
         return film_collection_item
 
-    def member(self, member_id):
-        """
+    def member(self, member_id: str) -> Member:
+        """instantiate a Member object
 
-        :param member_id: str - LID for Letterboxd member
-        :return: services.member.Member object
+        :param member_id: LID for Letterboxd member
+        :type member_id: str
+        :return: Member object
+        :rtype: Member
         """
         member = Member(api=self.api, member_id=member_id)
         return member
 
-    def search(self, search_request):
+    def search(self, search_request: dict) -> dict:
         """
         /search
 
-        :param search_request: dict - SearchRequest
-        :return: dict - SearchResponse
+        :param search_request: SearchRequest
+        :type search_request: dict
+        :return: SearchResponse
+        :rtype: dict
         """
         search = Search(self.api)
         search_response = search.search(search_request=search_request)
         return search_response
 
-    def list(self, list_id):
-        """
+    def list(self, list_id) -> List:
+        """Instantiate a List object
 
-        :param list_id: str - the LID of a list on Letterboxd
-        :return: services.list.List object
+        :param list_id: LID of a list on Letterboxd
+        :type list_id: str
+        :return: List object
+        :rtype: List
         """
         list = List(list_id=list_id, api=self.api)
         return list
 
-    def lists(self, lists_request):
+    def lists(self, lists_request: dict) -> dict:
+        """Get a ListsResponse
+
+        :param lists_request: ListsRequest
+        :type lists_request: dict
+        :return: ListsResponse
+        :rtype: dict
+        """
         lists = Lists(self.api)
         lists_response = lists.lists(lists_request=lists_request)
         return lists_response
 
-    def create_list(self, list_creation_request):
+    def create_list(self, list_creation_request: dict) -> dict:
+        """Create a list
+
+        :param list_creation_request: ListCreationRequest
+        :type list_creation_request: dict
+        :return: ListCreateResponse
+        :rtype: dict
+        """
         lists = Lists(self.api)
         list_create_response = lists.create_list(
             list_creation_request=list_creation_request
