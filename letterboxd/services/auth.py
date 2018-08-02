@@ -156,7 +156,16 @@ class Authentication:
 
     @staticmethod
     def username_check(api, username: str) -> dict:
-        """
+        """/auth/username-check
+
+        Check if a username is available to register.
+
+        Use this endpoint to check the validity and availability of a given
+        username. Usernames must be between 2 and 15 characters long and may
+        only contain upper or lowercase letters, numbers or the underscore (_)
+        character. Usernames associated with deactivated accounts are not
+        automatically released to the pool of available names (members will need
+        to contact Letterboxd Support for assistance).
 
         :param api: API object
         :type api: API
