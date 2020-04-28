@@ -1,4 +1,4 @@
-pip==20.0.2
+pip==20.1
 black==19.10b0
 bumpversion==0.5.3
 wheel==0.31.1
