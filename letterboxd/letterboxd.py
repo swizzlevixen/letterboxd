@@ -14,11 +14,12 @@ from .services.list import List
 from .services.member import Member
 from .services.search import Search
 from .services.list import Lists
+from .services.log_entry import LogEntry
 
 
 # TODO: Write these modules
 # from .services.comment import Comment
-# from .services.log_entry import LogEntry
+
 # from .services.news import News
 
 
@@ -175,3 +176,81 @@ class Letterboxd(object):
             list_creation_request=list_creation_request
         )
         return list_create_response
+
+    def entries(self, log_entry_request):
+        """
+        :param log_entry_request: dict - LogEntriesRequest
+        :return: services.log_entry.LogEntry object
+        """
+        log_entry = LogEntry(log_entry_request=log_entry_request, api=self.api)
+        return log_entry
+
+    def entry(self, entry_id):
+        """
+        :param entry_id: string - id
+
+        :return: services.log_entry.LogEntry object
+        """
+        log_entry = LogEntry(entry_id=entry_id, api=self.api)
+        return log_entry
+
+    def update_entry(self, entry_id, log_entry_request):
+        """
+        :param entry_id: string - id
+        :param log_entry_request: dict - request
+
+        :return: services.log_entry.LogEntry object
+        """
+        log_entry = LogEntry(entry_id=entry_id, log_entry_request=log_entry_request, api=self.api)
+        return log_entry
+
+
+    # def update_log_entry(self, entry_id, log_entry_update_request):
+    #     """
+    #     :param log_entry_update_request: TODO:
+    #     :return: TODO:
+    #     """
+    #     log_entry = LogEntry(entry_id=entry_id, log_entry_request=log_entry_update_request, api=self.api)
+    #     return log_entry
+    #
+
+    # def post_log_entry(self, log_entry_request):
+    #     """
+    #     :param log_entry_request: TODO:
+    #     :return: TODO:
+    #     """
+    #     log_entry = LogEntry(log_entry_request=log_entry_request, api=self.api)
+    #     return log_entry
+    #
+    # def get_log_entries(self, log_entry_request):
+    #     """
+    #     :param log_entry_request: TODO:
+    #     :return: TODO:
+    #     """
+    #     log_entries = LogEntry(log_entry_request=log_entry_request, api=self.api)
+    #     return log_entries
+    #
+    # def get_log_entry(self, log_entry_id):
+    #     """
+    #     :param log_entry_request: TODO:
+    #     :return: TODO:
+    #     """
+    #     log_entry = LogEntry(log_entry_request=log_entry_id, api=self.api)
+    #     return log_entry
+    #
+
+    # def comments_log_entry(self, entry_id, log_entry_comment_creation_request):
+    #     """
+    #     :param  TODO:
+    #     :return: TODO:
+    #     """
+    #     log_entry = LogEntry(entry_id=entry_id, log_entry_request=log_entry_comment_creation_request, api=self.api)
+    #     return log_entry
+    #
+    # def comment_log_entry(self, entry_id, log_entry_comments_request):
+    #     """
+    #     :param  TODO:
+    #     :return: TODO:
+    #     """
+    #     log_entry = LogEntry(entry_id=entry_id, log_entry_request=log_entry_comments_request, api=self.api)
+    #     return log_entry
