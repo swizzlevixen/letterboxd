@@ -4,6 +4,7 @@ import os
 from pytest import fixture
 
 from letterboxd.letterboxd import Letterboxd
+from tests.letterboxd_definitions import *
 
 logging.getLogger(__name__)
 logging.basicConfig(level=logging.DEBUG)
