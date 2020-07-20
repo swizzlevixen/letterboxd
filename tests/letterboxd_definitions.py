@@ -333,13 +333,15 @@ def list_create_response_keys():
 
 @fixture
 def log_entries_response_keys():
-    """Returns list of keys in LogEntriesResponse"""
-    return ["next", "items"]
+    """Returns list of keys in LogEntriesResponse
+    Optional keys: "next" - cursor
+    """
+    return ["items"]
 
 @fixture
 def log_entry_keys():
     """Returns list of keys in LogEntry"""
-    return ["id", "name", "owner", "film", "diaryDetails", "review", "tags2", "whenCreated", "whenUpdated", "rating", "like", "commentable", "commentPolicy", "links"]
+    return ["id", "name", "owner", "film", "diaryDetails", "review", "tags", "tags2", "whenCreated", "whenUpdated", "like", "commentable", "links"]
 
 @fixture
 def review_update_response_keys():
@@ -348,8 +350,10 @@ def review_update_response_keys():
 
 @fixture
 def review_comments_response_keys():
-    """Returns list of keys in ReviewCommentsResponse"""
-    return ["next", "items"]
+    """Returns list of keys in ReviewCommentsResponse
+    Optional keys: "next" - cursor
+    """
+    return ["items"]
 
 @fixture
 def review_comment_keys():

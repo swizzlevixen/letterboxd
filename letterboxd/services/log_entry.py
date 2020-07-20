@@ -49,7 +49,7 @@ class LogEntry(object):
         log_entry_response = response.json()
         return log_entry_response
 
-    def get_id(self, log_entry_id):
+    def get_id(self, log_entry_id=None):
         """
         [GET]/log-entry/{id}
 

@@ -40,8 +40,8 @@ def test_create_edit_delete_comment(load_user_pass, review_comment_keys, comment
     create_comment_instance = lbxd.update_entry(entry_id=entry_id, log_entry_request=comment_creation_request)
     review_comment = create_comment_instance.create_comment()
     assert isinstance(review_comment, dict)
-    logging.debug(f"list_details: {review_comment}")
-    logging.debug(f"list_details.keys(): {review_comment.keys()}")
+    logging.debug(f"review_comment: {review_comment}")
+    logging.debug(f"review_comment.keys(): {review_comment.keys()}")
     assert set(review_comment_keys).issubset(review_comment.keys()), "All keys should be in Keys."
 
     # set comment_id to refer to this entry so that we only work on it.
@@ -54,8 +54,8 @@ def test_create_edit_delete_comment(load_user_pass, review_comment_keys, comment
     comment_update_instance = lbxd.update_comment(comment_id=comment_id, comment_request=comment_update_request)
     comment_update_response = comment_update_instance.update()
     assert isinstance(comment_update_response, dict)
-    logging.debug(f"list_details: {comment_update_response}")
-    logging.debug(f"list_details.keys(): {comment_update_response.keys()}")
+    logging.debug(f"comment_update_response: {comment_update_response}")
+    logging.debug(f"comment_update_response.keys(): {comment_update_response.keys()}")
     assert set(comment_update_response_keys).issubset(comment_update_response.keys()), "All keys should be in Keys."
 
     # delete the comment
