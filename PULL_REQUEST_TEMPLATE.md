@@ -19,11 +19,11 @@
     - /comment/{id}/report
 
 - Tests for the new endpoints
+- Updates for old tests to pass on python 3.8 (see fixes). This unfortunately breaks 3.6 and 3.7 support.
 
 ## Fixes
 Updated old tests because they directly called fixtures. That feature was deprecated in pytest v4.0 and caused the tests to fail on pytest 5.2. 
 They are now passed as parameters to the tests they are relevant to and the tests pass.
 Relevant link (https://docs.pytest.org/en/latest/deprecations.html#calling-fixtures-directly)
-
 
 
