@@ -9,8 +9,8 @@ logging.getLogger(__name__)
 logging.basicConfig(level=logging.DEBUG)
 
 
-def test_search():
-    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
+def test_search(load_user_pass, search_response_keys, abstract_search_item_keys):
+    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass
     lbxd = Letterboxd()
     search_request = {
         "perPage": 5,
@@ -24,11 +24,11 @@ def test_search():
     assert isinstance(search_response, dict)
     # TODO: test returned keys
 
-    assert set(search_response_keys()).issubset(
+    assert set(search_response_keys).issubset(
         search_response.keys()
     ), "All keys should be in SearchResponse"
 
     abstract_search_item = search_response["items"][0]
-    assert set(abstract_search_item_keys()).issubset(
+    assert set(abstract_search_item_keys).issubset(
         abstract_search_item.keys()
     ), "All keys should be in the AbstractSearchItem"

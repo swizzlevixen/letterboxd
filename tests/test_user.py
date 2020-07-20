@@ -10,8 +10,8 @@ logging.getLogger(__name__)
 logging.basicConfig(level=logging.DEBUG)
 
 
-def test_user_auth():
-    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
+def test_user_auth(load_user_pass):
+    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass
     lbxd = Letterboxd()
     # make login
     test_user = lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
@@ -33,8 +33,8 @@ def test_user_auth_bad():
         logging.error(e.args)
 
 
-def test_user_me():
-    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
+def test_user_me(load_user_pass):
+    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass
     lbxd = Letterboxd()
     # login
     test_user = lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
@@ -43,13 +43,13 @@ def test_user_me():
     assert isinstance(me_dict, dict)
 
 
-def test_user_me_update():
+def test_user_me_update(load_user_pass, member_settings_update_response_keys):
     """
 
     :return:
     """
     # login
-    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
+    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass
     lbxd = Letterboxd()
     test_user = lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
     # test
@@ -64,7 +64,7 @@ def test_user_me_update():
     )
     logging.debug(f"member_settings_update_response: {member_settings_update_response}")
     assert isinstance(member_settings_update_response, dict)
-    assert set(member_settings_update_response_keys()).issubset(
+    assert set(member_settings_update_response_keys).issubset(
         member_settings_update_response.keys()
     ), "All keys should be in MemberSettingsUpdateResponse"
 
