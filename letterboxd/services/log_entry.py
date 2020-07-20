@@ -2,6 +2,7 @@ import logging
 
 logging.getLogger(__name__)
 
+
 class LogEntry(object):
     """
     /log-entries for the Letterboxd API
@@ -42,7 +43,9 @@ class LogEntry(object):
         if log_entry_request is None:
             log_entry_request = self._log_entry_request
 
-        response = self._api.api_call(path="log-entries", method="POST", params=log_entry_request)
+        response = self._api.api_call(
+            path="log-entries", method="POST", params=log_entry_request
+        )
         log_entry_response = response.json()
         return log_entry_response
 
@@ -78,7 +81,11 @@ class LogEntry(object):
             entry_id = self._entry_id
         if log_entry_update_request is None:
             log_entry_update_request = self._log_entry_request
-        response = self._api.api_call(path=f"log-entry/{entry_id}", method="PATCH", params=log_entry_update_request)
+        response = self._api.api_call(
+            path=f"log-entry/{entry_id}",
+            method="PATCH",
+            params=log_entry_update_request,
+        )
         log_entry_response = response.json()
         return log_entry_response
 
@@ -91,12 +98,14 @@ class LogEntry(object):
 
         :param entry_id: string - id
 
-        :return: :return: bool - Success
+        :return: bool - Success
         """
         if entry_id is None:
             entry_id = self._entry_id
-        response = self._api.api_call(path=f"log-entry/{entry_id}", method="DELETE", params={})
-        if response.status_code is 204:
+        response = self._api.api_call(
+            path=f"log-entry/{entry_id}", method="DELETE", params={}
+        )
+        if response.status_code == 204:
             # 204: Success
             return True
         else:
@@ -118,7 +127,9 @@ class LogEntry(object):
             entry_id = self._entry_id
         if comments_request is None:
             comments_request = self._log_entry_request
-        response = self._api.api_call(path=f"log-entry/{entry_id}/comments", params=comments_request)
+        response = self._api.api_call(
+            path=f"log-entry/{entry_id}/comments", params=comments_request
+        )
         review_comments_response = response.json()
         return review_comments_response
 
@@ -138,9 +149,11 @@ class LogEntry(object):
             entry_id = self._entry_id
         if comment_creation_request is None:
             comment_creation_request = self._log_entry_request
-        response = self._api.api_call(path=f"log-entry/{entry_id}/comments",
-                                      params=comment_creation_request,
-                                      method="POST")
+        response = self._api.api_call(
+            path=f"log-entry/{entry_id}/comments",
+            params=comment_creation_request,
+            method="POST",
+        )
         review_comments_response = response.json()
         return review_comments_response
 
@@ -161,7 +174,9 @@ class LogEntry(object):
         review_relationship = response.json()
         return review_relationship
 
-    def update_relationship(self, entry_id=None, review_relationship_update_request=None):
+    def update_relationship(
+        self, entry_id=None, review_relationship_update_request=None
+    ):
         """
         [PATCH]/log-entry/{id}/me
 
@@ -177,9 +192,11 @@ class LogEntry(object):
             entry_id = self._entry_id
         if review_relationship_update_request is None:
             review_relationship_update_request = self._log_entry_request
-        response = self._api.api_call(path=f"log-entry/{entry_id}/me",
-                                      params=review_relationship_update_request,
-                                      method="PATCH")
+        response = self._api.api_call(
+            path=f"log-entry/{entry_id}/me",
+            params=review_relationship_update_request,
+            method="PATCH",
+        )
         review_relationship = response.json()
         return review_relationship
 
@@ -199,8 +216,12 @@ class LogEntry(object):
             entry_id = self._entry_id
         if report_review_request is None:
             report_review_request = self._log_entry_request
-        response = self._api.api_call(path=f"log-entry/{entry_id}/report", params=report_review_request, method="POST")
-        if response.status_code is 204:
+        response = self._api.api_call(
+            path=f"log-entry/{entry_id}/report",
+            params=report_review_request,
+            method="POST",
+        )
+        if response.status_code == 204:
             # 204: Success
             return True
         else:
@@ -221,4 +242,3 @@ class LogEntry(object):
         response = self._api.api_call(path=f"log-entry/{entry_id}/statistics")
         review_statistics_response = response.json()
         return review_statistics_response
-

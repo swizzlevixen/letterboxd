@@ -18,7 +18,6 @@ def test_letterboxd():
 # Letterboxd API Definitions
 # -------------------------
 
-
 @fixture
 def load_user_pass():
     """

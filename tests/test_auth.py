@@ -15,7 +15,7 @@ def test_forgotten_password_request():
     status_code = Authentication.forgotten_password_request(
         api=lbxd.api, forgotten_password_request={"emailAddress": "user@example.com"}
     )
-    assert status_code is 204
+    assert status_code == 204
 
 
 def test_username_check():

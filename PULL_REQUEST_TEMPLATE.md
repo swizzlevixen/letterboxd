@@ -1,32 +1,26 @@
 ## Description
 
-Succint description of changes, and why they are being made.
+- Added the /log-entry and /log-entries endpoints which allows the user to add entries(diaries/reviews) to their log.
+- Added the /comment endpoint which allows the user to edit and delete comments made from other endpoints.
 
 ## Changelog
-
-Use these subsections to denote what chages are made. Delete any sections that are not used. For more details, please see [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
-
 ### Added
 
-- New features
+- /log-entries (http://api-docs.letterboxd.com/#path--log-entries)
+    - /log-entries 
+    - /log-entry/{id}
+    - /log-entry/{id}/comments
+    - /log-entry/{id}/me
+    - /log-entry/{id}/report
+    - /log-entry/{id}/statistics
 
-### Changed
+- /comments (http://api-docs.letterboxd.com/#path--comment--id-)
+    - /comment/{id}
+    - /comment/{id}/report
 
-- changes in existing functionality.
-- [BREAKING] for changes that will break existing functionality
+- pytests for the new endpoints
 
-### Deprecated
+## Changed
 
-- soon-to-be removed features.
 
-### Removed
 
-- now removed features.
-
-### Fixed
-
-- any bug fixes.
-
-### Security
-
-- in case of vulnerabilities.

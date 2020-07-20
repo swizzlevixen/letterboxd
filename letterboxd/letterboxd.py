@@ -15,6 +15,7 @@ from .services.member import Member
 from .services.search import Search
 from .services.list import Lists
 from .services.log_entry import LogEntry
+from .services.comment import Comment
 
 
 # TODO: Write these modules
@@ -201,9 +202,33 @@ class Letterboxd(object):
 
         :return: services.log_entry.LogEntry object
         """
-        log_entry = LogEntry(entry_id=entry_id, log_entry_request=log_entry_request, api=self.api)
+        log_entry = LogEntry(
+            entry_id=entry_id, log_entry_request=log_entry_request, api=self.api
+        )
         return log_entry
 
+    def update_comment(self, comment_id, comment_request):
+        """
+        :param comment_id: string - id
+        :param comment_request: dict - request
+
+        :return: services.comment.Comment object
+        """
+        comment = Comment(
+            comment_id=comment_id, comment_request=comment_request, api=self.api
+        )
+        return comment
+
+    def delete_comment(self, comment_id):
+        """
+        :param comment_id: string - id
+
+        :return: services.comment.Comment object
+        """
+        comment = Comment(
+            comment_id=comment_id, api=self.api
+        )
+        return comment
 
     # def update_log_entry(self, entry_id, log_entry_update_request):
     #     """

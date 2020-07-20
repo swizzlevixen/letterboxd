@@ -5,7 +5,6 @@ Letterboxd API definitions for testing
 
 from _pytest.fixtures import fixture
 
-
 # -------------------------
 # Film-collection
 # -------------------------
@@ -254,7 +253,7 @@ def list_comment_keys():
     """
     ListComment definition
 
-    Optional keys: 
+    Optional keys:
     """
     return [
         "id",
@@ -323,7 +322,63 @@ def list_summary_keys():
     """
     return ["id", "name", "filmCount", "published", "ranked", "owner", "previewEntries"]
 
-
+@fixture
 def list_create_response_keys():
     """Returns list of keys in ListCreateResponse"""
     return ["data", "messages"]
+
+# -------------------------
+# Log-Entries / Log-entry
+# -------------------------
+
+@fixture
+def log_entries_response_keys():
+    """Returns list of keys in LogEntriesResponse"""
+    return ["next", "items"]
+
+@fixture
+def log_entry_keys():
+    """Returns list of keys in LogEntry"""
+    return ["id", "name", "owner", "film", "diaryDetails", "review", "tags2", "whenCreated", "whenUpdated", "rating", "like", "commentable", "commentPolicy", "links"]
+
+@fixture
+def review_update_response_keys():
+    """Returns list of keys in ReviewUpdateResponse"""
+    return ["data", "messages"]
+
+@fixture
+def review_comments_response_keys():
+    """Returns list of keys in ReviewCommentsResponse"""
+    return ["next", "items"]
+
+@fixture
+def review_comment_keys():
+    """Returns list of keys in ReviewComment"""
+    return ["id", "member", "whenCreated", "whenUpdated", "commentLbml", "removedByAdmin", "removedByContentOwner", "deleted", "blocked", "blockedByOwner", "editableWindowExpiresIn", "review", "comment"]
+
+@fixture
+def review_relationship_keys():
+    """Returns list of keys in ReviewRelationship"""
+    return ["liked", "subscribed", "subscriptionState", "commentThreadState"]
+
+@fixture
+def review_relationship_update_response_keys():
+    """Returns list of keys in ReviewRelationshipUpdateResponse"""
+    return ["data", "messages"]
+
+@fixture
+def review_statistics_keys():
+    """Returns list of keys in ReviewStatistics"""
+    return ["logEntry", "counts"]
+
+# -------------------------
+# Comment
+# -------------------------
+
+@fixture
+def comment_update_response_keys():
+    """Returns list of keys in CommentUpdateResponse"""
+    return ["data", "messages"]
+
+
+
