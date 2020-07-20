@@ -7,7 +7,7 @@
 ### Added
 
 - /log-entries (http://api-docs.letterboxd.com/#path--log-entries)
-    - /log-entries 
+    - /log-entries
     - /log-entry/{id}
     - /log-entry/{id}/comments
     - /log-entry/{id}/me
@@ -18,9 +18,12 @@
     - /comment/{id}
     - /comment/{id}/report
 
-- pytests for the new endpoints
+- Tests for the new endpoints
 
-## Changed
+## Fixes
+Updated old tests because they directly called fixtures. That feature was deprecated in pytest v4.0 and caused the tests to fail on pytest 5.2. 
+They are now passed as parameters to the tests they are relevant to and the tests pass.
+Relevant link (https://docs.pytest.org/en/latest/deprecations.html#calling-fixtures-directly)
 
 
 

@@ -1,19 +1,15 @@
 import logging
-
-import pytest
-
 import letterboxd
-from tests.letterboxd_definitions import *
-from tests.test_letterboxd import load_user_pass
 
 logging.getLogger(__name__)
 logging.basicConfig(level=logging.DEBUG)
 
 
-# I have combined some of the tests into one in order to be able to delete the entry after. This way there is no data left by the tests on letterboxd.
+# I have combined some of the tests into one in order to be able to delete the entry after.
+# This way there is no data left by the tests on letterboxd.
 
-def test_create_edit_comment_delete_entry(load_user_pass, log_entries_response_keys, log_entry_keys, review_update_response_keys,
-                                          review_comment_keys, review_comments_response_keys):
+def test_create_edit_comment_delete_entry(load_user_pass, log_entries_response_keys, log_entry_keys,
+                                          review_update_response_keys, review_comment_keys, review_comments_response_keys):
     lbxd = letterboxd.new()
     LBXD_USERNAME, LBXD_PASSWORD = load_user_pass
     lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
@@ -132,12 +128,14 @@ def test_change_relationship(load_user_pass, review_relationship_update_response
         "liked": False,
         "subscribed": False
     }
-    change_relationship_of_entry_instance = lbxd.update_entry(entry_id=review_id, log_entry_request=review_relationship_update_request)
+    change_relationship_of_entry_instance = lbxd.update_entry(entry_id=review_id,
+                                                              log_entry_request=review_relationship_update_request)
     review_relationship_update_response = change_relationship_of_entry_instance.update_relationship()
     assert isinstance(review_relationship_update_response, dict)
     logging.debug(f"review_relationship_update_response: {review_relationship_update_response}")
     logging.debug(f"review_relationship_update_response.keys(): {review_relationship_update_response.keys()}")
-    assert set(review_relationship_update_response_keys).issubset(review_relationship_update_response.keys()), "All keys should be in Keys."
+    assert set(review_relationship_update_response_keys)\
+        .issubset(review_relationship_update_response.keys()), "All keys should be in Keys."
 
 
 def test_report_entry(load_user_pass):

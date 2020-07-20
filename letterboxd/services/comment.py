@@ -31,9 +31,7 @@ class Comment(object):
         if comment_update_request is None:
             comment_update_request = self._comment_request
         response = self._api.api_call(
-            path=f"comment/{comment_id}",
-            method="PATCH",
-            params=comment_update_request,
+            path=f"comment/{comment_id}", method="PATCH", params=comment_update_request,
         )
         comment_update_response = response.json()
         return comment_update_response

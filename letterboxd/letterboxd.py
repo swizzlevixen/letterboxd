@@ -225,57 +225,5 @@ class Letterboxd(object):
 
         :return: services.comment.Comment object
         """
-        comment = Comment(
-            comment_id=comment_id, api=self.api
-        )
+        comment = Comment(comment_id=comment_id, api=self.api)
         return comment
-
-    # def update_log_entry(self, entry_id, log_entry_update_request):
-    #     """
-    #     :param log_entry_update_request: TODO:
-    #     :return: TODO:
-    #     """
-    #     log_entry = LogEntry(entry_id=entry_id, log_entry_request=log_entry_update_request, api=self.api)
-    #     return log_entry
-    #
-
-    # def post_log_entry(self, log_entry_request):
-    #     """
-    #     :param log_entry_request: TODO:
-    #     :return: TODO:
-    #     """
-    #     log_entry = LogEntry(log_entry_request=log_entry_request, api=self.api)
-    #     return log_entry
-    #
-    # def get_log_entries(self, log_entry_request):
-    #     """
-    #     :param log_entry_request: TODO:
-    #     :return: TODO:
-    #     """
-    #     log_entries = LogEntry(log_entry_request=log_entry_request, api=self.api)
-    #     return log_entries
-    #
-    # def get_log_entry(self, log_entry_id):
-    #     """
-    #     :param log_entry_request: TODO:
-    #     :return: TODO:
-    #     """
-    #     log_entry = LogEntry(log_entry_request=log_entry_id, api=self.api)
-    #     return log_entry
-    #
-
-    # def comments_log_entry(self, entry_id, log_entry_comment_creation_request):
-    #     """
-    #     :param  TODO:
-    #     :return: TODO:
-    #     """
-    #     log_entry = LogEntry(entry_id=entry_id, log_entry_request=log_entry_comment_creation_request, api=self.api)
-    #     return log_entry
-    #
-    # def comment_log_entry(self, entry_id, log_entry_comments_request):
-    #     """
-    #     :param  TODO:
-    #     :return: TODO:
-    #     """
-    #     log_entry = LogEntry(entry_id=entry_id, log_entry_request=log_entry_comments_request, api=self.api)
-    #     return log_entry

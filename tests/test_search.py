@@ -2,8 +2,6 @@
 import logging
 
 from letterboxd.letterboxd import Letterboxd
-from tests.letterboxd_definitions import *
-from tests.test_letterboxd import load_user_pass
 
 logging.getLogger(__name__)
 logging.basicConfig(level=logging.DEBUG)
