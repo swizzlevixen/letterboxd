@@ -5,7 +5,8 @@ from random import randint
 
 import letterboxd
 from letterboxd.services.auth import Authentication
-
+from tests.letterboxd_definitions import *
+from tests.test_letterboxd import load_user_pass
 logging.getLogger(__name__)
 logging.basicConfig(level=logging.DEBUG)
 
@@ -15,7 +16,7 @@ def test_forgotten_password_request():
     status_code = Authentication.forgotten_password_request(
         api=lbxd.api, forgotten_password_request={"emailAddress": "user@example.com"}
     )
-    assert status_code is 204
+    assert status_code == 204
 
 
 def test_username_check():

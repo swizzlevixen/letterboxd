@@ -14,11 +14,13 @@ from .services.list import List
 from .services.member import Member
 from .services.search import Search
 from .services.list import Lists
+from .services.log_entry import LogEntry
+from .services.comment import Comment
 
 
 # TODO: Write these modules
 # from .services.comment import Comment
-# from .services.log_entry import LogEntry
+
 # from .services.news import News
 
 
@@ -175,3 +177,53 @@ class Letterboxd(object):
             list_creation_request=list_creation_request
         )
         return list_create_response
+
+    def entries(self, log_entry_request):
+        """
+        :param log_entry_request: dict - LogEntriesRequest
+        :return: services.log_entry.LogEntry object
+        """
+        log_entry = LogEntry(log_entry_request=log_entry_request, api=self.api)
+        return log_entry
+
+    def entry(self, entry_id):
+        """
+        :param entry_id: string - id
+
+        :return: services.log_entry.LogEntry object
+        """
+        log_entry = LogEntry(entry_id=entry_id, api=self.api)
+        return log_entry
+
+    def update_entry(self, entry_id, log_entry_request):
+        """
+        :param entry_id: string - id
+        :param log_entry_request: dict - request
+
+        :return: services.log_entry.LogEntry object
+        """
+        log_entry = LogEntry(
+            entry_id=entry_id, log_entry_request=log_entry_request, api=self.api
+        )
+        return log_entry
+
+    def update_comment(self, comment_id, comment_request):
+        """
+        :param comment_id: string - id
+        :param comment_request: dict - request
+
+        :return: services.comment.Comment object
+        """
+        comment = Comment(
+            comment_id=comment_id, comment_request=comment_request, api=self.api
+        )
+        return comment
+
+    def delete_comment(self, comment_id):
+        """
+        :param comment_id: string - id
+
+        :return: services.comment.Comment object
+        """
+        comment = Comment(comment_id=comment_id, api=self.api)
+        return comment

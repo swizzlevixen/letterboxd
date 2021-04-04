@@ -11,3 +11,4 @@ Contributors
 ------------
 
 * Chris Pruitt, advice and feedback
+* Marcus Rönnbäck

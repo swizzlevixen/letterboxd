@@ -6,7 +6,6 @@ from letterboxd.letterboxd import Letterboxd
 from letterboxd.services.film import Film
 from tests.letterboxd_definitions import *
 from tests.test_letterboxd import load_user_pass
-
 logging.getLogger(__name__)
 logging.basicConfig(level=logging.DEBUG)
 
@@ -16,7 +15,7 @@ logging.basicConfig(level=logging.DEBUG)
 # -------------------------
 
 
-def test_film_details():
+def test_film_details(film_keys):
     """Tests API call to get a film's details"""
 
     # Assume use of environment variables for api key and secret
@@ -27,7 +26,7 @@ def test_film_details():
     logging.debug(f"film: {film}")
     assert isinstance(film, dict)
     assert film["id"] == "2bbs", "The ID should be in the response"
-    assert set(film_keys()).issubset(film.keys()), "All keys should be in Film"
+    assert set(film_keys).issubset(film.keys()), "All keys should be in Film"
 
 
 def test_film_availability():
@@ -47,8 +46,8 @@ def test_film_availability():
     # ), "All keys should be in FilmAvailability"
 
 
-def test_film_me():
-    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
+def test_film_me(load_user_pass, film_relationship_keys):
+    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass
     lbxd = Letterboxd()
     # login
     lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
@@ -56,7 +55,7 @@ def test_film_me():
     film_relationship = film_instance.me()
     logging.debug(f"film_relationship 1: {film_relationship}")
     assert isinstance(film_relationship, dict)
-    assert set(film_relationship_keys()).issubset(
+    assert set(film_relationship_keys).issubset(
         film_relationship.keys()
     ), "All keys should be in FilmRelationship, against film with relationship"
 
@@ -64,13 +63,13 @@ def test_film_me():
     film_instance = lbxd.film(film_id="Xwa")  # Shark Attack 2
     film_relationship = film_instance.me()
     logging.debug(f"film_relationship 2: {film_relationship}")
-    assert set(film_relationship_keys()).issubset(
+    assert set(film_relationship_keys).issubset(
         film_relationship.keys()
     ), "All keys should be in FilmRelationship, against film with no relationship"
 
 
-def test_film_patch_me():
-    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
+def test_film_patch_me(load_user_pass, film_relationship_update_response_keys, film_relationship_keys):
+    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass
     lbxd = Letterboxd()
     # login
     lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
@@ -85,12 +84,12 @@ def test_film_patch_me():
         f"film_relationship_update_response: {film_relationship_update_response}"
     )
     assert isinstance(film_relationship_update_response, dict)
-    assert set(film_relationship_update_response_keys()).issubset(
+    assert set(film_relationship_update_response_keys).issubset(
         film_relationship_update_response.keys()
     ), "All keys should be in FilmRelationshipUpdateResponse"
     assert isinstance(film_relationship_update_response["data"], dict)
     film_relationship = film_relationship_update_response["data"]
-    assert set(film_relationship_keys()).issubset(
+    assert set(film_relationship_keys).issubset(
         film_relationship.keys()
     ), "All keys should be in FilmRelationship"
     assert isinstance(film_relationship_update_response["messages"], list)
@@ -121,8 +120,8 @@ def test_film_patch_me():
     assert isinstance(film_relationship_update_response, dict)
 
 
-def test_film_members():
-    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
+def test_film_members(load_user_pass, member_film_relationships_response_keys, member_summary_keys, film_relationship_keys):
+    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass
     lbxd = Letterboxd()
     # login
     lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
@@ -144,7 +143,7 @@ def test_film_members():
         f"member_film_relationships_response.keys(): {member_film_relationships_response.keys()}"
     )
     assert isinstance(member_film_relationships_response, dict)
-    assert set(member_film_relationships_response_keys()).issubset(
+    assert set(member_film_relationships_response_keys).issubset(
         member_film_relationships_response.keys()
     ), "All keys should be in MemberFilmRelationshipsResponse"
     assert isinstance(member_film_relationships_response["items"], list)
@@ -153,19 +152,19 @@ def test_film_members():
     assert isinstance(member_film_relationship["member"], dict)
     member_summary = member_film_relationship["member"]
     logging.debug(f"member_summary: {member_summary}")
-    assert set(member_summary_keys()).issubset(
+    assert set(member_summary_keys).issubset(
         member_summary.keys()
     ), "All keys should be in MemberSummary"
     assert isinstance(member_film_relationship["relationship"], dict)
     film_relationship = member_film_relationship["relationship"]
     logging.debug(f"film_relationship: {film_relationship}")
-    assert set(film_relationship_keys()).issubset(
+    assert set(film_relationship_keys).issubset(
         film_relationship.keys()
     ), "All keys should be in FilmRelationship"
 
 
-def test_film_report():
-    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
+def test_film_report(load_user_pass):
+    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass
     lbxd = Letterboxd()
     # login, even though we don't use this value
     lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
@@ -178,7 +177,7 @@ def test_film_report():
     assert success is True
 
 
-def test_film_statistics():
+def test_film_statistics(film_statistics_keys):
     """Tests API call to get a film's statistics"""
 
     # Assume use of environment variables for api key and secret
@@ -188,13 +187,13 @@ def test_film_statistics():
     film_statistics = film_instance.statistics()
     logging.debug(f"film_statistics: {film_statistics}")
     assert isinstance(film_statistics, dict)
-    assert set(film_statistics_keys()).issubset(
+    assert set(film_statistics_keys).issubset(
         film_statistics.keys()
     ), "All keys should be in FilmStatistics"
     assert film_statistics["film"]["id"] == "2bbs", "The ID should be in the response"
 
 
-def test_films():
+def test_films(films_response_keys):
     """
     Test API call to /films
     """
@@ -219,7 +218,7 @@ def test_films():
     films_response = films.films(films_request=films_request)
     logging.debug(f"films_response: {films_response}")
     assert isinstance(films_response, dict)
-    assert set(films_response_keys()).issubset(
+    assert set(films_response_keys).issubset(
         films_response.keys()
     ), "All keys should be in FilmsResponse"
     # Debug print a simple list of the movies
@@ -229,27 +228,27 @@ def test_films():
         film_num += 1
 
 
-def test_films_services():
+def test_films_services(load_user_pass, film_services_response_keys, service_keys):
     """
     Test API call to /films/film-services
     """
     lbxd = Letterboxd()
     # login, so that we can see all of the services available to this member
-    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
+    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass
     lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
     films = lbxd.films()
     film_services_response = films.services()
     logging.debug(f"film_services_response: {film_services_response}")
     assert isinstance(film_services_response, dict)
-    assert set(film_services_response_keys()).issubset(
+    assert set(film_services_response_keys).issubset(
         film_services_response.keys()
     ), "All keys should be in FilmServicesResponse"
     assert isinstance(film_services_response["items"], list)
     service = film_services_response["items"][0]
-    assert set(service_keys()).issubset(service.keys()), "All keys should be in Service"
+    assert set(service_keys).issubset(service.keys()), "All keys should be in Service"
 
 
-def test_films_genres():
+def test_films_genres(genres_response_keys, genre_keys):
     """
     Test API call to /films/genres
     """
@@ -258,21 +257,21 @@ def test_films_genres():
     genres_response = films.genres()
     logging.debug(f"genres_response: {genres_response}")
     assert isinstance(genres_response, dict)
-    assert set(genres_response_keys()).issubset(
+    assert set(genres_response_keys).issubset(
         genres_response.keys()
     ), "All keys should be in GenresResponse"
     genre = genres_response["items"][0]
     logging.debug(f"genre: {genre}")
-    assert set(genre_keys()).issubset(genre.keys()), "All keys should be in the Genre"
+    assert set(genre_keys).issubset(genre.keys()), "All keys should be in the Genre"
 
 
-def test_film_collection():
+def test_film_collection(load_user_pass, film_summary_keys, link_keys):
     """
     Test API call to /film-collection/{id}
     """
     lbxd = letterboxd.new()
     # Log in as a user
-    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass()
+    LBXD_USERNAME, LBXD_PASSWORD = load_user_pass
     lbxd.user(LBXD_USERNAME, LBXD_PASSWORD)
     film_collection_id = "Nb"  # Indiana Jones
     film_collection_request = {
@@ -296,10 +295,10 @@ def test_film_collection():
     film_summary = film_collection["films"][0]
     logging.debug(f"film_summary: {film_summary}")
     assert isinstance(film_summary, dict)
-    assert set(film_summary_keys()).issubset(
+    assert set(film_summary_keys).issubset(
         film_summary.keys()
     ), "All keys should be in FilmSummary"
     link = film_collection["links"][0]
     logging.debug(f"link: {link}")
     assert isinstance(link, dict)
-    assert set(link_keys()).issubset(link.keys()), "All keys should be in Link"
+    assert set(link_keys).issubset(link.keys()), "All keys should be in Link"
