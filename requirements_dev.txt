@@ -1,13 +1,13 @@
-pip==20.1
-black==19.10b0
+pip==21.0.1
+black==20.8b1
 bumpversion==0.5.3
-coverage==5.1
-tox==3.15.0
-wheel==0.34.2
-watchdog==0.10.2
-flake8==3.7.9
-Sphinx==3.0.3
-twine==3.1.1
+coverage==5.5
+tox==3.23.0
+wheel==0.36.2
+watchdog==2.0.2
+flake8==3.9.0
+Sphinx==3.5.3
+twine==3.4.1
 
-pytest==5.2
-pytest-runner==5.2
+pytest==6.2.3
+pytest-runner==5.3.0

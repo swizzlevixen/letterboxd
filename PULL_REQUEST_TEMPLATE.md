@@ -1,29 +1,34 @@
 ## Description
 
-- Added the /log-entry and /log-entries endpoints which allows the user to add entries(diaries/reviews) to their log.
-- Added the /comment endpoint which allows the user to edit and delete comments made from other endpoints.
+Succint description of changes, and why they are being made.
 
 ## Changelog
+
+Use these subsections to denote what chages are made. Delete any sections that are not used. For more details, please see [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+
 ### Added
 
-- /log-entries (http://api-docs.letterboxd.com/#path--log-entries)
-    - /log-entries
-    - /log-entry/{id}
-    - /log-entry/{id}/comments
-    - /log-entry/{id}/me
-    - /log-entry/{id}/report
-    - /log-entry/{id}/statistics
+- New features
 
-- /comments (http://api-docs.letterboxd.com/#path--comment--id-)
-    - /comment/{id}
-    - /comment/{id}/report
+### Changed
 
-- Tests for the new endpoints
-- Updates for old tests to pass on python 3.8 (see fixes). This unfortunately breaks 3.6 and 3.7 support.
+- changes in existing functionality.
+- [BREAKING] for changes that will break existing functionality
 
-## Fixes
-Updated old tests because they directly called fixtures. That feature was deprecated in pytest v4.0 and caused the tests to fail on pytest 5.2. 
-They are now passed as parameters to the tests they are relevant to and the tests pass.
-Relevant link (https://docs.pytest.org/en/latest/deprecations.html#calling-fixtures-directly)
+### Deprecated
+
+- soon-to-be removed features.
+
+### Removed
+
+- now removed features.
+
+### Fixed
+
+- any bug fixes.
+
+### Security
+
+- in case of vulnerabilities.
 
 
