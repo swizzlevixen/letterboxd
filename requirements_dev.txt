@@ -1,5 +1,5 @@
 pip==20.1
-black==19.10b0
+black==21.7b0
 bumpversion==0.5.3
 coverage==5.1
 tox==3.15.0
